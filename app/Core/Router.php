@@ -14,6 +14,11 @@ class Router {
         $this->addRoute('POST', $uri, $action);
     }
 
+    // Add a PUT route
+    public function put($uri, $action) {
+        $this->addRoute('PUT', $uri, $action);
+    }
+
     private function addRoute($method, $uri, $action) {
         // Convert route parameters (e.g., {id}) into regex patterns
         $routePattern = preg_replace('/\{([a-zA-Z0-9_-]+)\}/', '(?P<$1>[a-zA-Z0-9_-]+)', $uri);
@@ -30,9 +35,11 @@ class Router {
         // Remove query strings
         $uri = parse_url($uri, PHP_URL_PATH);
         
-        $basePath = '/Matrimony/public_html';
-        if (strpos($uri, $basePath) === 0) {
-            $uri = substr($uri, strlen($basePath));
+        $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+        if ($scriptPath !== '/' && $scriptPath !== '\\') {
+            if (strpos($uri, $scriptPath) === 0) {
+                $uri = substr($uri, strlen($scriptPath));
+            }
         }
 
         // Normalize URI

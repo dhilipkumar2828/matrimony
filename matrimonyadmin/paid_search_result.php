@@ -328,7 +328,7 @@ $query11="where  gender='$gender' and religion='$caste' and valid_for=''";
 <?php
    $tableName="register";
    $targetpage = "paid_search_result.php"; 	
-	$limit = 20; 
+	$limit = 1; 
 	//echo "SELECT COUNT(*) as num FROM $tableName";
 	//echo "SELECT COUNT(*) as num FROM $tableName ORDER BY id DESC";
 	$query = "SELECT COUNT(*) as num FROM $tableName ".$query11;
@@ -690,7 +690,15 @@ else
 ?>
 </div>
 </ul>
-
+<?php echo $paginate; ?>
+<form enctype="multipart/form-data" method="post" action="goto_search.php" name="frm_bottom">
+<input id="command" type="hidden" style="width:50px;" name="command" value="search_result.php">
+<div align="right">
+Goto page no:   
+<input id="goto" type="text" style="width:50px;" name="goto">
+<input type="submit" value="go" name="submit">
+</div>
+</form>
 </div><!-- /.col -->
 </div> 
                         

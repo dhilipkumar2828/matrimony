@@ -40,6 +40,25 @@ $router->get('/admin/logout', [App\Controllers\Admin\LoginController::class, 'lo
 // $router->get('/about', [App\Controllers\PageController::class, 'about']);
 
 // ==========================================
+// ============ API ROUTES ==================
+// ==========================================
+$router->post('/api/v1/auth/login', [App\Controllers\Api\AuthController::class, 'login']);
+$router->post('/api/v1/auth/register', [App\Controllers\Api\AuthController::class, 'register']);
+$router->get('/api/v1/members/search', [App\Controllers\Api\MemberController::class, 'search']);
+$router->get('/api/v1/members/likes', [App\Controllers\Api\MemberController::class, 'likes']);
+$router->get('/api/v1/members/shortlist', [App\Controllers\Api\MemberController::class, 'shortlist']);
+$router->get('/api/v1/members/contacts', [App\Controllers\Api\MemberController::class, 'contacts']);
+$router->get('/api/v1/members', [App\Controllers\Api\MemberController::class, 'index']);
+$router->get('/api/v1/members/{id}', [App\Controllers\Api\MemberController::class, 'show']);
+$router->post('/api/v1/members/{id}/like', [App\Controllers\Api\MemberController::class, 'toggleLike']);
+$router->post('/api/v1/members/unlock-contact', [App\Controllers\Api\MemberController::class, 'unlockContact']);
+$router->post('/api/v1/members/notify-marriage', [App\Controllers\Api\MemberController::class, 'notifyMarriage']);
+$router->get('/api/v1/profile/me', [App\Controllers\Api\ProfileController::class, 'me']);
+$router->put('/api/v1/profile/me', [App\Controllers\Api\ProfileController::class, 'update']);
+$router->post('/api/v1/profile/upload-image', [App\Controllers\Api\ProfileController::class, 'uploadImage']);
+$router->post('/api/v1/profile/upload-horoscope', [App\Controllers\Api\ProfileController::class, 'uploadHoroscope']);
+$router->get('/api/v1/metadata/education', [App\Controllers\Api\MetadataController::class, 'getEducation']);
+// ==========================================
 
 // Get current URI and HTTP Method
 $uri = $_SERVER['REQUEST_URI'] ?? '/';
