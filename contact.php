@@ -72,7 +72,7 @@
         <div class="col-lg-7">
             <div class="video-wrapper">
                 <div class="ratio ratio-16x9">
-                    <iframe src="https://www.youtube.com/embed/t2mlL7K1hbs" title="YouTube video" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.996174624!2d80.2312!3d13.0416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526659d87e3e!2s28%2F49%2C%20South%20Usman%20Rd%2C%20T.%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu%20600017!5e0!3m2!1sen!2sin!4v1710400000000!5m2!1sen!2sin" title="Google Map" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@
                             <textarea class="form-control" name="msg" id="msg" rows="5" placeholder="How can we help you?" required></textarea>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-success btn-submit text-white px-5">Send Message <i class="bi bi-send ms-2"></i></button>
+                            <button type="submit" class="btn btn-green px-5">Send Message <i class="bi bi-send ms-2"></i></button>
                             <button type="reset" class="btn btn-outline-secondary ms-2" style="border-radius: 8px; padding: 12px 20px;">Reset</button>
                         </div>
                     </div>

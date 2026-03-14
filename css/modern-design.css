@@ -89,6 +89,28 @@ h6 {
     background: #558b2f;
 }
 
+/* Global Green Button */
+.btn-green {
+    background: #689f38 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(104, 159, 56, 0.2);
+}
+
+.btn-green:hover {
+    background: #558b2f !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(104, 159, 56, 0.3);
+    color: #fff !important;
+}
+
 /* ============================= */
 /* Banner Background Iamge Section */
 /* ============================= */

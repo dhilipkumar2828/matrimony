@@ -13,8 +13,6 @@
         .section-title { font-family: 'Playfair Display', serif; color: #333; font-weight: 700; margin-bottom: 30px; text-align: center; }
         .form-label { font-weight: 600; font-size: 14px; color: #555; }
         .form-control { border-radius: 10px; padding: 12px; border: 1px solid #ddd; }
-        .btn-login { background: #689f38; color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 16px; transition: 0.3s; width: 100%; }
-        .btn-login:hover { background: #558b2f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(104, 159, 56, 0.3); }
         .login-footer { border-top: 1px solid #eee; margin-top: 30px; padding-top: 20px; text-align: center; }
         .register-link { color: #689f38; font-weight: 700; text-decoration: none; }
         .register-link:hover { text-decoration: underline; }
@@ -58,7 +56,7 @@
             <a href="#" class="small text-muted text-decoration-none">Forgot Password?</a>
         </div>
 
-        <button type="submit" class="btn btn-login">Login to Your Account</button>
+        <button type="submit" class="btn btn-green">Login to Your Account</button>
     </form>
 
     <div class="login-footer">

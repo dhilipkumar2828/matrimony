@@ -41,20 +41,6 @@ include("include/connect.php");
         .plan-features li i { color: #689f38; margin-right: 12px; font-size: 16px; }
         .plan-features li:last-child { border-bottom: none; }
         
-        .btn-choose { 
-            background: #689f38; 
-            color: white; 
-            border: none; 
-            padding: 14px 25px; 
-            border-radius: 12px; 
-            font-weight: 700; 
-            text-decoration: none; 
-            transition: 0.3s; 
-            display: block; 
-            width: 100%;
-            margin-top: auto;
-        }
-        .btn-choose:hover { background: #558b2f; box-shadow: 0 8px 20px rgba(104, 159, 56, 0.25); color: white; }
         
         .trust-section { background: #eef4ea; padding: 70px 0; border-top: 1px solid #eee; }
         .trust-icon { font-size: 2.8rem; color: #689f38; margin-bottom: 20px; }
@@ -86,7 +72,7 @@ include("include/connect.php");
                     <li><i class="bi bi-check-circle-fill"></i> 30 Contacts Direct</li>
                     <li><i class="bi bi-check-circle-fill"></i> Basic Email Support</li>
                 </ul>
-                <a href="paynow.php?plan_id=1" class="btn-choose">Choose Silver</a>
+                <a href="paynow.php?plan_id=1" class="btn btn-green">Choose Silver</a>
             </div>
         </div>
 
@@ -104,7 +90,7 @@ include("include/connect.php");
                     <li><i class="bi bi-check-circle-fill"></i> Priority Call Support</li>
                     <li><i class="bi bi-check-circle-fill"></i> Profile Visibility Boost</li>
                 </ul>
-                <a href="paynow.php?plan_id=2" class="btn-choose">Choose Gold</a>
+                <a href="paynow.php?plan_id=2" class="btn btn-green">Choose Gold</a>
             </div>
         </div>
 
@@ -122,7 +108,7 @@ include("include/connect.php");
                     <li><i class="bi bi-check-circle-fill"></i> Profile Highlighting</li>
                     <li><i class="bi bi-check-circle-fill"></i> Priority Verification</li>
                 </ul>
-                <a href="paynow.php?plan_id=3" class="btn-choose">Choose Platinum</a>
+                <a href="paynow.php?plan_id=3" class="btn btn-green">Choose Platinum</a>
             </div>
         </div>
     </div>

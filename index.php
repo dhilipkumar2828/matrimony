@@ -29,6 +29,8 @@ $router->get('/index.php', function() {
 // Routes for the completely new About Us Page
 $router->get('/about.php', [App\Controllers\AboutController::class, 'index']);
 $router->get('/about', [App\Controllers\AboutController::class, 'index']);
+$router->get('/terms', function() { require_once __DIR__ . '/terms.php'; });
+$router->get('/privacy', function() { require_once __DIR__ . '/privacy.php'; });
 
 // Routes for Admin Panel MVC Login
 $router->get('/matrimonyadmin/index.php', [App\Controllers\Admin\LoginController::class, 'index']);

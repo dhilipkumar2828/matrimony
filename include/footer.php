@@ -37,8 +37,8 @@
                     <li class="mb-2"><a href="about.php" class="footer-nav-link">About Us</a></li>
                     <li class="mb-2"><a href="search_result.php" class="footer-nav-link">Search Profiles</a></li>
                     <li class="mb-2"><a href="paynow.php" class="footer-nav-link">Payment</a></li>
-                    <li class="mb-2"><a href="#" class="footer-nav-link">Privacy Policy</a></li>
-                    <li class="mb-2"><a href="#" class="footer-nav-link">Terms & Conditions</a></li>
+                    <li class="mb-2"><a href="privacy.php" class="footer-nav-link">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="terms.php" class="footer-nav-link">Terms & Conditions</a></li>
                     <li class="mb-2"><a href="contact.php" class="footer-nav-link">Contact Us</a></li>
                 </ul>
             </div>

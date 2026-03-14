@@ -103,8 +103,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         .plan-summary-card { background: #f8fcf5; border: 1px solid #e1eed9; border-radius: 12px; padding: 25px; margin-bottom: 30px; }
         .form-label { font-weight: 600; font-size: 14px; color: #555; }
         .form-control { border-radius: 8px; padding: 12px; border: 1px solid #ddd; }
-        .btn-pay { background: #689f38; border: none; padding: 15px; border-radius: 8px; font-weight: 700; color: #fff; transition: 0.3s; }
-        .btn-pay:hover { background: #558b2f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(104, 159, 56, 0.3); }
         .radio-group-modern { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
         .radio-group-modern:hover { border-color: #689f38; background: #fafff5; }
         .form-check-input:checked + .form-check-label { color: #689f38; font-weight: 600; }
@@ -190,7 +188,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
             
             <div class="col-12 mt-5">
                 <?php if(!$hash) { ?>
-                    <button type="submit" class="btn btn-pay w-100 fs-5 shadow-sm">Proceed to Secure Payment <i class="bi bi-shield-lock-fill ms-2"></i></button>
+                    <button type="submit" class="btn btn-green w-100 shadow-sm">Proceed to Secure Payment <i class="bi bi-shield-lock-fill ms-2"></i></button>
                     <div class="text-center mt-3">
                         <a href="index.php" class="text-muted text-decoration-none small"><i class="bi bi-arrow-left me-1"></i> Back to Home</a>
                     </div>
