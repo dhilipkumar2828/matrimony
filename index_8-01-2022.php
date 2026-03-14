@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 include("include/connect.php");
 ?>
 <script type="text/javascript">
@@ -6,24 +7,25 @@ include("include/connect.php");
     document.location = "indexmob.php";
   }
 </script>
-<?php 
-if(isset($_POST['submit']))
+<?php
+
+if (isset($_POST['submit'])) 
 {
-  $command=$_POST['command'];
-  $gender=$_POST['gender'];
-  $from_age=$_POST['age1'];
-  $to_age=$_POST['age2'];
-  $caste=$_POST['caste'];
-  $education=$_POST['education'];
-  $photo=$_POST['photo'];
+  $command = $_POST['command'];
+  $gender = $_POST['gender'];
+  $from_age = $_POST['age1'];
+  $to_age = $_POST['age2'];
+  $caste = $_POST['caste'];
+  $education = $_POST['education'];
+  $photo = $_POST['photo'];
   session_start();
-  $_SESSION['gender']=$gender;
-  $_SESSION['from_age']=$from_age;
-  $_SESSION['to_age']=$to_age;
-  $_SESSION['caste']=$caste;
-  $_SESSION['education']=$education;
-  $_SESSION['command']=$command;
-  $_SESSION['photo']=$photo;
+  $_SESSION['gender'] = $gender;
+  $_SESSION['from_age'] = $from_age;
+  $_SESSION['to_age'] = $to_age;
+  $_SESSION['caste'] = $caste;
+  $_SESSION['education'] = $education;
+  $_SESSION['command'] = $command;
+  $_SESSION['photo'] = $photo;
   echo "<script language='javascript'>window.location='search_result.php';</script>";
 }
 ?>
@@ -209,25 +211,24 @@ req.send(null);
                               <div class="row">
                                 <span class="col-xs-4"><select name="age1" id="age1">
                                   <?php
-                                  for($i=18;$i<=60;$i++)
-                                  {
-                                    ?>
+for ($i = 18; $i <= 60; $i++) {
+?>
                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                     <?php
-                                  }
-                                  ?>
+}
+?>
                                 </select>
                               </span> 
                               <span span class="col-xs-4 text-center">to</span>  
                               <span span class="col-xs-4">
                                 <select class="ml10px" id="age2" name="age2"><?php
-                                for($i=18;$i<=60;$i++)
-                                {
-                                  ?>
-                                  <option value="<?php echo $i; ?>"  <?php if($i==40) { ?>selected<?php } ?> ><?php echo $i; ?></option>
+for ($i = 18; $i <= 60; $i++) {
+?>
+                                  <option value="<?php echo $i; ?>"  <?php if ($i == 40) { ?>selected<?php
+  }?> ><?php echo $i; ?></option>
                                   <?php
-                                }
-                                ?>
+}
+?>
                               </select>
                             </span>
                           </span>
@@ -237,14 +238,13 @@ req.send(null);
                           <span class="subtitle col-xs-8"><select class="w"  name="caste" id="caste"  onchange="getcity(this.value);">
                             <option value="">--Select--</option>
                             <?php
-                            $man=mysqli_query($con, "select * from caste where temp_id=1 order by caste asc");
-                            while($man1=mysqli_fetch_array($man))
-                            {
-                             ?>
+$man = mysqli_query($con, "select * from caste where temp_id=1 order by caste asc");
+while ($man1 = mysqli_fetch_array($man)) {
+?>
                              <option value="<?php echo $man1['id']; ?>"><?php echo ucwords($man1['caste']); ?></option>
                              <?php
-                           }
-                           ?>
+}
+?>
                          </select></span> 
                        </li>
                        <li class="row">
@@ -252,15 +252,14 @@ req.send(null);
                         <span class="subtitle col-xs-8">
                           <select class="w"  name="education" id="education">
                             <option value="">Select</option>
-                            <?php 
-                            $kal=mysqli_query($con, "select * from education where temp_id=1 order by id desc");
-                            while($kal11=mysqli_fetch_array($kal))
-                            {
-                              ?>
+                            <?php
+$kal = mysqli_query($con, "select * from education where temp_id=1 order by id desc");
+while ($kal11 = mysqli_fetch_array($kal)) {
+?>
                               <option value="<?php echo $kal11['education']; ?>"><?php echo $kal11['education']; ?></option>
                               <?php
-                            }
-                            ?>
+}
+?>
                           </select></span> 
                         </li>
                         <li class="row">
@@ -291,10 +290,11 @@ req.send(null);
                   <div class="row">
                     <div class="col-sm-6 price-plancss1">
                       <h6 class="text-center mt10 mb10" style="color:#f104e7;"><span style="color:#fff;">HM MATRIMONY</span><br> News and Events</h6>
-                      <?php 
+                      <?php
+
 //echo "select * from  product where mf_name='$mf_name' order by pro_name asc";
-$e122=mysqli_query($con, "select * from  news where id='2'")or die(mysqli_error($con));
-$row_e122=mysqli_fetch_array($e122);
+$e122 = mysqli_query($con, "select * from  news where id='2'") or die(mysqli_error($con));
+$row_e122 = mysqli_fetch_array($e122);
 ?>	  
                       <div class="row">
                        <div class="pt10 pl10 pr10" >
@@ -303,7 +303,7 @@ $row_e122=mysqli_fetch_array($e122);
                         <p class="tab blink"><?php echo $row_e122['news_heading']; ?></p>
                         <div class="qst_b">
                           <!--  
-                         <p style="color:#690; font-weight:700;font-size: 15px;">ஆதிதிராவிடர் திருமண தகவல் மைய இணையதளத்த்திற்கு �
+                         <p style="color:#690; font-weight:700;font-size: 15px;">ஆதிதிராவிடர் திருமண தகவல் மைய இணையதளத்த்திற்கு �
 ன்புடன் வரவேற்கிறோம்   <span style="color:red;"> / எங்களுக்கு வேறு எங்கும் கிளைகள் கிடையாது</p>
 -->
 <p style="color:#690; font-weight:700;font-size: 15px;"><?php echo $row_e122['descrip']; ?></p>
@@ -330,23 +330,21 @@ $row_e122=mysqli_fetch_array($e122);
                           </form>
                         </div>
                         <?php
-                        if(isset($_REQUEST['failure']))
-                        {
-                          ?>
+if (isset($_REQUEST['failure'])) {
+?>
                           <div style="background:#FF8484; color:#FF0000; font-weight:bold; font-size:14px;">
                             <span>Payment failed due to some reasons</span>
                           </div>
                           <?php
-                        }
-                        if(isset($_REQUEST['sucess']))
-                        {
-                          ?>
+}
+if (isset($_REQUEST['sucess'])) {
+?>
                           <div style="background:#95FFAF; color:#009900; font-weight:bold; font-size:14px;">
                             <span>Payment Successfull</span>
                           </div>
                           <?php
-                        }
-                        ?>
+}
+?>
                       </div>
                     </div>
                   </div>

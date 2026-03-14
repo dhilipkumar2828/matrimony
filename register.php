@@ -14,10 +14,11 @@
 <link type="text/css" rel="stylesheet" href="css/common.css" />
 </head>
 <body class="back">
-<div id="body"><!--body id start-->
 <?php include("include/header.php"); ?>
-<br />
-<div class="plr">
+
+<div class="container my-5">
+    <div class="registration-wrapper shadow-sm bg-white p-4 rounded-3" style="border-top: 5px solid #689f38;">
+        <div class="plr">
 <style>
 .error { color:#f00; font-size:11px; display:none; }
 </style>
@@ -254,7 +255,7 @@ function validateForm()
 </script>
 <div class="plr">
 
-<?php include("include/menu.php"); ?>
+
 <style type="text/css">
 .w90 {
     width: 50%;
@@ -857,8 +858,10 @@ function chk()
 }
 </script>
 
-<?php include("include/footer.php"); ?>
+        </div>
+    </div>
 </div>
- </body>
 
+<?php include("include/footer.php"); ?>
+</body>
 </html>

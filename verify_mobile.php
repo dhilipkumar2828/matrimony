@@ -7,248 +7,82 @@ if(isset($_GET['mobile_no']) && $_GET['mobile_no']!='' && isset($_GET['reg_id'])
 else
 {
      echo "<script type=\"text/javascript\">
-        alert('Invalid Parameter,Please contact admin');
+        alert('Invalid Parameter, Please contact admin');
         window.location='index.php';
         </script>";
-   // header("Location: https://hmmatrimony.com");
-    //die();
+     exit;
 }
+include("include/connect.php"); 
 ?>
-<?php include("include/connect.php"); ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php include("include/title.php"); ?>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/register.js"></script>
-<script type="text/javascript" src="js/form-field-tooltip.js"></script>
-<script type="text/javascript" src="js/rounded-corners.js"></script>
-<link type="text/css" rel="stylesheet" href="css/header-footer.css" />
-<link type="text/css" rel="stylesheet" href="css/form-field-tooltip.css" />
-<link type="text/css" rel="stylesheet" href="css/common.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Verification - Adidravidar Matrimony</title>
+    <link rel="stylesheet" href="css/modern-design.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f4f7f6; }
+        .verify-container { max-width: 600px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 5px solid #689f38; }
+        .section-title { font-family: 'Playfair Display', serif; color: #333; font-weight: 700; margin-bottom: 20px; text-align: center; }
+        .form-control { border-radius: 10px; padding: 15px; border: 1px solid #ddd; font-size: 18px; text-align: center; letter-spacing: 5px; font-weight: 700; }
+        .btn-verify { background: #689f38; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: 700; font-size: 16px; transition: 0.3s; width: 100%; transition: 0.3s; }
+        .btn-verify:hover { background: #558b2f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(104, 159, 56, 0.3); }
+        .mobile-display { background: #f8fcf5; color: #689f38; padding: 10px 20px; border-radius: 30px; display: inline-block; font-weight: 600; margin-bottom: 30px; }
+    </style>
 </head>
-<body class="back">
-<div id="body"><!--body id start-->
+<body>
+
 <?php include("include/header.php"); ?>
-<br />
-<div class="plr">
-<style>
-.error { color:#f00; font-size:11px; display:none; }
-</style>
-<script language="javascript">
-function profile_add_disp(obj) {
-	if (obj=="Self" || obj=="") {
-		$('#addedfrm').html('Basic Information')		
-		$('#conperson').hide()
-	}
-	else {
-		$('#addedfrm').html("Basic Information Of Your "+obj)
-		$('#conperson').show()
-	}
-}
+
+<div class="verify-container text-center">
+    <div class="mb-4">
+        <i class="bi bi-shield-check text-success" style="font-size: 3rem;"></i>
+    </div>
+    <h2 class="section-title">Mobile Verification</h2>
+    <p class="text-muted mb-4">An OTP has been sent to your mobile number</p>
+    <div class="mobile-display">
+        <i class="bi bi-phone me-2"></i>+91 <?php echo htmlspecialchars($mobile_no); ?>
+    </div>
+
+    <form name="registerForm" id="registerForm" action="save_profile.php" method="post" onsubmit="return validateForm();">
+        <input type="hidden" name="command" value="verify" />
+        <input type="hidden" name="mobile_no" value="<?php echo htmlspecialchars($mobile_no); ?>" />
+        <input type="hidden" name="reg_id" value="<?php echo htmlspecialchars($reg_id); ?>" />
+        
+        <div class="mb-4">
+            <label class="form-label fw-bold text-dark mb-2">Enter 6-Digit OTP</label>
+            <input type="text" class="form-control" name="otp" id="otp" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" maxlength="6" required onkeypress="return isNumberKey(event)">
+        </div>
+
+        <button type="submit" class="btn btn-verify">Verify & Complete Registration<i class="bi bi-arrow-right ms-2"></i></button>
+        
+        <div class="mt-4">
+            <p class="small text-muted mb-0">Didn't receive the code?</p>
+            <a href="#" class="text-success fw-bold text-decoration-none small">Resend OTP</a>
+        </div>
+    </form>
+</div>
+
+<script>
 function isNumberKey(evt) {
-	var charCode = (evt.which) ? evt.which : event.keyCode
-	if (charCode > 31 && (charCode < 48 || charCode > 57))
-	return false;
-	return true;
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+    return true;
 }
-</SCRIPT>
-<script type="text/javascript">
-var xmlHttp;
-function dynshowHint(str,sitename,geturl,element_name) {
-	xmlHttp = GetXmlHttpObject();
-	if (xmlHttp==null) {
-		alert ("Browser does not support HTTP Request");
-		return;
-	}
-	document.getElementById(element_name).innerHTML='<img src="images/loading.gif">';
-	var url = sitename+geturl;
-	url = url+"&q="+str;
-	url = url+"&sid="+Math.random();
-	xmlHttp.onreadystatechange=
-	function dynstateChanged() {
-		if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete") {
-			document.getElementById(element_name).innerHTML = xmlHttp.responseText;
-			if (xmlHttp.responseText.length>4) {
-				document.getElementById(element_name).innerHTML = xmlHttp.responseText;			
-				if (element_name=='namedisp') {
-					document.getElementById('username').focus();
-				}
-				return false;
-			}
-		} 
-	};
-	xmlHttp.open("GET/index.html",url,true);
-	xmlHttp.send(null)
-}
-function GetXmlHttpObject() { 
-	var objXMLHttp = null;
-	if (window.XMLHttpRequest) {
-		objXMLHttp = new XMLHttpRequest();
-	}
-	else if (window.ActiveXObject) {
-		objXMLHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	return (objXMLHttp);
-} 
-</script>
-<script type="text/javascript">
-  function getXMLHTTP() { //fuction to return the xml http object
-		var xmlhttp=false;	
-		try{
-			xmlhttp=new XMLHttpRequest();
-		}
-		catch(e)	
-		{		
-			try{			
-				xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			catch(e){
-				try{
-				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-				}
-				catch(e1){
-					xmlhttp=false;
-				}
-			}
-		}
-		return xmlhttp;
-	}
-//Function for Displaying cities
-function getcity(title)
-{
-//alert('hai');
-//alert(title);
- var strURL="getinfo.php?title="+title;
-  //alert(strURL);
-   var req = getXMLHTTP();
-   if (req)
-   {
-     req.onreadystatechange = function()
-     {
-      if (req.readyState == 4)
-      {
-  // only if "OK"
-  if (req.status == 200)
-         {
-     document.getElementById('caste').innerHTML=req.responseText;
-  } else {
-       alert("There was a problem while using XMLHTTP:\n" + req.statusText);
-  }
-       }
-      }
-   req.open("GET", strURL, true);
-   req.send(null);
-   } 
-}
-//Function for Displaying and hiding.....
-</script>
- <script type="text/javascript">
- function onlyNumbers(event) {
-        var e = event || evt; // for trans-browser compatibility
-        var charCode = e.which || e.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
+
+function validateForm() {
+    var otp = document.getElementById("otp").value;
+    if(!otp.trim() || otp.length < 4) {
+        alert("Please enter a valid OTP");
+        return false;
     }
-	function validate_Email(email) 
-{
-	var x=document.getElementById("email").value;
-	//alert(x);exit;
-	//var x=document.forms["registerform"]["email"].value;
-	var atpos=x.indexOf("@");
-	var dotpos=x.lastIndexOf(".");
-	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
-    {
-    alert("Not a valid e-mail address");
-	document.getElementById("email").value='';
-    return false;
-    }
-	return true;
-}
- </script>
- <script type="text/javascript">
-function validateForm()
-{
-	var x=document.getElementById("otp").value;
-	if(x=="null" || x=="")
-	{
-	alert("Please Enter OTP");
-	return false; 
-	}
-	return true;
-}
-</script>
-<div class="plr">
-
-<?php include("include/menu.php"); ?>
-<style type="text/css">
-.w90 {
-    width: 50%;
-}
-</style>
-<p class="amem uu">Already a Member? <a href="login.php">Click Here</a></p>
-<div class="bdr">
-<p class="jn_g2 p10px"><b>Mobile Verification</b>  (* Mandatory Fields)</p>
-<div class="p10px gray joinNow"><br />
-<form name="registerForm" id="registerForm" action="save_profile.php" method="post" enctype="multipart/form-data"  onSubmit="return validateForm();" >
-<input id="command" type="hidden" name="command" value="verify" />
-<input id="mobile_no" type="hidden" name="mobile_no" value="<?php echo $mobile_no; ?>" />
-<input id="reg_id" type="hidden" name="reg_id" value="<?php echo $reg_id; ?>" />
-<table width="98%" border="0" cellspacing="0" cellpadding="0">
-<tr valign="top">
-<td class="bdrR w66">
-<h1 class="p5px10px mb15px bdrBd mr20px">Please enter your otp send to your mobile number</h1>
-
-<table  style="font-size:15px;" width="100%"  border="0" cellpadding="0" cellspacing="0">
-<tr>
-<td class="p5px10px">OTP<span class="star">*</span></td>
-<td class="p5px10px">
-<input type="text" class="input w90" style="padding:3px;" name="otp" id="otp" value="" tooltipText="Please enter your otp send to your mobile number" />
-<p class="error" id="name_error"></p>
-</td>
-</tr>
-<tr valign="top">
-<td class="p20px" style="padding-left:316px;" colspan="2">
-<br />
-<div class="rn_btn">
-<input type="hidden" name="id1" value="submit_new">
-<button type="submit"><span style="color:#FFFFFF; padding:5px; font-size:16px; font-weight:bold;">Verify My Mobile</span></button>
-</div>
-</td>
-</tr>
-</table>
-</form>
-</div>
-</div>
-</div>
-
-<script type="text/javascript">
-var tooltipObj = new DHTMLgoodies_formTooltip();
-tooltipObj.setTooltipPosition('right');
-tooltipObj.setPageBgColor('#f00');
-tooltipObj.setCloseMessage('Exit');
-tooltipObj.initFormFieldTooltip();
-</script> 
-<script language="javascript">
-function chk()
-{
-	var a = document.getElementById('marital_status_code').value;	
-	if (a != "12" && a != "")
-		{
-			$('#children').css('display','block');
-		}
-	else
-		{
-			$('#children').css('display','none');	
-		}
+    return true;
 }
 </script>
 
 <?php include("include/footer.php"); ?>
-</div>
- </body>
 
+</body>
 </html>

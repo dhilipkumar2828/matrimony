@@ -1,331 +1,183 @@
 <?php 
 include("include/connect.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php include("include/title.php"); ?>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<link type="text/css" rel="stylesheet" href="css/header-footer.css" />
-<link type="text/css" rel="stylesheet" href="css/common.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User ID Search - Adidravidar Matrimony</title>
+    <link rel="stylesheet" href="css/modern-design.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body { background: #fdfdfd; font-family: 'Inter', sans-serif; }
+        .main-container { padding-top: 50px; padding-bottom: 80px; max-width: 1000px; margin: 0 auto; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #1b2e1b; text-align: center; margin-bottom: 40px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #689f38; margin: 15px auto 0; border-radius: 2px; }
+        
+        .search-form-card { background: #fff; border-radius: 20px; padding: 35px; box-shadow: 0 15px 45px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; margin-bottom: 40px; }
+        .form-label { font-size: 14px; font-weight: 600; color: #444; margin-bottom: 8px; }
+        .form-control { padding: 12px 18px; border-radius: 10px; border: 1px solid #e0e0e0; font-size: 15px; transition: 0.3s; }
+        .form-control:focus { border-color: #689f38; box-shadow: 0 0 0 4px rgba(104, 159, 56, 0.1); }
+        
+        .result-profile-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid #f0f0f0; margin-top: 40px; }
+        .profile-banner { background: linear-gradient(135deg, #689f38, #5aab2a); padding: 25px 40px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .profile-banner h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin: 0; }
+        .profile-id-tag { background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 6px 15px; border-radius: 30px; font-size: 14px; font-weight: 600; border: 1px solid rgba(255,255,255,0.3); }
+        
+        .detail-item { display: flex; align-items: flex-start; margin-bottom: 12px; }
+        .detail-icon { width: 32px; height: 32px; background: #f1f8e9; color: #689f38; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; }
+        .detail-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+        .detail-value { font-size: 15px; color: #333; font-weight: 600; }
+        
+        .profile-img-wrapper { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        .profile-img-wrapper img { width: 100%; height: auto; display: block; transition: 0.5s; }
+        
+        .desc-box { background: #f9fbf8; padding: 25px; border-radius: 15px; border-left: 4px solid #689f38; margin-top: 30px; }
+        .desc-title { font-size: 14px; font-weight: 700; color: #689f38; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+    </style>
 </head>
-<body class="back">
-	    <style type="text/css"><style type="text/css">
-.paginate {
-font-family:Arial, Helvetica, sans-serif;
-padding: 3px;
-margin: 3px;
-}
-.paginate a {
-	padding:2px 5px 2px 5px;
-	margin:2px;
-	border:1px solid #999;
-	text-decoration:none;
-	color: #0099FF;
-}
-.paginate a:hover, .paginate a:active {
-	border: 1px solid #999;
-	color: #3300CC;
-}
-.paginate span.current {
-    margin: 2px;
-	padding: 2px 5px 2px 5px;
-border: 1px solid #999;
-font-weight: bold;
-background-color: #999;
-color: #FFF;
-}
-.paginate span.disabled {
-padding:2px 5px 2px 5px;
-margin:2px;
-border:1px solid #eee;
-color:#DDD;
-}
-.searching_jo
-{
-  background: none repeat scroll 0 0 #FFFFCC;
-    border: 1px solid #006699;
-    border-radius: 10px 10px 10px 10px;
-    margin-bottom: 5px;
-    margin-left: 38px;
-    padding: 5px;
-    width: 813px;
-}
-</style>
-<div id="body"><!--body id start-->
+<body>
 
 <?php include("include/header.php"); ?>
-<br />
-<div class="plr">
 
-<?php include("include/menu.php"); ?>
-	<p class="cb"></p>
-	<br />
-<div class="heading pb5px bdrB mb2px">
-<h1>User Id Search</h1>
+<div class="container main-container">
+    <h1 class="section-title">User ID Search</h1>
+    
+    <div class="search-form-card">
+        <form action="userid_search.php" method="post" onsubmit="return validateSearch();">
+            <input type="hidden" name="command" value="search_profile" />
+            <div class="row align-items-end g-4">
+                <div class="col-md-8">
+                    <label class="form-label">Search by User ID</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-person-badge text-success"></i></span>
+                        <input type="text" name="user_id" id="user_id" class="form-control border-start-0" placeholder="Enter Member ID (e.g. ADM12345)" value="<?php echo isset($_POST['user_id']) ? htmlspecialchars($_POST['user_id']) : ''; ?>" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" name="submit" class="btn btn-success w-100 py-3 fw-bold rounded-pill">
+                        <i class="bi bi-search me-2"></i>Search Profile
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <?php
+    if(isset($_POST['submit'])) {
+        $user_id = mysqli_real_escape_string($con, $_POST['user_id']);
+        $result = mysqli_query($con, "SELECT * FROM register WHERE username='$user_id' AND status='1'");
+        
+        if(mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_array($result)) {
+                $caste_id = $row['religion'];
+                $c_q = mysqli_query($con,"SELECT caste FROM caste WHERE id='$caste_id'");
+                $c_row = mysqli_fetch_array($c_q);
+                $c_name = $c_row['caste'] ?? 'N/A';
+
+                $sub_id = $row['caste'];
+                $s_q = mysqli_query($con,"SELECT subcaste FROM subcaste WHERE id='$sub_id'");
+                $s_row = mysqli_fetch_array($s_q);
+                $s_name = $s_row['subcaste'] ?? 'N/A';
+                
+                $profile_img = !empty($row['uploadedfile']) ? "profile/".$row['uploadedfile'] : "images/no-photo.png";
+                ?>
+                <div class="result-profile-card">
+                    <div class="profile-banner">
+                        <h3><?php echo ucwords($row['name']); ?></h3>
+                        <span class="profile-id-tag">Member ID: <?php echo $row['username']; ?></span>
+                    </div>
+                    <div class="p-5">
+                        <div class="row g-5">
+                            <div class="col-lg-4">
+                                <div class="profile-img-wrapper mb-4">
+                                    <img src="<?php echo $profile_img; ?>" alt="Profile">
+                                </div>
+                                <?php if(!empty($row['horo'])) { ?>
+                                    <a href="admin/horo/<?php echo $row['horo']; ?>" class="btn btn-outline-success w-100 py-2 rounded-pill fw-bold" target="_blank">
+                                        <i class="bi bi-file-earmark-pdf me-2"></i>View Horoscope
+                                    </a>
+                                <?php } ?>
+                                <button class="btn btn-success w-100 mt-3 py-2 rounded-pill fw-bold" onclick="location.href='paynow.php'">
+                                    <i class="bi bi-telephone me-2"></i>Contact Member
+                                </button>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col-md-6 border-end">
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-person"></i></div>
+                                            <div><p class="detail-label">Gender</p><p class="detail-value"><?php echo ucwords($row['gender']); ?></p></div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-calendar-check"></i></div>
+                                            <div><p class="detail-label">Age / DOB</p><p class="detail-value"><?php echo $row['age']; ?> Yrs, <?php echo $row['dob']; ?></p></div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-layers"></i></div>
+                                            <div><p class="detail-label">Caste</p><p class="detail-value"><?php echo ucwords($c_name); ?></p></div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-star"></i></div>
+                                            <div><p class="detail-label">Star</p><p class="detail-value"><?php echo ucwords($row['star']); ?></p></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ps-md-4">
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-book"></i></div>
+                                            <div><p class="detail-label">Education</p><p class="detail-value"><?php echo ucwords($row['education']); ?></p></div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-briefcase"></i></div>
+                                            <div><p class="detail-label">Job & Salary</p><p class="detail-value"><?php echo ucwords($row['job']); ?> (<?php echo $row['salary']; ?>)</p></div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-geo-alt"></i></div>
+                                            <div><p class="detail-label">Location</p><p class="detail-value"><?php echo ucwords($row['job_loc']); ?></p></div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="bi bi-arrows-expand"></i></div>
+                                            <div><p class="detail-label">Height</p><p class="detail-value"><?php echo $row['height']; ?></p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="desc-box">
+                                    <span class="desc-title">About Member</span>
+                                    <p class="mb-0 text-muted"><?php echo !empty($row['self_desc']) ? nl2br(htmlspecialchars($row['self_desc'])) : 'No additional information shared by this member.'; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+        } else {
+            echo '<div class="alert alert-info mt-5 p-4 rounded-3 border-0 shadow-sm"><i class="bi bi-info-circle me-3"></i>No active profiles found with the Member ID: <strong>'.htmlspecialchars($user_id).'</strong></div>';
+        }
+    }
+    ?>
 </div>
-<p class="tree">&bull;<a href="index.php">Home</a>&bull; User Id Search</p>
-<br />
 
-<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
-<tr valign="top">
-<td>
-<p class="refine_bg2 large b p5px15px">User Id Search</p>
-<p class="cb"></p>
-<div class="p5px bgfbfff8 bdrbed563">
-<link href="extension/Highslides/css/highslides.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="extension/Highslides/highslide-with-html.js"></script>
-    <script type="text/javascript" src="extension/Highslides/highslide_manage.js"></script>
-    <script type="text/javascript">
-        hs.graphicsDir = 'extension/Highslides/graphics/';
-        hs.outlineType = 'rounded-white';
-        hs.outlineWhileAnimating = true;
+<script>
+function validateSearch() {
+    var id = document.getElementById("user_id").value;
+    if(!id.trim()) {
+        alert("Please enter a User ID to search");
+        return false;
+    }
+    return true;
+}
 </script>
-<script type="text/javascript">
-function validlogin12()
-{
-var x=document.getElementById("user_id").value;
-if(x=="null" || x=="")
-{
-alert("Please Enter User Id");
-return false; 
-}
-return true;
-}
-</script>
-<form action="userid_search.php" method="post" name="topsearch" onSubmit="return validlogin12();">
-<input type="hidden" name="command" id="command" value="search_profile" />
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr valign="top">
-<td class="p5px10px" width="28%"><p class="mb5px">UserId</p>
-<input type="text" name="user_id" id="user_id" />
-</td>
-<td width="28%" class="p5px10px">
-<input type="submit" name="submit" id="submit" class="bt" value="Search Profiles" style='background: url("images/bg.png") no-repeat scroll 0 -960px transparent;
- border: 0 none; cursor:pointer; color: #FFFFFF; font-weight: bold; height: 25px; margin-bottom: 8px; outline: medium none; width: 120px;' /></td>
-</tr>
-</table>
-</form>
 
-</div>
-<br />
-
-</td>
-<td width="220" class="pl15px"></td>
-</tr>
-</table>
-
-
-
-<?php
-if(isset($_POST['submit']))
-{
-$user_id=$_POST['user_id'];
-$result =mysqli_query($con, "SELECT * FROM register where username='$user_id' and status='1'");
-$i=1;
-if(mysqli_num_rows($result)>0)
-{
-while($usprod=mysqli_fetch_array($result))
-{
-$id=$usprod['id'];
-?>
-<table width="100%" cellpadding="5" cellspacing="5">
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;"></span></td>
-<td></td>
-<td><span style="color:#FF0000; font-size:14px;"></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Userid</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['username']); ?></td>
-</tr>
-<tr>
-<td width="18%" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Name</span></td>
-<td width="1%">:</td>
-<td width="25%"><span style="color:#FF0000; font-size:14px;"><?php echo  ucwords($usprod['name']); ?></span></td>
-<td width="20%" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Gender</span></td>
-<td width="1%">:</td>
-<td width="35%"><?php echo  ucwords($usprod['gender']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Date of Birth</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo $usprod['dob']; ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Age</span></td>
-<td>:</td>
-<td><?php echo $usprod['age']; ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Time of Birth</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo $usprod['tob']; ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Place of Birth</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['p_birth']); ?></td>
-</tr>
-<?php
-$caste1=$usprod['religion'];
-$man=mysqli_query($con,"select * from caste where id='$caste1'");
-$man11=mysqli_fetch_array($man);
-$subcaste11=$usprod['caste'];
-$man112=mysqli_query($con,"select * from subcaste where id='$subcaste11'");
-$man111=mysqli_fetch_array($man112);
-?>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Caste</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($man11['caste']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Sub Caste</span></td>
-<td>:</td>
-<td><?php echo ucwords($man111['subcaste']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Star</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['star']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Moonsign</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['moonsign']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Education</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['education']); ?>
-<?php if($usprod['edu_det']!='') { ?> [<?php echo ucwords($usprod['edu_det']); ?>]<?php } ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Place of birth</span></td>
-<td>:</td>
-<td><?php echo $usprod['p_birth']; ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Father's Name</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['fathername']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Father's Occupation</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['father_occupation']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Mother's Name</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['mother_name']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Mother's Occupation</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['mother_occupation']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Number of brothers</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['no_of_brothers']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Number of Sisters</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['no_of_sisters']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Married brothers</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['bro_married']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Married Sisters</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['sis_married']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Skin Color</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['skin']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Height</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['height']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Company Name</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['job_cmpy']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Job Details</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['job']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Job Location</span></td>
-<td>:</td>
-<td><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['job_loc']); ?></span></td>
-<td align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Salary</span></td>
-<td>:</td>
-<td><?php echo ucwords($usprod['salary']); ?></td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Self Description</span></td>
-<td>:</td>
-<td colspan="4"><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['self_desc']); ?></span></td>
-</tr>
-
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture</span></td>
-<td>:</td>
-<td colspan="4">
-<?php if($usprod['uploadedfile']=='') { echo '<span style="color:#FF0000; font-weight:bold;">Picture not found</span>'; } else { ?>
-<img src="profile/<?php echo $usprod['uploadedfile']; ?>" height="300" width="300" />
-<?php } ?>
-</td>
-</tr>
-<?php
-$horo=$usprod['horo'];
-if($horo!='')
-{
-?>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Horoscope</span></td>
-<td>:</td>
-<td colspan="4">
-<img src="admin/horo/<?php echo $usprod['horo']; ?>" height="300" width="500" />
-</td>
-</tr>
-<?php
-}
-else
-{
-?>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Horoscope</span></td>
-<td>:</td>
-<td colspan="4">
-<span style="color:#FF0000; font-weight:bold;">Horoscope not yet uploaded</span>
-</td>
-</tr>
-<?php
-}
-?>
-</table>
-            
-
-<?php
-}
-}
-?>
- 
- 
- 
- 
- 
- 
- <?php
-}
-?>
-
-
-
-</div>
 <?php include("include/footer.php"); ?>
-</div>
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-16625285-7']);
-_gaq.push(['_setDomainName', '.matrimonialsindia.com']);
-_gaq.push(['_trackPageview']);
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script> </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
