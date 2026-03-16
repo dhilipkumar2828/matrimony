@@ -79,6 +79,48 @@ if (isset($_POST['submit']))
         if(y=="null" || y=="") { alert("Please Enter Password"); return false; }
         return true;
       }
+      function agelimit(gender) {
+        var minAge = (gender == 'male') ? 21 : 18;
+        var age1 = document.getElementById('age1');
+        var age2 = document.getElementById('age2');
+        var currentAge1 = age1.value;
+        
+        age1.innerHTML = '<option value="">Min Age</option>';
+        for (var i = minAge; i <= 60; i++) {
+          var opt = document.createElement('option');
+          opt.value = i;
+          opt.innerHTML = i;
+          if (i == currentAge1) opt.selected = true;
+          age1.appendChild(opt);
+        }
+        updateMaxAge();
+      }
+
+      function updateMaxAge() {
+        var age1 = document.getElementById('age1');
+        var age2 = document.getElementById('age2');
+        var selectedAge1 = parseInt(age1.value);
+        
+        if (!isNaN(selectedAge1)) {
+          var currentAge2 = age2.value;
+          age2.innerHTML = '<option value="">Max Age</option>';
+          for (var i = selectedAge1 + 1; i <= 60; i++) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = i;
+            if (i == currentAge2) opt.selected = true;
+            age2.appendChild(opt);
+          }
+        } else {
+          age2.innerHTML = '<option value="">Max Age</option>';
+          for (var i = 18; i <= 60; i++) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = i;
+            age2.appendChild(opt);
+          }
+        }
+      }
     </script>
 </head>
 
@@ -113,7 +155,7 @@ if (isset($_POST['submit']))
             <div class="form-row">
                 <label class="form-label-custom">Age Range</label>
                 <div class="d-flex gap-2">
-                    <select name="age1" id="age1" required class="flex-fill">
+                    <select name="age1" id="age1" required class="flex-fill" onchange="updateMaxAge()">
                         <option value="">Min Age</option>
                         <?php for ($i = 18; $i <= 60; $i++) {
   echo "<option value='$i'>$i</option>";
