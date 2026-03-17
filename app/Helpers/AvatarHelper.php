@@ -5,9 +5,9 @@ class AvatarHelper {
     public static function getAvatar($gender, $prefix = '') {
         $g = strtolower(trim($gender));
         if ($g == "male" || $g == "groom") {
-            return $prefix . "assets/avatar/male-avatar.svg";
+            return $prefix . "images/male_avatar.png";
         } else {
-            return $prefix . "assets/avatar/female-avatar.svg";
+            return $prefix . "images/female_avatar.png";
         }
     }
 }

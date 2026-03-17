@@ -43,7 +43,9 @@ function fetchProfiles($con, $filters, $page, $limit)
             $subcaste_data = mysqli_fetch_assoc($subcaste_query);
             $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
 
-            $profile_img = get_avatar($row['gender'] ?? 'female');
+            $gender_profile = $row['gender'];
+            $default_avatar = ($gender_profile == 'male' || $gender_profile == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
+            $profile_img = (!empty($row['uploadedfile']) && file_exists("profile/" . $row['uploadedfile'])) ? "profile/" . $row['uploadedfile'] : $default_avatar;
 
             echo "
             <div class='profile-result-card mb-4'>

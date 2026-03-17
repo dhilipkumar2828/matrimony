@@ -35,9 +35,9 @@ mysqli_set_charset($con, "utf8");
 function get_avatar($gender, $prefix = '') {
     $g = strtolower(trim($gender));
     if ($g == "male" || $g == "groom") {
-        return $prefix . "assets/avatar/male-avatar.svg";
+        return $prefix . "images/male_avatar.png";
     } else {
-        return $prefix . "assets/avatar/female-avatar.svg";
+        return $prefix . "images/female_avatar.png";
     }
 }
 ?>
