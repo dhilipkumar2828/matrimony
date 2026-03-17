@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <title>Admin Login - Advanced MVC</title>
     <!-- We will use Bootstrap and FontAwesome similar to original admin design -->
-    <link href="/Matrimony/public_html/matrimonyadmin/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/Matrimony/public_html/matrimonyadmin/assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/Matrimony/public_html/matrimonyadmin/assets/css/ace.min.css" />
-    <link rel="stylesheet" href="/Matrimony/public_html/matrimonyadmin/assets/css/ace-rtl.min.css" />
+    <link href="../../matrimonyadmin/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../matrimonyadmin/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../matrimonyadmin/assets/css/ace.min.css" />
+    <link rel="stylesheet" href="../../matrimonyadmin/assets/css/ace-rtl.min.css" />
     <style>
         body.login-layout { background-color: #f1f2f7; }
         .login-box { padding: 20px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); background: #fff;}
@@ -49,7 +49,7 @@
                                         </div>
                                     <?php endif; ?>
 
-                                    <form name="frm" action="/Matrimony/public_html/admin/authenticate" method="post">
+                                    <form name="frm" action="authenticate" method="post">
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">

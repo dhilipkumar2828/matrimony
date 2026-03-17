@@ -1463,23 +1463,10 @@ $man111=mysqli_fetch_array($man112);
 <td><?php echo ucwords((string)$usprod['password']); ?></td>
 </tr>
 <tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 1</span></td>
+<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture</span></td>
 <td>:</td>
 <td colspan="4">
-<?php if($usprod['uploadedfile']!='') { ?>
-<a href="../profile/<?php echo $usprod['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords((string)$usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['uploadedfile']; ?>" height="300" width="300" /></a>
-<?php } ?>
-</td>
-</tr>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 2</span></td>
-<td>:</td>
-<td colspan="4">
-<?php if($usprod['second_upload']!='') { ?>
-<a href="../profile/<?php echo $usprod['second_upload']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords((string)$usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['second_upload']; ?>" height="300" width="300" /></a>
-<?php } ?>
+<img src="<?php echo get_avatar($usprod['gender'], '../'); ?>" height="300" width="300" />
 </td>
 </tr>
 <?php

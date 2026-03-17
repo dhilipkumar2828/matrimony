@@ -1,8 +1,16 @@
 <?php
 // ========== MODERN ENTRY POINT (Front Controller) ==========
 
+// Enable all error reporting during development/troubleshooting
+// (You may set display_errors to 0 on a production server once everything is fixed)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // 1. Require Composer Autoloader
-// This automatically loads any classes placed in the app/ and config/ folders.
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    die("<h1>Fatal Error: Missing Autoloader</h1><p>It seems the 'vendor' folder or 'vendor/autoload.php' is missing. Please run <code>composer install</code> on your server or upload the vendor directory.</p>");
+}
 require_once __DIR__ . '/vendor/autoload.php';
 
 // 2. Import Router
@@ -66,11 +74,6 @@ $router->get('/api/v1/metadata/education', [App\Controllers\Api\MetadataControll
 $uri = $_SERVER['REQUEST_URI'] ?? '/';
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Ensure all errors are displayed during development
-// Move to 0 in production
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 // Dispatch the request
 $router->dispatch($uri, $method);

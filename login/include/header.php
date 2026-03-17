@@ -252,18 +252,7 @@ $gender1=$ar1['gender'];
                         <!-- ************li start******************-->
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
- <?php  if($uploadedfile1!='') { ?>  
-  <img class="nav-user-photo" src="../profile/<?php echo $uploadedfile1; ?>" alt="<?php echo ucwords($username); ?>" />               
- <?php
- }
- else  {  if($gender1=='male') { ?>
-  <img class="nav-user-photo" src="assets/avatars/avatar4.png" alt="<?php echo ucwords($username); ?>" />
-<?php  }  if($gender1=='female') {  ?>   
-       <img class="nav-user-photo" src="assets/avatars/avatar1.png" alt="<?php echo ucwords($username); ?>" />         
- <?php
- }
- }
- ?>
+  <img class="nav-user-photo" src="../<?php echo get_avatar($gender1); ?>" alt="<?php echo ucwords($username); ?>" />               
           
 
 

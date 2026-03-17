@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers\Api;
 
+use App\Helpers\AvatarHelper;
+
 class MemberController extends ApiController {
     
     // Helper function to map DB row to the requested API structure
@@ -17,7 +19,7 @@ class MemberController extends ApiController {
             'education_details' => (string)($member['edu_det'] ?? ''),
             'location' => (string)$member['native_place'],
             'about' => (string)$member['self_desc'],
-            'profileImage' => !empty($member['uploadedfile']) ? '/profile/' . $member['uploadedfile'] : null,
+            'profileImage' => AvatarHelper::getAvatar($member['gender'], '/'),
             'religion' => (string)$member['religion'],
             'horoscopeImage' => !empty($member['horo']) ? '/matrimonyadmin/horo/' . $member['horo'] : null,
             'dateOfBirth' => (string)$member['dob'],
@@ -77,8 +79,8 @@ class MemberController extends ApiController {
             'expectation' => $profile['expectation'],
             'dosam' => $profile['dosam'],
             'self_dosam' => $profile['self_dosam'],
-            'profile_image' => !empty($profile['uploadedfile']) ? '/profile/' . $profile['uploadedfile'] : null,
-            'profile_image_2' => !empty($profile['second_upload']) ? '/profile/' . $profile['second_upload'] : null,
+            'profile_image' => AvatarHelper::getAvatar($profile['gender'], '/'),
+            'profile_image_2' => null,
             'horoscope_image' => !empty($profile['horo']) ? '/matrimonyadmin/horo/' . $profile['horo'] : null,
             'raasi_grid' => [
                 'r1' => $profile['r1'], 'r2' => $profile['r2'], 'r3' => $profile['r3'], 'r4' => $profile['r4'],

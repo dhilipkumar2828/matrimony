@@ -12,6 +12,18 @@ class Database {
 
     // Private constructor to prevent multiple instances (Singleton Pattern)
     private function __construct() {
+        // Auto-detect environment
+        if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+            $this->host = "localhost";
+            $this->user = "root";
+            $this->pass = "";
+        } else {
+            $this->host = "localhost";
+            $this->user = "hmmattdk_testuser";
+            $this->pass = "Micandmac@12";
+        }
+        $this->dbname = "hmmattdk_matrimonialdb";
+
         try {
             $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname . ";charset=utf8mb4";
             $options = [
