@@ -2,24 +2,23 @@
 include("include/connect.php");
 ?>
 <?php
-if (isset($_POST['submit'])) 
-{
-  $command = $_POST['command'];
-  $gender = $_POST['gender'];
-  $from_age = $_POST['age1'];
-  $to_age = $_POST['age2'];
-  $caste = $_POST['caste'];
-  $education = $_POST['education'];
-  $photo = $_POST['photo'];
-  session_start();
-  $_SESSION['gender'] = $gender;
-  $_SESSION['from_age'] = $from_age;
-  $_SESSION['to_age'] = $to_age;
-  $_SESSION['caste'] = $caste;
-  $_SESSION['education'] = $education;
-  $_SESSION['command'] = $command;
-  $_SESSION['photo'] = $photo;
-  echo "<script language='javascript'>window.location='search_result.php';</script>";
+if (isset($_POST['submit'])) {
+    $command = $_POST['command'];
+    $gender = $_POST['gender'];
+    $from_age = $_POST['age1'];
+    $to_age = $_POST['age2'];
+    $caste = $_POST['caste'];
+    $education = $_POST['education'];
+    $photo = $_POST['photo'];
+    session_start();
+    $_SESSION['gender'] = $gender;
+    $_SESSION['from_age'] = $from_age;
+    $_SESSION['to_age'] = $to_age;
+    $_SESSION['caste'] = $caste;
+    $_SESSION['education'] = $education;
+    $_SESSION['command'] = $command;
+    $_SESSION['photo'] = $photo;
+    echo "<script language='javascript'>window.location='search_result.php';</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -37,90 +36,92 @@ if (isset($_POST['submit']))
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <script type="text/javascript">
-      if (screen.width <= 699) {
-        document.location = "indexmob.php";
-      }
+        if (screen.width <= 699) {
+            document.location = "indexmob.php";
+        }
     </script>
     <script type="text/javascript">
-      function getXMLHTTP() {
-        var xmlhttp=false;  
-        try{ xmlhttp=new XMLHttpRequest(); }
-        catch(e) {   
-          try{ xmlhttp= new ActiveXObject("Microsoft.XMLHTTP"); }
-          catch(e){
-            try{ xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); }
-            catch(e1){ xmlhttp=false; }
-          }
-        }
-        return xmlhttp;
-      }
-      function valid() {
-        var strURL="valid_exp.php";
-        var req = getXMLHTTP();
-        if (req) {
-          req.onreadystatechange = function() {
-            if (req.readyState == 4) {
-              if (req.status == 200) {
-                // Handle potential response if needed
-              }
+        function getXMLHTTP() {
+            var xmlhttp = false;
+            try { xmlhttp = new XMLHttpRequest(); }
+            catch (e) {
+                try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
+                catch (e) {
+                    try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); }
+                    catch (e1) { xmlhttp = false; }
+                }
             }
-          }
-          req.open("GET", strURL, true);
-          req.send(null);
-        } 
-      }
-      function validlogin() {
-        var x=document.getElementById("username").value;
-        if(x=="null" || x=="") { alert("Please Enter Username"); return false; }
-        var y=document.getElementById("password").value;
-        if(y=="null" || y=="") { alert("Please Enter Password"); return false; }
-        return true;
-      }
-      function agelimit(gender) {
-        var minAge = (gender == 'male') ? 21 : 18;
-        var age1 = document.getElementById('age1');
-        var age2 = document.getElementById('age2');
-        var currentAge1 = age1.value;
-        
-        age1.innerHTML = '<option value="">Min Age</option>';
-        for (var i = minAge; i <= 60; i++) {
-          var opt = document.createElement('option');
-          opt.value = i;
-          opt.innerHTML = i;
-          if (i == currentAge1) opt.selected = true;
-          age1.appendChild(opt);
+            return xmlhttp;
         }
-        updateMaxAge();
-      }
+        function valid() {
+            var strURL = "valid_exp.php";
+            var req = getXMLHTTP();
+            if (req) {
+                req.onreadystatechange = function () {
+                    if (req.readyState == 4) {
+                        if (req.status == 200) {
+                            // Handle potential response if needed
+                        }
+                    }
+                }
+                req.open("GET", strURL, true);
+                req.send(null);
+            }
+        }
+        function validlogin() {
+            var x = document.getElementById("username").value;
+            if (x == "null" || x == "") { alert("Please Enter Username"); return false; }
+            var y = document.getElementById("password").value;
+            if (y == "null" || y == "") { alert("Please Enter Password"); return false; }
+            return true;
+        }
+        function agelimit(gender) {
+            var minAge = (gender == 'male') ? 21 : 18;
+            var age1 = document.getElementById('age1');
+            var age2 = document.getElementById('age2');
+            var currentAge1 = age1.value;
 
-      function updateMaxAge() {
-        var age1 = document.getElementById('age1');
-        var age2 = document.getElementById('age2');
-        var selectedAge1 = parseInt(age1.value);
-        
-        if (!isNaN(selectedAge1)) {
-          var currentAge2 = age2.value;
-          age2.innerHTML = '<option value="">Max Age</option>';
-          for (var i = selectedAge1 + 1; i <= 60; i++) {
-            var opt = document.createElement('option');
-            opt.value = i;
-            opt.innerHTML = i;
-            if (i == currentAge2) opt.selected = true;
-            age2.appendChild(opt);
-          }
-        } else {
-          age2.innerHTML = '<option value="">Max Age</option>';
-          for (var i = 18; i <= 60; i++) {
-            var opt = document.createElement('option');
-            opt.value = i;
-            opt.innerHTML = i;
-            age2.appendChild(opt);
-          }
+            age1.innerHTML = '<option value="">Min Age</option>';
+            for (var i = minAge; i <= 60; i++) {
+                var opt = document.createElement('option');
+                opt.value = i;
+                opt.innerHTML = i;
+                if (i == currentAge1) opt.selected = true;
+                age1.appendChild(opt);
+            }
+            updateMaxAge();
         }
-      }
+
+        function updateMaxAge() {
+            var age1 = document.getElementById('age1');
+            var age2 = document.getElementById('age2');
+            var selectedAge1 = parseInt(age1.value);
+
+            if (!isNaN(selectedAge1)) {
+                var currentAge2 = age2.value;
+                age2.innerHTML = '<option value="">Max Age</option>';
+                for (var i = selectedAge1 + 1; i <= 60; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerHTML = i;
+                    if (i == currentAge2) opt.selected = true;
+                    age2.appendChild(opt);
+                }
+            } else {
+                age2.innerHTML = '<option value="">Max Age</option>';
+                for (var i = 18; i <= 60; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerHTML = i;
+                    age2.appendChild(opt);
+                }
+            }
+        }
     </script>
 </head>
 
@@ -130,7 +131,8 @@ if (isset($_POST['submit']))
 
     <!-- banner from section -->
     <div class="hero-section">
-        <div class="backgroundimg" style="background-image: url('image/WhatsApp Image 2026-03-03 at 10.45.50 PM.jpeg');"></div>
+        <div class="backgroundimg"
+            style="background-image: url('image/WhatsApp Image 2026-03-03 at 10.45.50 PM.jpeg');"></div>
         <div class="hero-overlay"></div>
 
         <div class="hero-text-container">
@@ -141,11 +143,11 @@ if (isset($_POST['submit']))
         <form class="register-form" name="topsearch" id="topsearch" method="post" action="index.php">
             <input type="hidden" name="command" id="command" value="searchby">
             <h2 class="mb-3">Find <span>Your Match</span></h2>
-            
+
             <!-- Row 1: Gender -->
             <div class="form-row">
                 <label class="form-label-custom">Looking for</label>
-                <select name="gender" required onchange="agelimit(this.value);">
+                <select name="gender" onchange="agelimit(this.value);">
                     <option value="female" selected>Bride</option>
                     <option value="male">Groom</option>
                 </select>
@@ -155,17 +157,17 @@ if (isset($_POST['submit']))
             <div class="form-row">
                 <label class="form-label-custom">Age Range</label>
                 <div class="d-flex gap-2">
-                    <select name="age1" id="age1" required class="flex-fill" onchange="updateMaxAge()">
+                    <select name="age1" id="age1" class="flex-fill" onchange="updateMaxAge()">
                         <option value="">Min Age</option>
                         <?php for ($i = 18; $i <= 60; $i++) {
-  echo "<option value='$i'>$i</option>";
-}?>
+                            echo "<option value='$i'>$i</option>";
+                        } ?>
                     </select>
-                    <select name="age2" id="age2" required class="flex-fill">
+                    <select name="age2" id="age2" class="flex-fill">
                         <option value="">Max Age</option>
                         <?php for ($i = 18; $i <= 60; $i++) {
-  echo "<option value='$i'>$i</option>";
-}?>
+                            echo "<option value='$i'>$i</option>";
+                        } ?>
                     </select>
                 </div>
             </div>
@@ -174,35 +176,38 @@ if (isset($_POST['submit']))
             <div class="form-row">
                 <label class="form-label-custom">Caste & Education</label>
                 <div class="d-flex gap-2">
-                    <select name="caste" id="caste" required onchange="getcity(this.value);" class="flex-fill">
+                    <select name="caste" id="caste" onchange="getcity(this.value);" class="flex-fill">
                         <option value="">Select Caste</option>
                         <?php
-$man = mysqli_query($con, "select * from caste where temp_id=1 order by caste asc");
-while ($man1 = mysqli_fetch_array($man)) {
-  echo "<option value='" . $man1['id'] . "'>" . ucwords($man1['caste']) . "</option>";
-}
-?>
+                        $man = mysqli_query($con, "select * from caste where temp_id=1 order by caste asc");
+                        while ($man1 = mysqli_fetch_array($man)) {
+                            echo "<option value='" . $man1['id'] . "'>" . ucwords($man1['caste']) . "</option>";
+                        }
+                        ?>
                     </select>
 
-                    <select name="education" id="education" required class="flex-fill">
+                    <select name="education" id="education" class="flex-fill">
                         <option value="">Select Education</option>
                         <?php
-$kal = mysqli_query($con, "select * from education where temp_id=1 order by id desc");
-while ($kal11 = mysqli_fetch_array($kal)) {
-  echo "<option value='" . $kal11['education'] . "'>" . $kal11['education'] . "</option>";
-}
-?>
+                        $kal = mysqli_query($con, "select * from education where temp_id=1 order by id desc");
+                        while ($kal11 = mysqli_fetch_array($kal)) {
+                            echo "<option value='" . $kal11['education'] . "'>" . $kal11['education'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
-            
+
             <!-- Row 4: Photo Status -->
             <div class="form-row">
                 <label class="form-label-custom">Photo Status</label>
                 <div class="photo-status-group">
-                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="1" class="vam me-1"> With Photo</label>
-                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="0" class="vam me-1"> Without</label>
-                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="2" checked class="vam me-1"> All</label>
+                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="1" class="vam me-1"> With
+                        Photo</label>
+                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="0" class="vam me-1">
+                        Without</label>
+                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="2" checked
+                            class="vam me-1"> All</label>
                 </div>
             </div>
 
@@ -210,7 +215,9 @@ while ($kal11 = mysqli_fetch_array($kal)) {
                 <i class="bi bi-search me-2"></i>Find Matches
             </button>
             <div class="text-center mt-1">
-                <a href="govt_search.php" style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government Search</a>
+                <a href="govt_search.php"
+                    style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government
+                    Search</a>
             </div>
         </form>
     </div>
@@ -315,7 +322,8 @@ while ($kal11 = mysqli_fetch_array($kal)) {
                     <div class="video-heading">
                         <h2>About Our <span>Matrimony Service</span></h2>
                     </div>
-                    <p>Aadithiravidar Matrimony is a trusted platform helping families find the perfect life partner within the community.</p>
+                    <p>Aadithiravidar Matrimony is a trusted platform helping families find the perfect life partner
+                        within the community.</p>
                     <div class="features-list">
                         <ul>
                             <li><i class="bi bi-check-circle-fill"></i> Verified Profiles</li>
@@ -338,9 +346,10 @@ while ($kal11 = mysqli_fetch_array($kal)) {
                     <div class="mobile-section-heading">
                         <p class="small-title">Mobile App</p>
                         <h2 class="main-title">Find Your Perfect Match<br><span>Anytime, Anywhere</span></h2>
-                        <p class="app-description">Browse verified profiles, send interests, and connect with your ideal partner easily through our mobile app.</p>
+                        <p class="app-description">Browse verified profiles, send interests, and connect with your ideal
+                            partner easily through our mobile app.</p>
                     </div>
-                    
+
                     <div class="stats-row">
                         <div class="stat-card">
                             <div class="stat-icon">
@@ -367,7 +376,7 @@ while ($kal11 = mysqli_fetch_array($kal)) {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="store-buttons">
                         <a href="#" class="store-btn">
                             <div class="store-icon google">
@@ -389,13 +398,14 @@ while ($kal11 = mysqli_fetch_array($kal)) {
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-5 col-md-12 d-none d-lg-flex justify-content-center">
-                   <img src="image/app screen.svg" style="width: 100%; height: 55%; object-fit: cover;" alt="App Interface">
-                 
-                    </div>
+                    <img src="image/app screen.svg" style="width: 100%; height: 55%; object-fit: cover;"
+                        alt="App Interface">
+
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
