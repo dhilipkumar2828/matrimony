@@ -136,90 +136,185 @@ if (isset($_POST['submit'])) {
         <div class="hero-overlay"></div>
 
         <div class="hero-text-container">
-            <h1>Find Your Perfect<br><span>Life Partner</span></h1>
+            <h1>Find Your perfect<br><span>Life Partner</span></h1>
             <p>Trusted matrimony service helping families find meaningful connections.</p>
         </div>
 
-        <form class="register-form" name="topsearch" id="topsearch" method="post" action="index.php">
-            <input type="hidden" name="command" id="command" value="searchby">
-            <h2 class="mb-3">Find <span>Your Match</span></h2>
+        <div class="hero-forms-wrapper" data-aos="fade-left">
+            <!-- Login Form (Now First) -->
+            <form class="login-banner-form" method="POST" action="login/logincheck.php" onsubmit="return validlogin();">
+                <input type="hidden" name="command" value="login">
+                
+                <div class="login-header-group">
+                    <h2>Member <span>Login</span></h2>
+                    <div class="login-subtitle">Welcome back! Please login to your account</div>
+                </div>
 
-            <!-- Row 1: Gender -->
-            <div class="form-row">
-                <label class="form-label-custom">Looking for</label>
-                <select name="gender" onchange="agelimit(this.value);">
-                    <option value="female" selected>Bride</option>
-                    <option value="male">Groom</option>
-                </select>
-            </div>
+                <div class="form-row mb-4">
+                    <label class="form-label-custom">User ID / Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter ID" required>
+                    </div>
+                </div>
 
-            <!-- Row 2: Age Range -->
-            <div class="form-row">
-                <label class="form-label-custom">Age Range</label>
-                <div class="d-flex gap-2">
-                    <select name="age1" id="age1" class="flex-fill" onchange="updateMaxAge()">
-                        <option value="">Min Age</option>
-                        <?php for ($i = 18; $i <= 60; $i++) {
-                            echo "<option value='$i'>$i</option>";
-                        } ?>
-                    </select>
-                    <select name="age2" id="age2" class="flex-fill">
-                        <option value="">Max Age</option>
-                        <?php for ($i = 18; $i <= 60; $i++) {
-                            echo "<option value='$i'>$i</option>";
-                        } ?>
+                <div class="form-row mb-4">
+                    <label class="form-label-custom">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember_me" id="remember_banner" value="Y" style="width: 15px; height: 15px;">
+                        <label class="form-check-label" for="remember_banner" style="font-size: 12px; color: #666; font-weight: 500;">Remember Me</label>
+                    </div>
+                    <a href="#" style="font-size: 12px; color: #666; text-decoration: none; font-weight: 500;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 py-3 fw-bold shadow-sm" style="font-size: 16px;">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Login to Account
+                </button>
+
+                <div class="login-footer text-center">
+                    <p class="text-muted small mb-1">Don't have an account yet?</p>
+                    <a href="register_user.php" style="color: #689f38; font-weight: 700; text-decoration: none; font-size: 14px;">Register Free Member</a>
+                </div>
+            </form>
+
+            <!-- Search Form (Now Second) -->
+            <form class="register-form" name="topsearch" id="topsearch" method="post" action="index.php">
+                <input type="hidden" name="command" id="command" value="searchby">
+                <h2 class="mb-3">Find <span>Your Match</span></h2>
+
+                <div class="form-row">
+                    <label class="form-label-custom">Looking for</label>
+                    <select name="gender" onchange="agelimit(this.value);">
+                        <option value="female" selected>Bride</option>
+                        <option value="male">Groom</option>
                     </select>
                 </div>
-            </div>
 
-            <!-- Row 3: Caste & Education -->
-            <div class="form-row">
-                <label class="form-label-custom">Caste & Education</label>
-                <div class="d-flex gap-2">
-                    <select name="caste" id="caste" onchange="getcity(this.value);" class="flex-fill">
-                        <option value="">Select Caste</option>
-                        <?php
-                        $man = mysqli_query($con, "select * from caste where temp_id=1 order by caste asc");
-                        while ($man1 = mysqli_fetch_array($man)) {
-                            echo "<option value='" . $man1['id'] . "'>" . ucwords($man1['caste']) . "</option>";
-                        }
-                        ?>
-                    </select>
+                <div class="form-row">
+                    <label class="form-label-custom">Age Range</label>
+                    <div class="d-flex gap-2">
+                        <select name="age1" id="age1" class="flex-fill" onchange="updateMaxAge()">
+                            <option value="">Min Age</option>
+                            <?php for ($i = 18; $i <= 60; $i++) { echo "<option value='$i'>$i</option>"; } ?>
+                        </select>
+                        <select name="age2" id="age2" class="flex-fill">
+                            <option value="">Max Age</option>
+                            <?php for ($i = 18; $i <= 60; $i++) { echo "<option value='$i'>$i</option>"; } ?>
+                        </select>
+                    </div>
+                </div>
 
-                    <select name="education" id="education" class="flex-fill">
-                        <option value="">Select Education</option>
-                        <?php
-                        $kal = mysqli_query($con, "select * from education where temp_id=1 order by id desc");
-                        while ($kal11 = mysqli_fetch_array($kal)) {
-                            echo "<option value='" . $kal11['education'] . "'>" . $kal11['education'] . "</option>";
-                        }
-                        ?>
-                    </select>
+                <div class="form-row">
+                    <label class="form-label-custom">Caste & Education</label>
+                    <div class="d-flex gap-2">
+                        <select name="caste" id="caste" onchange="getcity(this.value);" class="flex-fill">
+                            <option value="">Select Caste</option>
+                            <?php
+                            $man = mysqli_query($con, "select * from caste where temp_id=1 order by caste asc");
+                            while ($man1 = mysqli_fetch_array($man)) { echo "<option value='" . $man1['id'] . "'>" . ucwords($man1['caste']) . "</option>"; }
+                            ?>
+                        </select>
+
+                        <select name="education" id="education" class="flex-fill">
+                            <option value="">Select Education</option>
+                            <?php
+                            $kal = mysqli_query($con, "select * from education where temp_id=1 order by id desc");
+                            while ($kal11 = mysqli_fetch_array($kal)) { echo "<option value='" . $kal11['education'] . "'>" . $kal11['education'] . "</option>"; }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label class="form-label-custom">Photo Status</label>
+                    <div class="photo-status-group">
+                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="1" class="vam me-1"> With Photo</label>
+                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="0" class="vam me-1"> Without</label>
+                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="2" checked class="vam me-1"> All</label>
+                    </div>
+                </div>
+
+                <button type="submit" name="submit" class="btn btn-success w-100 py-2 fw-bold mt-2">
+                    <i class="bi bi-search me-2"></i>Find Matches
+                </button>
+                <div class="text-center mt-1">
+                    <a href="govt_search.php" style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government Search</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Plans Strip Section -->
+    <div class="plans-strip-section" data-aos="fade-up">
+        <div class="container">
+            <div class="plans-glass-container">
+                <div class="plans-flex-row">
+                    <!-- Plan 1 -->
+                    <div class="plan-item plan-silver">
+                        <div class="plan-content">
+                            <div class="plan-icon">
+                                <div class="icon-circle">
+                                    <img src="image/plan_silver.png" alt="Silver Plan">
+                                </div>
+                            </div>
+                            <div class="plan-info">
+                                <h6>RS 3000 / 6 MONTHS</h6>
+                                <a href="payment.php?plan=Silver&price=3000" class="btn btn-join-now">CHOOSE PLAN</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Plan 2 -->
+                    <div class="plan-item plan-gold">
+                        <div class="plan-content">
+                            <div class="plan-icon">
+                                <div class="icon-circle">
+                                    <img src="image/plan_gold.png" alt="Gold Plan">
+                                </div>
+                            </div>
+                            <div class="plan-info">
+                                <h6>RS 4000 / 1 YEAR</h6>
+                                <a href="payment.php?plan=Gold&price=4000" class="btn btn-join-now">CHOOSE PLAN</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Plan 3 -->
+                    <div class="plan-item plan-bronze">
+                        <div class="plan-content">
+                            <div class="plan-icon">
+                                <div class="icon-circle">
+                                    <img src="image/plan_bronze.png" alt="Bronze Plan">
+                                </div>
+                            </div>
+                            <div class="plan-info">
+                                <h6>RS 7000 / UPTO MARRIAGE</h6>
+                                <a href="payment.php?plan=Bronze&price=7000" class="btn btn-join-now">CHOOSE PLAN</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Plan 4 -->
+                    <div class="plan-item plan-wallet">
+                        <div class="plan-content">
+                            <div class="plan-icon">
+                                <div class="icon-circle">
+                                    <img src="image/plan_wallet.png" alt="Wallet">
+                                </div>
+                            </div>
+                            <div class="plan-info">
+                                <h6>Add Wallet Amount</h6>
+                                <a href="payment.php?plan=Wallet&price=0" class="btn btn-join-now">CHOOSE PLAN</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Row 4: Photo Status -->
-            <div class="form-row">
-                <label class="form-label-custom">Photo Status</label>
-                <div class="photo-status-group">
-                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="1" class="vam me-1"> With
-                        Photo</label>
-                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="0" class="vam me-1">
-                        Without</label>
-                    <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="2" checked
-                            class="vam me-1"> All</label>
-                </div>
-            </div>
-
-            <button type="submit" name="submit" class="btn btn-success w-100 py-2 fw-bold mt-2">
-                <i class="bi bi-search me-2"></i>Find Matches
-            </button>
-            <div class="text-center mt-1">
-                <a href="govt_search.php"
-                    style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government
-                    Search</a>
-            </div>
-        </form>
+        </div>
     </div>
 
     <!-- Feature Section -->
@@ -279,8 +374,8 @@ if (isset($_POST['submit'])) {
                 <p class="price">₹3,000</p>
                 <ul>
                     <li><i class="bi bi-check-circle-fill"></i> 6 Months Validity</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Verified Profiles</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Multiple Contact Views</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
                 </ul>
                 <button onclick="location.href='paynow.php?plan_id=1'">Choose Plan</button>
             </div>
@@ -292,7 +387,7 @@ if (isset($_POST['submit'])) {
                 <ul>
                     <li><i class="bi bi-check-circle-fill"></i> Upto Marriage</li>
                     <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Dedicated Manager</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
                 </ul>
                 <button onclick="location.href='paynow.php?plan_id=3'">Choose Plan</button>
             </div>
@@ -303,8 +398,8 @@ if (isset($_POST['submit'])) {
                 <p class="price">₹4,000</p>
                 <ul>
                     <li><i class="bi bi-check-circle-fill"></i> 1 Year Validity</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Enhanced Matches</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Priority Support</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
                 </ul>
                 <button onclick="location.href='paynow.php?plan_id=2'">Choose Plan</button>
             </div>
