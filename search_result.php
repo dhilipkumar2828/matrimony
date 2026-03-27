@@ -326,7 +326,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                             <div class="col-md-4">
                                 <label class="form-label">Age</label>
                                 <div class="d-flex align-items-center gap-2">
-                                    <select class="form-select flex-fill" name="age1" id="age1"></select>
+                                    <select class="form-select flex-fill" name="age1" id="age1" onchange="updateMaxAge()"></select>
                                     <span class="text-muted">to</span>
                                     <select class="form-select flex-fill" name="age2" id="age2"></select>
                                 </div>
@@ -447,6 +447,23 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                 if (i === 40) opt2.selected = true;
                 age1.add(opt1);
                 age2.add(opt2);
+            }
+            updateMaxAge();
+        }
+
+        function updateMaxAge() {
+            let age1 = document.getElementById('age1');
+            let age2 = document.getElementById('age2');
+            let selectedAge1 = parseInt(age1.value);
+            let currentAge2 = age2.value;
+
+            if (!isNaN(selectedAge1)) {
+                age2.innerHTML = '<option value="">Max Age</option>';
+                for (let i = selectedAge1 + 1; i <= 60; i++) {
+                    let opt = new Option(i, i);
+                    if (i == currentAge2) opt.selected = true;
+                    age2.add(opt);
+                }
             }
         }
         // Load profiles via AJAX
