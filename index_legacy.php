@@ -144,7 +144,7 @@ if (isset($_POST['submit'])) {
             <!-- Login Form (Now First) -->
             <form class="login-banner-form" method="POST" action="login/logincheck.php" onsubmit="return validlogin();">
                 <input type="hidden" name="command" value="login">
-                
+
                 <div class="login-header-group">
                     <h2>Member <span>Login</span></h2>
                     <div class="login-subtitle">Welcome back! Please login to your account</div>
@@ -154,7 +154,8 @@ if (isset($_POST['submit'])) {
                     <label class="form-label-custom">User ID / Email</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-person"></i></span>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter ID" required>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter ID"
+                            required>
                     </div>
                 </div>
 
@@ -162,16 +163,20 @@ if (isset($_POST['submit'])) {
                     <label class="form-label-custom">Password</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="Enter Password" required>
                     </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember_me" id="remember_banner" value="Y" style="width: 15px; height: 15px;">
-                        <label class="form-check-label" for="remember_banner" style="font-size: 12px; color: #666; font-weight: 500;">Remember Me</label>
+                        <input class="form-check-input" type="checkbox" name="remember_me" id="remember_banner"
+                            value="Y" style="width: 15px; height: 15px;">
+                        <label class="form-check-label" for="remember_banner"
+                            style="font-size: 12px; color: #666; font-weight: 500;">Remember Me</label>
                     </div>
-                    <a href="#" style="font-size: 12px; color: #666; text-decoration: none; font-weight: 500;">Forgot Password?</a>
+                    <a href="#" style="font-size: 12px; color: #666; text-decoration: none; font-weight: 500;">Forgot
+                        Password?</a>
                 </div>
 
                 <button type="submit" class="btn banner-btn">
@@ -180,7 +185,9 @@ if (isset($_POST['submit'])) {
 
                 <div class="banner-footer text-center">
                     <p class="text-muted small mb-1">Don't have an account yet?</p>
-                    <a href="register_user.php" style="color: #689f38; font-weight: 700; text-decoration: none; font-size: 14px;">Register Free Member</a>
+                    <a href="register_user.php"
+                        style="color: #689f38; font-weight: 700; text-decoration: none; font-size: 14px;">Register Free
+                        Member</a>
                 </div>
             </form>
 
@@ -202,11 +209,15 @@ if (isset($_POST['submit'])) {
                     <div class="d-flex gap-2">
                         <select name="age1" id="age1" class="flex-fill" onchange="updateMaxAge()">
                             <option value="">Min Age</option>
-                            <?php for ($i = 18; $i <= 60; $i++) { echo "<option value='$i'>$i</option>"; } ?>
+                            <?php for ($i = 18; $i <= 60; $i++) {
+                                echo "<option value='$i'>$i</option>";
+                            } ?>
                         </select>
                         <select name="age2" id="age2" class="flex-fill">
                             <option value="">Max Age</option>
-                            <?php for ($i = 18; $i <= 60; $i++) { echo "<option value='$i'>$i</option>"; } ?>
+                            <?php for ($i = 18; $i <= 60; $i++) {
+                                echo "<option value='$i'>$i</option>";
+                            } ?>
                         </select>
                     </div>
                 </div>
@@ -218,7 +229,9 @@ if (isset($_POST['submit'])) {
                             <option value="">Select Caste</option>
                             <?php
                             $man = mysqli_query($con, "select * from caste where temp_id=1 order by caste asc");
-                            while ($man1 = mysqli_fetch_array($man)) { echo "<option value='" . $man1['id'] . "'>" . ucwords($man1['caste']) . "</option>"; }
+                            while ($man1 = mysqli_fetch_array($man)) {
+                                echo "<option value='" . $man1['id'] . "'>" . ucwords($man1['caste']) . "</option>";
+                            }
                             ?>
                         </select>
 
@@ -226,7 +239,9 @@ if (isset($_POST['submit'])) {
                             <option value="">Select Education</option>
                             <?php
                             $kal = mysqli_query($con, "select * from education where temp_id=1 order by id desc");
-                            while ($kal11 = mysqli_fetch_array($kal)) { echo "<option value='" . $kal11['education'] . "'>" . $kal11['education'] . "</option>"; }
+                            while ($kal11 = mysqli_fetch_array($kal)) {
+                                echo "<option value='" . $kal11['education'] . "'>" . $kal11['education'] . "</option>";
+                            }
                             ?>
                         </select>
                     </div>
@@ -235,17 +250,22 @@ if (isset($_POST['submit'])) {
                 <div class="form-row">
                     <label class="form-label-custom">Photo Status</label>
                     <div class="photo-status-group">
-                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="1" class="vam me-1"> With Photo</label>
-                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="0" class="vam me-1"> Without</label>
-                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="2" checked class="vam me-1"> All</label>
+                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="1" class="vam me-1">
+                            With Photo</label>
+                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="0" class="vam me-1">
+                            Without</label>
+                        <label class="m-0 cursor-pointer"><input type="radio" name="photo" value="2" checked
+                                class="vam me-1"> All</label>
                     </div>
                 </div>
 
-                <button type="submit" name="submit" class="btn banner-btn shadow-sm">
+                <button type="submit" name="submit" class="btn banner-btn shadow-sm d-flex">
                     <i class="bi bi-search me-2"></i>Find Matches
                 </button>
                 <div class="banner-footer text-center">
-                    <a href="govt_search.php" style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government Search</a>
+                    <a href="govt_search.php"
+                        style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government
+                        Search</a>
                 </div>
             </form>
         </div>
@@ -266,7 +286,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>RS 3000 / 6 MONTHS</h6>
-                                <a href="paynow.php?plan_id=1" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=1" class="btn btn-join-now d-flex">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>
@@ -280,7 +300,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>RS 4000 / 1 YEAR</h6>
-                                <a href="paynow.php?plan_id=2" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=2" class="btn btn-join-now d-flex">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>
@@ -294,7 +314,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>RS 7000 / UPTO MARRIAGE</h6>
-                                <a href="paynow.php?plan_id=3" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=3" class="btn btn-join-now d-flex">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>
@@ -308,7 +328,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>Add Wallet Amount</h6>
-                                <a href="paynow.php?plan_id=7" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=7" class="btn btn-join-now d-flex">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>
@@ -375,7 +395,7 @@ if (isset($_POST['submit'])) {
                 <ul>
                     <li><i class="bi bi-check-circle-fill"></i> 6 Months Validity</li>
                     <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Contact</li>
                 </ul>
                 <button onclick="location.href='paynow.php?plan_id=1'">Choose Plan</button>
             </div>
@@ -387,7 +407,7 @@ if (isset($_POST['submit'])) {
                 <ul>
                     <li><i class="bi bi-check-circle-fill"></i> Upto Marriage</li>
                     <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Contact</li>
                 </ul>
                 <button onclick="location.href='paynow.php?plan_id=3'">Choose Plan</button>
             </div>
@@ -399,7 +419,7 @@ if (isset($_POST['submit'])) {
                 <ul>
                     <li><i class="bi bi-check-circle-fill"></i> 1 Year Validity</li>
                     <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Contact</li>
                 </ul>
                 <button onclick="location.href='paynow.php?plan_id=2'">Choose Plan</button>
             </div>
