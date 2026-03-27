@@ -68,9 +68,8 @@ include("include/connect.php");
                 </div>
                 <ul class="plan-features">
                     <li><i class="bi bi-check-circle-fill"></i> 6 Months Validity</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Verified Profiles</li>
-                    <li><i class="bi bi-check-circle-fill"></i> 30 Contacts Direct</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Basic Email Support</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
                 </ul>
                 <a href="paynow.php?plan_id=1" class="btn btn-green">Choose Silver</a>
             </div>
@@ -85,10 +84,8 @@ include("include/connect.php");
                 </div>
                 <ul class="plan-features">
                     <li><i class="bi bi-check-circle-fill"></i> 1 Year Validity</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Verified Profiles</li>
-                    <li><i class="bi bi-check-circle-fill"></i> 60 Contacts Direct</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Priority Call Support</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Profile Visibility Boost</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
                 </ul>
                 <a href="paynow.php?plan_id=2" class="btn btn-green">Choose Gold</a>
             </div>
@@ -103,10 +100,8 @@ include("include/connect.php");
                 </div>
                 <ul class="plan-features">
                     <li><i class="bi bi-check-circle-fill"></i> Valid Upto Marriage</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Contacts</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Dedicated Manager</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Profile Highlighting</li>
-                    <li><i class="bi bi-check-circle-fill"></i> Priority Verification</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Views</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Unlimited  Contact</li>
                 </ul>
                 <a href="paynow.php?plan_id=3" class="btn btn-green">Choose Platinum</a>
             </div>

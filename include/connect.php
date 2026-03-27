@@ -4,9 +4,17 @@ error_reporting(0);
 ini_set('display_errors', '0');
 
 @ob_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
+
+// Auto-detect environment
+if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+} else {
+    $servername = "localhost";
+    $username = "hmmattdk_testuser";
+    $password = "Micandmac@12";
+}
 $dbname = "hmmattdk_matrimonialdb";
 
 // Direct connect with database
@@ -18,4 +26,18 @@ if (!$con) {
 
 // Set charset
 mysqli_set_charset($con, "utf8");
+
+/**
+ * Standardized Avatar Helper
+ * Always returns gender-based avatar based on input gender
+ * Supports optional path prefix (e.g., '../') for files in subdirectories
+ */
+function get_avatar($gender, $prefix = '') {
+    $g = strtolower(trim($gender));
+    if ($g == "male" || $g == "groom") {
+        return $prefix . "images/male_avatar.png";
+    } else {
+        return $prefix . "images/female_avatar.png";
+    }
+}
 ?>

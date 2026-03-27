@@ -141,8 +141,12 @@ h6 {
 /* Hero Section */
 .hero-section {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 100px 0;
 }
 
 .hero-overlay {
@@ -156,10 +160,8 @@ h6 {
 }
 
 .hero-text-container {
-    position: absolute;
-    left: 80px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
+    margin-left: 80px;
     max-width: 550px;
     z-index: 2;
     color: white;
@@ -195,39 +197,137 @@ h6 {
     background-position: center;
 }
 
-/* Form Card */
-.register-form {
-    position: absolute;
-    right: 80px;
-    top: 45%;
-    transform: translateY(-50%);
-    width: 360px;
-    padding: 25px 30px;
-    background: rgba(255, 255, 255, 0.85);
-    /* soft white glass */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    z-index: 2;
+.hero-forms-wrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: 80px;
     display: flex;
-    flex-direction: column;
+    gap: 20px;
+    z-index: 2;
+    align-items: stretch;
 }
 
-/* Form Heading */
-.register-form h2 {
+/* Form Card (Common for Search & Login) */
+.register-form, 
+.login-banner-form {
+    width: 360px;
+    padding: 35px 30px; /* Enhanced padding */
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Stretch to fill */
+}
+
+.login-banner-form {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle decorative circle for login form */
+.login-banner-form::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(104, 159, 56, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.login-banner-form > * {
+    position: relative;
+    z-index: 1;
+}
+
+.login-banner-form .login-header-group {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-top: 5px;
+}
+
+.login-banner-form h2 {
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.login-banner-form .login-subtitle {
+    font-size: 13px;
+    color: #888;
+    font-weight: 500;
+}
+
+.register-form {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+}
+
+/* Form Headings */
+.register-form h2,
+.login-banner-form h2 {
     text-align: center;
     margin-bottom: 2px;
     font-weight: 700;
     font-family: 'Playfair Display', serif;
-    font-size: 24px;
+    font-size: 22px; /* Slightly smaller heading */
     color: #1b2e1b;
 }
 
-/* heading bold */
-.register-form h2 span {
+.register-form h2 span,
+.login-banner-form h2 span {
     color: #689f38;
+}
+
+.login-banner-form .input-group {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 46px;
+    align-items: center;
+}
+
+.login-banner-form .input-group:focus-within {
+    border-color: #689f38;
+    box-shadow: 0 0 0 4px rgba(104, 159, 56, 0.1);
+}
+
+.login-banner-form .input-group-text {
+    border: none !important;
+    background: transparent !important;
+    color: #689f38 !important; /* Theme Green */
+    padding-right: 0 !important;
+    font-size: 18px !important;
+}
+
+.login-banner-form .form-control {
+    border: none !important;
+    background: transparent !important;
+    height: 100% !important;
+    font-size: 14px;
+    padding-left: 12px !important;
+}
+
+.login-banner-form .form-control:focus {
+    box-shadow: none !important;
+}
+
+.login-banner-form .login-footer {
+    margin-top: auto; /* Push to bottom */
+    padding-top: 25px;
+}
+
+.login-banner-form .login-footer p {
+    margin-bottom: 5px;
 }
 
 .form-label-custom {
@@ -3738,6 +3838,107 @@ body {
     box-shadow: 0 -5px 15px rgba(104, 159, 56, 0.1);
 }
 
+/* Membership Plans Section (Simplified Premium UI) */
+.plans-strip-section {
+    position: relative;
+    z-index: 30;
+    margin-top: -85px;
+    padding-bottom: 50px;
+}
+
+.plans-glass-container {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    border: 1px solid #fff;
+    overflow: hidden;
+}
+
+.plans-flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px; /* Symmetrical side padding */
+    width: 100%;
+}
+
+.plan-item {
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+    flex: 1; /* Distribute space evenly */
+}
+
+.plan-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.icon-circle {
+    width: 75px;
+    height: 75px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+.plan-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.plan-info {
+    flex: 1;
+}
+
+.plan-info h6 {
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #1b2e1b;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.btn-join-now {
+    background: #689f38 !important;
+    color: #ffffff !important;
+    padding: 10px 20px !important;
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 50px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(104, 159, 56, 0.2);
+    white-space: nowrap;
+}
+
+.btn-join-now:hover {
+    background-color: #558b2f !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(104, 159, 56, 0.3);
+}
+
+@media (max-width: 1200px) {
+    .plans-strip-section { margin-top: -60px; }
+}
+
+@media (max-width: 991px) {
+    .plans-strip-section { margin-top: 30px; padding: 0 20px 40px; }
+    .plan-item { border-right: none !important; border-bottom: 1px solid #f5f5f5; padding: 25px; }
+}
+
 .search-tab-content {
     background: #fff;
     border-radius: 20px;
@@ -3754,4 +3955,53 @@ body {
     margin-bottom: 30px;
     border-left: 5px solid #689f38;
     padding-left: 20px;
+}
+
+/* Hero Forms Responsiveness */
+@media (max-width: 1400px) {
+    .hero-forms-wrapper {
+        right: 40px;
+        gap: 15px;
+    }
+    .register-form, .login-banner-form {
+        width: 320px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 50px;
+    }
+    .hero-forms-wrapper {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin: 50px auto 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .hero-text-container {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 120px auto 0;
+        text-align: center;
+        max-width: 800px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-forms-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .register-form, .login-banner-form {
+        width: 100%;
+        max-width: 380px;
+    }
 }

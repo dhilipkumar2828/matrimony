@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include("../include/connect.php");
 session_start();
 $id=$_SESSION['id'];
@@ -684,58 +684,14 @@ $man111=mysqli_fetch_array($man112);
 <td>:</td>
 <td colspan="4"><span style="color:#FF0000; font-size:14px;"><?php echo ucwords($usprod['expectation']); ?></span></td>
 </tr>
-<?php
-
-if($usprod['uploadedfile']!='')
-{
-?>
 <tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 1</span></td>
+<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture</span></td>
 <td>:</td>
 <td colspan="4">
-<a href="../profile/<?php echo $usprod['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['uploadedfile']; ?>" height="300" width="300" /></a>
+<img src="<?php echo get_avatar($usprod['gender'], '../'); ?>" height="300" width="300" />
 </td>
 </tr>
 <?php
-}
-else
-{
-?>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 1</span></td>
-<td>:</td>
-<td colspan="4">
-<span style="color:#FF0000; font-weight:bold;">Profile Picture not yet uploaded</span>
-</td>
-</tr>
-<?php
-}
-if($usprod['second_upload']!='')
-{
-?>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 2</span></td>
-<td>:</td>
-<td colspan="4">
-<a href="../profile/<?php echo $usprod['second_upload']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['second_upload']; ?>" height="300" width="300" /></a>
-</td>
-</tr>
-<?php
-}
-else
-{
-?>
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 2</span></td>
-<td>:</td>
-<td colspan="4">
-<span style="color:#FF0000; font-weight:bold;">Profile Picture not yet uploaded</span>
-</td>
-</tr>
-<?php
-}
 $horo=$usprod['horo'];
 if($count_contactinfo!=0 || $my_row['valid_string']!='') 
 {

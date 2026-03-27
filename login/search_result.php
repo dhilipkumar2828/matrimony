@@ -541,7 +541,7 @@ while($bb=mysqli_fetch_array($aa))
   <tbody><tr>
   <td rowspan="6" width="16%">
     <a href="../profile/<?php echo $bb['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo $bb['name']; ?>" class="fancybox">
-<img src="../profile/<?php echo $bb['uploadedfile']; ?>" width="200" height="200"></a> </td>
+<img src="../<?php echo get_avatar($bb['gender']); ?>" width="200" height="200"></a> </td>
   <td width="18%" height="33" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Name</span></td>
   <td width="1%">:</td>
   <td width="23%"><span style="color:#FF0000; font-size:14px;"><?php echo $bb['name']; ?></span></td>
@@ -615,7 +615,7 @@ $man111=mysqli_fetch_array($man112);
   <td width="16%" rowspan="6">
   <?php if($usprod['uploadedfile']!='') { ?>
   <a href="../profile/<?php echo $usprod['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['uploadedfile']; ?>" height="200" width="200" /></a> <?php } ?></td>
+<img src="../<?php echo get_avatar($usprod['gender']); ?>" height="200" width="200" /></a> <?php } ?></td>
   <td width="18%" height="33" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Name</span></td>
   <td width="1%">:</td>
   <td width="23%"><span style="color:#FF0000; font-size:14px;"><?php echo  ucwords($usprod['name']); ?></span></td>

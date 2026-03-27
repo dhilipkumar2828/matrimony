@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include("../include/connect.php");
 session_start();
 $id=$_SESSION['id'];
@@ -651,8 +651,7 @@ $man111=mysqli_fetch_array($man112);
 <td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture</span></td>
 <td>:</td>
 <td colspan="4">
-<a href="../profile/<?php echo $usprod['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['uploadedfile']; ?>" height="300" width="300" /></a>
+<img src="<?php echo get_avatar($usprod['gender'], '../'); ?>" height="300" width="300" />
 </td>
 </tr>
 <?php

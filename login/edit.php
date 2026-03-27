@@ -686,40 +686,13 @@ else {
     }
 </SCRIPT>
 <tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 1</span></td>
+<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture</span></td>
 <td>:</td>
 <td colspan="4">
-<?php
-$uploadedfile=$usprod['uploadedfile'];
-if($uploadedfile!='')
-{
-?>
-<a href="../profile/<?php echo $usprod['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['uploadedfile']; ?>" height="300" width="300" /></a>
-<?php } else { ?>
-<span style="color:#FF0000; font-weight:bold; font-size:14px;">Profile picture not yet uploaded</span>
-<?php } ?>
+<img src="<?php echo get_avatar($usprod['gender'], '../'); ?>" height="300" width="300" />
+<br>
 <input type="hidden" name="picture" id="picture" value="<?php echo $usprod['uploadedfile']; ?>" />
 <input name="image1"  type="file"  id="image1" onchange="return ValidateFileUpload('image1')"  />To Change Profile Picture
-</td>
-</tr>
-
-<tr>
-<td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 2</span></td>
-<td>:</td>
-<td colspan="4">
-<?php
-$second_upload=$usprod['second_upload'];
-if($second_upload!='')
-{
-?>
-<a href="../profile/<?php echo $usprod['second_upload']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../profile/<?php echo $usprod['second_upload']; ?>" height="300" width="300" /></a>
-<?php } else { ?>
-<span style="color:#FF0000; font-weight:bold; font-size:14px;">Profile picture not yet uploaded</span>
-<?php } ?>
-<input type="hidden" name="picture2" id="picture2" value="<?php echo $usprod['second_upload']; ?>" />
-<input name="image3"  type="file"  id="image3"  onchange="return ValidateFileUpload('image3')"   />To Change Profile Picture
 </td>
 </tr>
 

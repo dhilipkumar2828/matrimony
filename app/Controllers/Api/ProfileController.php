@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers\Api;
 
+use App\Helpers\AvatarHelper;
+
 class ProfileController extends ApiController {
     public function me() {
         $user = $this->authenticate();
@@ -68,8 +70,8 @@ class ProfileController extends ApiController {
             'expectation' => $profile['expectation'],
             'dosam' => $profile['dosam'],
             'self_dosam' => $profile['self_dosam'],
-            'profile_image' => !empty($profile['uploadedfile']) ? '/profile/' . $profile['uploadedfile'] : null,
-            'profile_image_2' => !empty($profile['second_upload']) ? '/profile/' . $profile['second_upload'] : null,
+            'profile_image' => AvatarHelper::getAvatar($profile['gender'], '/'),
+            'profile_image_2' => null,
             'horoscope_image' => !empty($profile['horo']) ? '/matrimonyadmin/horo/' . $profile['horo'] : null,
             'raasi_grid' => [
                 'r1' => $profile['r1'], 'r2' => $profile['r2'], 'r3' => $profile['r3'], 'r4' => $profile['r4'],

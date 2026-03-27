@@ -112,46 +112,54 @@
             
             <!-- Indian Bank -->
             <div class="bank-details-card shadow-sm">
-                <h6>Indian Bank</h6>
+                <h6>Indian Bank Details</h6>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">Account Holder</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Account Holder Name</span>
                     <span class="bank-info-value">P.Mani</span>
                 </div>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">Account Number</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Bank Name</span>
+                    <span class="bank-info-value">Indian Bank</span>
+                </div>
+                <div class="bank-info-item">
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Account Number</span>
                     <span class="bank-info-value">428197570</span>
                 </div>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">IFSC Code</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>IFSC Code</span>
                     <span class="bank-info-value">IDIB000T115</span>
                 </div>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">Branch</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Branch Name</span>
                     <span class="bank-info-value">T.Nagar, Chennai</span>
                 </div>
             </div>
 
             <!-- Axis Bank -->
             <div class="bank-details-card shadow-sm">
-                <h6>Axis Bank</h6>
+                <h6>Axis Bank Details</h6>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">Account Name</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Account Holder Name</span>
                     <span class="bank-info-value">Happy Marriage Matrimony</span>
                 </div>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">Account Number</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Bank Name</span>
+                    <span class="bank-info-value">Axis Bank</span>
+                </div>
+                <div class="bank-info-item">
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Account Number</span>
                     <span class="bank-info-value">9140 2003 9993 724</span>
                 </div>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">IFSC Code</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>IFSC Code</span>
                     <span class="bank-info-value">UTIB0001594</span>
                 </div>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">Branch</span>
-                    <span class="bank-info-value">Venkat Narayana Road</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Branch Name</span>
+                    <span class="bank-info-value">Venkat Narayana Road, T.Nagar</span>
                 </div>
                 <div class="bank-info-item">
-                    <span class="bank-info-label">Branch Code</span>
+                    <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Branch Code</span>
                     <span class="bank-info-value">001594</span>
                 </div>
             </div>

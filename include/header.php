@@ -25,6 +25,7 @@ $request_uri = $_SERVER['REQUEST_URI'];
             <li><a href="search_result.php" <?php if ($current_page == 'search_result.php' || strpos($request_uri, '/search_result') !== false) echo 'class="active"'; ?>>Search Profiles</a></li>
             <li><a href="plans.php" <?php if ($current_page == 'plans.php' || $current_page == 'paynow.php' || strpos($request_uri, '/plans') !== false || strpos($request_uri, '/paynow') !== false) echo 'class="active"'; ?>>Payment</a></li>
             <li><a href="contact.php" <?php if ($current_page == 'contact.php' || strpos($request_uri, '/contact') !== false) echo 'class="active"'; ?>>Contact Us</a></li>
+            <li><a href="register.php" <?php if ($current_page == 'register.php' || strpos($request_uri, '/register') !== false) echo 'class="active"'; ?>>Register</a></li>
             <button class="btn btn-success" onclick="location.href='login.php'">Login</button>
         </ul>
     </div>
