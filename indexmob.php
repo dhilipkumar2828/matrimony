@@ -548,9 +548,11 @@ if (isset($_POST['submit'])) {
         <li><a href="#">Web Design by Ocean Softwares</a></li>
       </ul>
       <p>Copyright &copy; 2018 <a href="#">www.hmmatrimony.com - only for Adidravidar</a>. All Rights reserved.</p>
-      <p style="padding-left: 50px;">
+      <p style="float: right; clear: right;">
         <a href="privacy-policy.php" style="color:#000; text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp;
         <a href="terms.php" style="color:#000; text-decoration:none;">Terms & Conditions</a>
+        &nbsp;|&nbsp;
+        <a href="child-safety-policy.php" style="color:#000; text-decoration:none;">Child Safety Policy</a>
       </p>
 
 
