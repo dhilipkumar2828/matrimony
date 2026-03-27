@@ -3,9 +3,11 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 
-class AboutController extends Controller {
+class AboutController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
         $data = [
             'title' => 'About Us - HM Matrimony',
             'heading' => 'About HM Matrimony',

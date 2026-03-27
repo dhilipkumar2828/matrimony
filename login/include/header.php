@@ -82,7 +82,7 @@ $validity_mess='1';
                                     <?php if(@$walet_validity_mess!=1){ ?>
                                     <span class="badge badge-important"><?php echo $wallet; ?></span>
                                     <?php }else {  ?>
-                                    <span class="badge badge-important">0 (₹)</span>
+                                    <span class="badge badge-important"style="font-family: Arial, sans-serif;">0 (₹)</span>
                                     <?php } ?>
 							</a>
 
