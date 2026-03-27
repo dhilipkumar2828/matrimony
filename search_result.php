@@ -45,7 +45,14 @@ function fetchProfiles($con, $filters, $page, $limit)
 
             $gender_profile = $row['gender'];
             $default_avatar = ($gender_profile == 'male' || $gender_profile == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
-            $profile_img = (!empty($row['uploadedfile']) && file_exists("profile/" . $row['uploadedfile'])) ? "profile/" . $row['uploadedfile'] : $default_avatar;
+            $profile_img = $default_avatar;
+            if (!empty($row['uploadedfile'])) {
+                if (file_exists("profile/" . $row['uploadedfile'])) {
+                    $profile_img = "profile/" . $row['uploadedfile'];
+                } else {
+                    $profile_img = "https://hmmatrimony.com/profile/" . $row['uploadedfile'];
+                }
+            }
 
             echo "
             <div class='profile-result-card mb-4'>

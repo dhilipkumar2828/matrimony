@@ -31,7 +31,17 @@ $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
 
     <div class="row mb-4">
         <div class="col-md-4 text-center">
-            <img src="<?php echo get_avatar($usprod['gender']); ?>" class="img-fluid rounded shadow-sm border" style="max-height: 200px;" alt="Profile Avatar">
+            <?php 
+                $profile_img = get_avatar($usprod['gender']);
+                if (!empty($usprod['uploadedfile'])) {
+                    if (file_exists("profile/" . $usprod['uploadedfile'])) {
+                        $profile_img = "profile/" . $usprod['uploadedfile'];
+                    } else {
+                        $profile_img = "https://hmmatrimony.com/profile/" . $usprod['uploadedfile'];
+                    }
+                }
+            ?>
+            <img src="<?php echo $profile_img; ?>" class="img-fluid rounded shadow-sm border" style="max-height: 200px;" alt="Profile Avatar">
         </div>
         <div class="col-md-8">
             <div class="row g-3">

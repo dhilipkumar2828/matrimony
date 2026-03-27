@@ -174,11 +174,11 @@ if (isset($_POST['submit'])) {
                     <a href="#" style="font-size: 12px; color: #666; text-decoration: none; font-weight: 500;">Forgot Password?</a>
                 </div>
 
-                <button type="submit" class="btn btn-success w-100 py-3 fw-bold shadow-sm" style="font-size: 16px;">
+                <button type="submit" class="btn banner-btn">
                     <i class="bi bi-box-arrow-in-right me-2"></i>Login to Account
                 </button>
 
-                <div class="login-footer text-center">
+                <div class="banner-footer text-center">
                     <p class="text-muted small mb-1">Don't have an account yet?</p>
                     <a href="register_user.php" style="color: #689f38; font-weight: 700; text-decoration: none; font-size: 14px;">Register Free Member</a>
                 </div>
@@ -241,10 +241,10 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
 
-                <button type="submit" name="submit" class="btn btn-success w-100 py-2 fw-bold mt-2">
+                <button type="submit" name="submit" class="btn banner-btn shadow-sm">
                     <i class="bi bi-search me-2"></i>Find Matches
                 </button>
-                <div class="text-center mt-1">
+                <div class="banner-footer text-center">
                     <a href="govt_search.php" style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government Search</a>
                 </div>
             </form>

@@ -107,7 +107,15 @@ include("include/connect.php");
                 
                 $gender_profile = $row['gender'];
                 $default_avatar = ($gender_profile == 'male' || $gender_profile == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
-                $profile_img = (!empty($row['uploadedfile']) && file_exists("profile/".$row['uploadedfile'])) ? "profile/".$row['uploadedfile'] : $default_avatar;
+                $profile_img = $default_avatar;
+                if (!empty($row['uploadedfile'])) {
+                    if (file_exists("profile/" . $row['uploadedfile'])) {
+                        $profile_img = "profile/" . $row['uploadedfile'];
+                    } else {
+                        // Fallback to live site if local file is missing
+                        $profile_img = "https://hmmatrimony.com/profile/" . $row['uploadedfile'];
+                    }
+                }
                 ?>
                 <div class="result-profile-card">
                     <div class="profile-banner">
@@ -227,9 +235,9 @@ include("include/connect.php");
                                 <div class="desc-box mt-4">
                                     <span class="desc-title">Horoscope</span>
                                     <div class="mt-3 text-center">
-                                        <img src="admin/horo/<?php echo $row['horo']; ?>" class="img-fluid rounded shadow-sm border" style="max-height: 400px;" alt="Horoscope">
+                                        <img src="matrimonyadmin/horo/<?php echo $row['horo']; ?>" class="img-fluid rounded shadow-sm border" style="max-height: 400px;" alt="Horoscope">
                                         <div class="mt-3">
-                                            <a href="admin/horo/<?php echo $row['horo']; ?>" class="btn btn-outline-success btn-sm rounded-pill fw-bold" target="_blank">
+                                            <a href="matrimonyadmin/horo/<?php echo $row['horo']; ?>" class="btn btn-outline-success btn-sm rounded-pill fw-bold" target="_blank">
                                                 <i class="bi bi-file-earmark-pdf me-2"></i>View Full Horoscope
                                             </a>
                                         </div>

@@ -204,14 +204,15 @@ h6 {
     display: flex;
     gap: 20px;
     z-index: 2;
-    align-items: stretch;
+    align-items: stretch; /* This ensures equal height columns */
 }
 
 /* Form Card (Common for Search & Login) */
 .register-form, 
 .login-banner-form {
     width: 360px;
-    padding: 35px 30px; /* Enhanced padding */
+    flex: 1 1 auto; /* Allow growth to match heights */
+    padding: 25px 30px; /* More compact padding */
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -220,7 +221,7 @@ h6 {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
     display: flex;
     flex-direction: column;
-    height: 100%; /* Stretch to fill */
+    min-height: 100%; /* Fill the flex container height */
 }
 
 .login-banner-form {
@@ -321,12 +322,16 @@ h6 {
     box-shadow: none !important;
 }
 
-.login-banner-form .login-footer {
-    margin-top: auto; /* Push to bottom */
-    padding-top: 25px;
+.banner-footer {
+    padding-top: 10px;
+    min-height: 55px; /* More compact height while keeping buttons aligned */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-banner-form .login-footer p {
+.banner-footer p {
     margin-bottom: 5px;
 }
 
@@ -412,28 +417,34 @@ h6 {
     cursor: pointer;
 }
 
-/* Button */
-.register-form button {
-    padding: 15px;
+/* Banner & Master Buttons Consolidation */
+.banner-btn {
+    margin-top: auto !important;
+    width: 100%;
+    height: 40px; /* Reduced to standard 40px height */
+    padding: 0 15px;
     background: linear-gradient(135deg, #689f38, #5aab2a);
     border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
+    border-radius: 8px; /* Slightly smaller radius for smaller button */
+    color: white !important;
+    font-size: 14px; /* Standard font size */
     font-weight: 700;
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 10px;
     box-shadow: 0 4px 15px rgba(104, 159, 56, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
 }
 
-/* Button Hover */
-.register-form button:hover {
+.banner-btn:hover {
     background: linear-gradient(135deg, #558b2f, #4a9020);
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(104, 159, 56, 0.35);
+    color: white !important;
 }
 
 /* ============================= */
@@ -3898,28 +3909,35 @@ body {
 
 .plan-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px; /* Tight gap between price and button */
 }
 
 .plan-info h6 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
-    margin-bottom: 12px;
+    margin-bottom: 0; /* Removed bottom margin for better alignment */
     color: #1b2e1b;
     font-family: 'DM Sans', sans-serif;
 }
 
 .btn-join-now {
-    background: #689f38 !important;
+    background: linear-gradient(135deg, #689f38, #5aab2a) !important;
     color: #ffffff !important;
-    padding: 10px 20px !important;
-    font-size: 11px;
-    font-weight: 800;
-    border-radius: 50px;
+    height: 38px; /* Compact height for strip */
+    padding: 0 20px !important;
+    font-size: 12px; /* Smaller font for strip buttons */
+    font-weight: 700;
+    border-radius: 12px;
     text-transform: uppercase;
     transition: all 0.3s ease;
     border: none;
-    display: inline-block;
-    text-decoration: none;
+    display: inline-flex; /* Changed to inline-flex for vertical centering */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
     box-shadow: 0 6px 15px rgba(104, 159, 56, 0.2);
     white-space: nowrap;
 }
@@ -3964,7 +3982,9 @@ body {
         gap: 15px;
     }
     .register-form, .login-banner-form {
-        width: 320px;
+        width: 100%;
+        max-width: 380px;
+        flex: 1 1 auto;
     }
 }
 
