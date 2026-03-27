@@ -1,5 +1,6 @@
 <?php 
 include("include/connect.php");
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +109,8 @@ include("include/connect.php");
                 $gender_profile = $row['gender'];
                 $default_avatar = ($gender_profile == 'male' || $gender_profile == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
                 $profile_img = $default_avatar;
-                if (!empty($row['uploadedfile'])) {
+                // Only show actual profile image if the user is logged in
+                if (isset($_SESSION['id']) && !empty($row['uploadedfile'])) {
                     if (file_exists("profile/" . $row['uploadedfile'])) {
                         $profile_img = "profile/" . $row['uploadedfile'];
                     } else {

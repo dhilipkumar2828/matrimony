@@ -46,7 +46,8 @@ function fetchProfiles($con, $filters, $page, $limit)
             $gender_profile = $row['gender'];
             $default_avatar = ($gender_profile == 'male' || $gender_profile == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
             $profile_img = $default_avatar;
-            if (!empty($row['uploadedfile'])) {
+            // Only show actual profile image if the user is logged in
+            if (isset($_SESSION['id']) && !empty($row['uploadedfile'])) {
                 if (file_exists("profile/" . $row['uploadedfile'])) {
                     $profile_img = "profile/" . $row['uploadedfile'];
                 } else {
@@ -57,9 +58,7 @@ function fetchProfiles($con, $filters, $page, $limit)
             echo "
             <div class='profile-result-card mb-4'>
                 <div class='row g-0 align-items-center'>
-                    <div class='col-md-3 text-center p-3'>
-                        <img src='{$profile_img}' class='img-fluid rounded' style='max-height: 180px; width: auto;' alt='Profile'>
-                    </div>
+                   
                     <div class='col-md-7 p-3'>
                         <div class='row'>
                             <div class='col-sm-6'>
@@ -326,7 +325,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                             <div class="col-md-4">
                                 <label class="form-label">Age</label>
                                 <div class="d-flex align-items-center gap-2">
-                                    <select class="form-select flex-fill" name="age1" id="age1" onchange="updateMaxAge()"></select>
+                                    <select class="form-select flex-fill" name="age1" id="age1"
+                                        onchange="updateMaxAge()"></select>
                                     <span class="text-muted">to</span>
                                     <select class="form-select flex-fill" name="age2" id="age2"></select>
                                 </div>
@@ -534,7 +534,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                             'z-index': '30000'
                         });
 
-                        $overlay.off('click').on('click', function() {
+                        $overlay.off('click').on('click', function () {
                             $dialogEl.dialog('close');
                         });
 
