@@ -42,7 +42,12 @@ $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
                         <tr><td class="fw-bold text-primary">Time of Birth</td><td>: <span class="text-danger"><?php echo $usprod['tob']; ?></span></td></tr>
                         <tr><td class="fw-bold text-primary">Caste</td><td>: <span class="text-danger fw-bold"><?php echo ucwords($caste_name); ?></span></td></tr>
                         <tr><td class="fw-bold text-primary">Star</td><td>: <span class="text-danger"><?php echo ucwords($usprod['star']); ?></span></td></tr>
-                        <tr><td class="fw-bold text-primary">Education</td><td>: <span class="text-danger"><?php echo ucwords($usprod['education']); ?></span></td></tr>
+                        <tr><td class="fw-bold text-primary">Education</td><td>: <span class="text-danger"><?php 
+                            echo ucwords($usprod['education']); 
+                            if(!empty($usprod['edu_det'])) {
+                                echo " [".ucwords($usprod['edu_det'])."]";
+                            }
+                        ?></span></td></tr>
                     </table>
                 </div>
                 <div class="col-md-6">
@@ -94,6 +99,44 @@ $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
         <p class="mt-2 p-3 bg-light rounded shadow-sm border-start border-4 border-success">
             <?php echo !empty($usprod['self_desc']) ? ucwords($usprod['self_desc']) : 'No description provided.'; ?>
         </p>
+    </div>
+
+    <?php if(!empty($usprod['expectation'])) { ?>
+    <div class="info-group mt-3">
+        <label class="fw-bold text-muted small text-uppercase">Expectation</label>
+        <p class="mt-2 p-3 bg-light rounded shadow-sm border-start border-4 border-primary">
+            <?php echo ucwords($usprod['expectation']); ?>
+        </p>
+    </div>
+    <?php } ?>
+
+    <div class="info-group mt-3 pb-4">
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td class="fw-bold text-primary" width="45%">Profile Picture</td>
+                <td>: <span class="text-danger">
+                    <?php 
+                        if(!empty($usprod['uploadedfile']) && file_exists("profile/".$usprod['uploadedfile'])) {
+                            echo "Picture Available";
+                        } else {
+                            echo "Picture not found";
+                        }
+                    ?>
+                </span></td>
+            </tr>
+            <tr>
+                <td class="fw-bold text-primary" width="45%">Horoscope Status</td>
+                <td>: <span class="text-danger">
+                    <?php 
+                        if(!empty($usprod['horo'])) {
+                            echo "Horoscope Uploaded";
+                        } else {
+                            echo "Horoscope not yet uploaded";
+                        }
+                    ?>
+                </span></td>
+            </tr>
+        </table>
     </div>
 </div>
 

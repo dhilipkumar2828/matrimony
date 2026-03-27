@@ -252,7 +252,7 @@ if (isset($_POST['submit'])) {
     </div>
 
     <!-- Plans Strip Section -->
-    <div class="plans-strip-section" data-aos="fade-up">
+    <div class="plans-strip-section" id="membership-plans" data-aos="fade-up">
         <div class="container">
             <div class="plans-glass-container">
                 <div class="plans-flex-row">
@@ -266,7 +266,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>RS 3000 / 6 MONTHS</h6>
-                                <a href="payment.php?plan=Silver&price=3000" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=1" class="btn btn-join-now">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>
@@ -280,7 +280,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>RS 4000 / 1 YEAR</h6>
-                                <a href="payment.php?plan=Gold&price=4000" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=2" class="btn btn-join-now">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>
@@ -294,7 +294,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>RS 7000 / UPTO MARRIAGE</h6>
-                                <a href="payment.php?plan=Bronze&price=7000" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=3" class="btn btn-join-now">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>
@@ -308,7 +308,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="plan-info">
                                 <h6>Add Wallet Amount</h6>
-                                <a href="payment.php?plan=Wallet&price=0" class="btn btn-join-now">CHOOSE PLAN</a>
+                                <a href="paynow.php?plan_id=7" class="btn btn-join-now">CHOOSE PLAN</a>
                             </div>
                         </div>
                     </div>

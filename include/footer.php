@@ -74,12 +74,6 @@
                     <a href="https://www.facebook.com/AdiDravidarMatrimonyHappyMarriage" target="_blank" class="social-link">
                         <i class="bi bi-facebook"></i>
                     </a>
-                    <a href="https://www.instagram.com" target="_blank" class="social-link">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com" target="_blank" class="social-link">
-                        <i class="bi bi-linkedin"></i>
-                    </a>
                     <a href="https://www.youtube.com/@hmmatrimony9238" target="_blank" class="social-link">
                         <i class="bi bi-youtube"></i>
                     </a>
@@ -93,9 +87,10 @@
                     <li class="mb-2"><a href="index.php" class="footer-nav-link">Home</a></li>
                     <li class="mb-2"><a href="about.php" class="footer-nav-link">About Us</a></li>
                     <li class="mb-2"><a href="search_result.php" class="footer-nav-link">Search Profiles</a></li>
-                    <li class="mb-2"><a href="paynow.php" class="footer-nav-link">Payment</a></li>
+                    <li class="mb-2"><a href="plans.php" class="footer-nav-link">Payment</a></li>
                     <li class="mb-2"><a href="privacy.php" class="footer-nav-link">Privacy Policy</a></li>
                     <li class="mb-2"><a href="terms.php" class="footer-nav-link">Terms & Conditions</a></li>
+                    <li class="mb-2"><a href="child_safety_policy.php" class="footer-nav-link">Child Safety Policy</a></li>
                     <li class="mb-2"><a href="contact.php" class="footer-nav-link">Contact Us</a></li>
                 </ul>
             </div>
