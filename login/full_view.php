@@ -688,7 +688,23 @@ $man111=mysqli_fetch_array($man112);
 <td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture</span></td>
 <td>:</td>
 <td colspan="4">
-<img src="<?php echo get_avatar($usprod['gender'], '../'); ?>" height="300" width="300" />
+<?php 
+$profile_img = get_avatar($usprod['gender'], '../');
+if (!empty($usprod['uploadedfile'])) {
+    $filename = trim($usprod['uploadedfile']);
+    if (file_exists("../profile/" . $filename)) {
+        $profile_img = "../profile/" . $filename;
+    } else if (file_exists("profile/" . $filename)) {
+        $profile_img = "profile/" . $filename;
+    } else {
+        // Fallback for paths or external references if applicable
+        $profile_img = "https://hmmatrimony.com/profile/" . $filename;
+    }
+}
+?>
+<div class="profile-img-wrap shadow-sm border rounded-3 overflow-hidden" style="width: 300px; height: 300px; background: #f9f9f9;">
+    <img src="<?php echo $profile_img; ?>" style="width: 100%; height: 100%; object-fit: cover;" alt="Profile Picture" />
+</div>
 </td>
 </tr>
 <?php
@@ -702,8 +718,17 @@ if($horo!='')
 <td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Horoscope</span></td>
 <td>:</td>
 <td colspan="4">
-<a href="../matrimonyadmin/horo/<?php echo $usprod['horo']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../matrimonyadmin/horo/<?php echo $usprod['horo']; ?>"  height="300" width="500" /></a>
+<?php 
+$horo_file = $usprod['horo'];
+$horo_path = "../matrimonyadmin/horo/" . $horo_file;
+if (!file_exists($horo_path)) {
+    // Try external fallback if not local
+    $horo_path = "https://hmmatrimony.com/matrimonyadmin/horo/" . $horo_file;
+}
+?>
+<a href="<?php echo $horo_path; ?>" data-fancybox-group="gallery" title="<?php echo ucwords($usprod['name']); ?>" class="fancybox" >
+    <img src="<?php echo $horo_path; ?>" height="300" width="500" class="border rounded shadow-sm" style="max-width: 100%; height: auto; object-fit: contain; background: #fff;" />
+</a>
 </td>
 </tr>
 <?php

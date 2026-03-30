@@ -1,6 +1,20 @@
 <?php
 include('include/connect.php');
 session_start();
+
+if (!isset($_SESSION['id'])) {
+    echo "<div class='p-5 text-center'>
+            <i class='bi bi-lock-fill text-muted' style='font-size: 3rem;'></i>
+            <h3 class='mt-4'>Private Profile</h3>
+            <p class='text-muted'>You must be logged in to view profile details. <br>Please register or login to continue.</p>
+            <div class='mt-4'>
+                <a href='login.php' class='btn btn-success px-5 py-2 rounded-pill fw-bold me-3'>Login Now</a>
+                <a href='register.php' class='btn btn-outline-success px-5 py-2 rounded-pill fw-bold'>Register Free</a>
+            </div>
+          </div>";
+    exit;
+}
+
 $user_id = $_REQUEST['user_id'];
 $prod = mysqli_query($con, "select * from register where id='$user_id'");
 $usprod = mysqli_fetch_array($prod);
@@ -14,6 +28,10 @@ $subcaste_id = $usprod['caste'];
 $subcaste_query = mysqli_query($con, "select subcaste from subcaste where id='$subcaste_id'");
 $subcaste_data = mysqli_fetch_assoc($subcaste_query);
 $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
+
+function get_avatar_local($gender) {
+    return ($gender == 'male' || $gender == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
+}
 ?>
 
 <div class="profile-details-modal p-3">
@@ -32,7 +50,7 @@ $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
 
     <div class="row mb-4">
             <?php
-            $profile_img = get_avatar($usprod['gender']);
+            $profile_img = get_avatar_local($usprod['gender']);
             // Only show actual profile image if the user is logged in
             if (isset($_SESSION['id']) && isset($usprod['uploadedfile']) && strlen(trim($usprod['uploadedfile'])) > 0) {
                 $filename = trim($usprod['uploadedfile']);
@@ -44,7 +62,7 @@ $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
                 }
             }
             ?>
-            <img src="<?php echo $profile_img; ?>" class="img-fluid rounded shadow-sm border" style="max-height: 200px; object-fit: cover;" alt="Profile Image">
+            <img src="<?php echo $profile_img; ?>" class="img-fluid rounded-3 shadow-sm border" style="max-height: 200px; width: 200px; object-fit: cover;" alt="Profile Image">
         <div class="col-md-8">
             <div class="row g-3">
                 <div class="col-md-6">

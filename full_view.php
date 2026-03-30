@@ -1,5 +1,10 @@
 <?php
 include("include/connect.php");
+session_start();
+if (!isset($_SESSION['id'])) {
+    header("Location: login.php?msg=login_required");
+    exit;
+}
 $userid=$_REQUEST['userid'];
 $result=mysqli_query($con, "select * from register where  id='$userid'")or die(mysqli_error($con));
 $usprod=mysqli_fetch_array($result);

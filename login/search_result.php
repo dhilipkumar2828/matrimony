@@ -549,7 +549,7 @@ while($bb=mysqli_fetch_array($aa))
     }
     ?>
     <a href="<?php echo $profile_img; ?>" data-fancybox-group="gallery" title="<?php echo $bb['name']; ?>" class="fancybox">
-        <img src="<?php echo $profile_img; ?>" width="200" height="200" style="object-fit: cover; border-radius: 50%;">
+        <img src="<?php echo $profile_img; ?>" width="200" height="200" style="object-fit: cover; border-radius: 12px; border: 2px solid #689f38; padding: 3px;">
     </a>
   <td width="18%" height="33" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Name</span></td>
   <td width="1%">:</td>
@@ -631,7 +631,7 @@ $man111=mysqli_fetch_array($man112);
   }
   ?>
   <a href="<?php echo $profile_img; ?>" data-fancybox-group="gallery" title="<?php echo ucwords($usprod['name']); ?>" class="fancybox">
-    <img src="<?php echo $profile_img; ?>" height="200" width="200" style="object-fit: cover; border-radius: 50%;" />
+    <img src="<?php echo $profile_img; ?>" height="200" width="200" style="object-fit: cover; border-radius: 12px; border: 1px solid #ccc; padding: 3px;" />
   </a></td>
   <td width="18%" height="33" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Name</span></td>
   <td width="1%">:</td>

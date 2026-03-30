@@ -1,556 +1,197 @@
 <?php
 include("include/connect.php");
 session_start();
+
+$results_html = "";
+$user_found = false;
+
+if (isset($_REQUEST['submit']) || isset($_GET['user_id'])) {
+    $user_id = isset($_REQUEST['user_id']) ? trim(mysqli_real_escape_string($con, $_REQUEST['user_id'])) : (isset($_GET['user_id']) ? $_GET['user_id'] : '');
+    
+    if (!empty($user_id)) {
+        $query = "SELECT * FROM register WHERE (LOWER(username) LIKE LOWER('%$user_id%') OR LOWER(profile_id) LIKE LOWER('%$user_id%') OR id = '$user_id') AND status='1' LIMIT 1";
+        $result = mysqli_query($con, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            $user_found = true;
+            $row = mysqli_fetch_array($result);
+            
+            // Fetch Caste and Subcaste names
+            $caste_id = $row['religion'];
+            $c_q = mysqli_query($con, "SELECT caste FROM caste WHERE id='$caste_id'");
+            $c_data = mysqli_fetch_assoc($c_q);
+            $caste_name = $c_data['caste'] ?? 'N/A';
+
+            $subcaste_id = $row['caste'];
+            $sc_q = mysqli_query($con, "SELECT subcaste FROM subcaste WHERE id='$subcaste_id'");
+            $sc_data = mysqli_fetch_assoc($sc_q);
+            $subcaste_name = $sc_data['subcaste'] ?? 'N/A';
+
+            ob_start();
+            ?>
+            <div class="full-profile-view bg-white p-4 rounded-4 shadow-sm border border-success border-opacity-25 mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h3 class="text-success mb-0 fw-bold"><i class="bi bi-person-check me-2"></i>Full Profile Details</h3>
+                    <span class="badge bg-success py-2 px-3 rounded-pill">User ID: <?php echo $row['username'] ?: $row['id']; ?></span>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="profile-section mb-4">
+                    <h5 class="section-subtitle mb-3 text-primary fw-bold"><i class="bi bi-person-lines-fill me-2"></i>Personal & Identity</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Name</td><td>: <span class="text-danger fw-bold"><?php echo ucwords($row['name']); ?></span></td></tr>
+                                <tr><td class="text-muted">Gender</td><td>: <span class="text-dark"><?php echo ucwords($row['gender']); ?></span></td></tr>
+                                <tr><td class="text-muted">DOB - Age</td><td>: <span class="text-danger"><?php echo $row['dob']; ?> --- <?php echo $row['age']; ?></span></td></tr>
+                                <tr><td class="text-muted">Caste</td><td>: <span class="text-danger"><?php echo ucwords($caste_name); ?></span></td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Subcaste</td><td>: <span class="text-dark"><?php echo ucwords($subcaste_name); ?></span></td></tr>
+                                <tr><td class="text-muted">Star</td><td>: <span class="text-danger"><?php echo ucwords($row['star']); ?></span></td></tr>
+                                <tr><td class="text-muted">Moonsign</td><td>: <span class="text-danger"><?php echo ucwords($row['moonsign'] ?: 'N/A'); ?></span></td></tr>
+                                <tr><td class="text-muted">Height</td><td>: <span class="text-dark"><?php echo $row['feet'] ?? 'N/A'; ?></span></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Career -->
+                <div class="profile-section mb-4">
+                    <h5 class="section-subtitle mb-3 text-primary fw-bold"><i class="bi bi-briefcase me-2"></i>Education & Career</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Education</td><td>: <span class="text-danger"> <?php echo ucwords($row['education']); ?> <?php if($row['edu_det']) echo "[".ucwords($row['edu_det'])."]"; ?></span></td></tr>
+                                <tr><td class="text-muted">Job Details</td><td>: <span class="text-danger"><?php echo ucwords($row['job'] ?: 'N/A'); ?></span></td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Salary</td><td>: <span class="text-danger"><?php echo $row['salary'] ?: 'N/A'; ?></span></td></tr>
+                                <tr><td class="text-muted">Working Location</td><td>: <span class="text-dark"><?php echo ucwords($row['emp_loc'] ?: 'N/A'); ?></span></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Family Information -->
+                <div class="profile-section mb-4">
+                    <h5 class="section-subtitle mb-3 text-primary fw-bold"><i class="bi bi-people me-2"></i>Family Details</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Father's Name</td><td>: <span class="text-dark"><?php echo ucwords($row['fathername'] ?: 'N/A'); ?></span></td></tr>
+                                <tr><td class="text-muted">Father's Job</td><td>: <span class="text-dark"><?php echo ucwords($row['father_occupation'] ?: 'N/A'); ?></span></td></tr>
+                                <tr><td class="text-muted">Brothers Count</td><td>: <span class="text-dark"><?php echo $row['no_of_brothers'] ?: '0'; ?></span></td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Mother's Name</td><td>: <span class="text-dark"><?php echo ucwords($row['mother_name'] ?: 'N/A'); ?></span></td></tr>
+                                <tr><td class="text-muted">Mother's Job</td><td>: <span class="text-dark"><?php echo ucwords($row['mother_occupation'] ?: 'N/A'); ?></span></td></tr>
+                                <tr><td class="text-muted">Sisters Count</td><td>: <span class="text-dark"><?php echo $row['no_of_sisters'] ?: '0'; ?></span></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Horoscope Information -->
+                <div class="profile-section mb-0">
+                    <h5 class="section-subtitle mb-3 text-primary fw-bold"><i class="bi bi-moon-stars me-2"></i>Horoscope</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Time of Birth</td><td>: <span class="text-danger"><?php echo $row['tob'] ?: 'N/A'; ?></span></td></tr>
+                                <tr><td class="text-muted">Place of Birth</td><td>: <span class="text-dark"><?php echo ucwords($row['p_birth'] ?: 'N/A'); ?></span></td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-sm table-borderless mb-0">
+                                <tr><td class="text-muted" width="40%">Dasa / Balance</td><td>: <span class="text-dark"><?php echo ucwords($row['dasa'] ?: 'N/A'); ?></span></td></tr>
+                                <tr><td class="text-muted">Residential Addr</td><td>: <span class="text-danger fw-bold">******</span></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-5 text-center">
+                    <a href="login.php" class="btn btn-success px-5 py-3 rounded-pill fw-bold shadow-sm">
+                        <i class="bi bi-lock-fill me-2"></i>Login to View Contact Details & Photo
+                    </a>
+                </div>
+            </div>
+            <?php
+            $results_html = ob_get_clean();
+        } else {
+            $results_html = '<div class="alert alert-info p-4 rounded-4 border-0 shadow-sm mt-4"><i class="bi bi-info-circle-fill me-2"></i>No profile found matching this ID. Please try another ID.</div>';
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User ID Search - Adidravidar Matrimony</title>
-    <link rel="stylesheet" href="css/modern-design.css">
+    <title>Member ID Search - Adidravidar Matrimony</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
-        body {
-            background: #fdfdfd;
-            font-family: 'Inter', sans-serif;
-        }
+        body { background: #fdfdfd; font-family: 'Segoe UI', Roboto, sans-serif; color: #444; }
+        .main-container { padding-top: 50px; padding-bottom: 80px; max-width: 1100px; margin: 0 auto; }
+        .search-title { font-size: 28px; font-weight: 700; color: #2d452d; margin-bottom: 30px; text-align: center; }
+        .search-form-card { background: #fff; border-radius: 25px; padding: 40px; box-shadow: 0 15px 50px rgba(0, 0, 0, 0.05); border: 1px solid #edf2ed; }
+        .form-label { font-size: 14px; font-weight: 600; color: #555; }
+        .form-control { padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8e2; background: #fafcfa; }
+        .form-control:focus { border-color: #689f38; box-shadow: 0 0 0 0.25rem rgba(104, 159, 56, 0.15); }
+        .section-subtitle { font-size: 16px; border-bottom: 2px solid #f0f7f0; padding-bottom: 8px; }
+        .text-primary { color: #2e59d9 !important; }
+        .text-danger { color: #e74a3b !important; }
+        .profile-section { background: #fcfdfc; padding: 20px; border-radius: 15px; border: 1px solid #f0f4f0; }
 
-        .main-container {
-            padding-top: 50px;
-            padding-bottom: 80px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: #1b2e1b;
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: #689f38;
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
-
-        .search-form-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
-            margin-bottom: 40px;
-        }
-
-        .form-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: #444;
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            padding: 12px 18px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: #689f38;
-            box-shadow: 0 0 0 4px rgba(104, 159, 56, 0.1);
-        }
-
-        .result-profile-card {
-            background: #fff;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-            border: 1px solid #f0f0f0;
-            margin-top: 40px;
-        }
-
-        .profile-banner {
-            background: linear-gradient(135deg, #689f38, #5aab2a);
-            padding: 25px 40px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .profile-banner h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            margin: 0;
-        }
-
-        .profile-id-tag {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            padding: 6px 15px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .detail-icon {
-            width: 32px;
-            height: 32px;
-            background: #f1f8e9;
-            color: #689f38;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-
-        .detail-label {
-            font-size: 12px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-
-        .detail-value {
-            font-size: 15px;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .profile-img-wrapper {
-            position: relative;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid #eee;
-        }
-
-        .profile-img-wrapper img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: 0.5s;
-        }
-
-        .desc-box {
-            background: #f9fbf8;
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 4px solid #689f38;
-            margin-top: 30px;
-        }
-
-        .desc-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #689f38;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .info-group-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1b2e1b;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-group-title::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 18px;
-            background: #689f38;
-            margin-right: 12px;
-            border-radius: 2px;
-        }
-
-        .info-group-title:first-child {
-            margin-top: 0;
-        }
-
-        .detail-item {
-            margin-bottom: 15px;
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                padding-top: 30px;
-                padding-bottom: 40px;
-            }
-
-            .section-title {
-                font-size: 26px;
-            }
-
-            .search-form-card {
-                padding: 20px;
-            }
-
-            .profile-banner {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-                padding: 20px;
-            }
-
-            .profile-banner h3 {
-                font-size: 20px;
-            }
-
-            .result-profile-card .p-5 {
-                padding: 1.5rem !important;
-            }
-
-            .info-group-title {
-                margin-top: 25px;
-                font-size: 15px;
-            }
-
-            .detail-item {
-                margin-bottom: 10px;
-            }
-
-            .detail-value {
-                font-size: 14px;
-            }
-
-            .border-end {
-                border-right: none !important;
-                border-bottom: 1px solid #f0f0f0;
-                padding-bottom: 15px;
-                margin-bottom: 15px;
-            }
-
-            .ps-md-4 {
-                padding-left: 0 !important;
-            }
-
-            .desc-box {
-                padding: 15px;
-            }
-        }
+        /* Tab Styles */
+        .search-nav-tabs { display: flex; gap: 5px; margin-bottom: -1px; position: relative; z-index: 10; padding-left: 10px; }
+        .search-nav-link { padding: 10px 25px; background: #f8f9fa; border: 1px solid #ddd; border-bottom: none; border-radius: 10px 10px 0 0; text-decoration: none !important; color: #666; font-weight: 600; font-size: 14px; transition: 0.2s; }
+        .search-nav-link:hover { background: #e9ecef; color: #333; }
+        .search-nav-link.active { background: #689f38; color: #fff; border-color: #689f38; }
     </style>
 </head>
-
 <body>
-
     <?php include("include/header.php"); ?>
-
     <div class="container main-container">
-        <h1 class="section-title">User ID Search</h1>
+        <!-- Search Tabs -->
+        <div class="search-nav-tabs">
+            <a href="search_result.php" class="search-nav-link">Advanced Search</a>
+            <a href="userid_search.php" class="search-nav-link active">User ID Search</a>
+        </div>
 
+        <h1 class="search-title">Search Member by ID</h1>
         <div class="search-form-card">
-            <form action="userid_search.php" method="post" onsubmit="return validateSearch();">
-                <input type="hidden" name="command" value="search_profile" />
+            <form action="userid_search.php" method="get">
                 <div class="row align-items-end g-4">
-                    <div class="col-md-8">
-                        <label class="form-label">Search by User ID</label>
+                    <div class="col-md-9">
+                        <label class="form-label mb-2">Member User ID</label>
                         <div class="input-group">
-                            <span class="input-group-text bg-white border-end-0"><i
-                                    class="bi bi-person-badge text-success"></i></span>
-                            <input type="text" name="user_id" id="user_id" class="form-control border-start-0"
-                                placeholder="Enter Member ID (e.g. ADM12345)"
-                                value="<?php echo isset($_POST['user_id']) ? htmlspecialchars($_POST['user_id']) : ''; ?>"
-                                required>
+                            <span class="input-group-text bg-white border-end-0 rounded-start-4"><i class="bi bi-person-badge text-success"></i></span>
+                            <input type="text" name="user_id" class="form-control border-start-0 rounded-end-4" 
+                                   placeholder="Enter ID (e.g. HM123456)" 
+                                   value="<?php echo isset($_REQUEST['user_id']) ? htmlspecialchars($_REQUEST['user_id']) : ''; ?>" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <button type="submit" name="submit" class="btn btn-success w-100 py-2 fw-bold rounded-pill">
-                            <i class="bi bi-search me-2"></i>Search Profile
+                    <div class="col-md-3">
+                        <button type="submit" name="submit" class="btn btn-success w-100 py-3 fw-bold rounded-pill">
+                            <i class="bi bi-search me-2"></i>Find Profile
                         </button>
                     </div>
                 </div>
             </form>
         </div>
-
-        <?php
-        if (isset($_POST['submit'])) {
-            $user_id = trim(mysqli_real_escape_string($con, $_POST['user_id']));
-
-            // 1. Precise search (username, profile_id, or numeric id)
-            $query = "SELECT * FROM register WHERE (LOWER(username) = LOWER('$user_id') OR LOWER(profile_id) = LOWER('$user_id') OR id = '$user_id')";
-            $result = mysqli_query($con, $query);
-
-            // 2. If no exact match, try matching just the numbers (Deep Search)
-            if (mysqli_num_rows($result) == 0) {
-                $only_numbers = preg_replace('/[^0-9]/', '', $user_id);
-                if (!empty($only_numbers)) {
-                    $query = "SELECT * FROM register WHERE (username LIKE '%$only_numbers%' OR profile_id LIKE '%$only_numbers%' OR id = '$only_numbers')";
-                    $result = mysqli_query($con, $query);
-                }
-            }
-
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_array($result);
-                if ($row['status'] != '1') {
-                    echo '<div class="alert alert-warning mt-5 p-4 rounded-3 border-0 shadow-sm"><i class="bi bi-clock-history me-3"></i>Profile with Member ID <strong>' . htmlspecialchars($user_id) . '</strong> is found but is <strong>pending administrator approval</strong>. It will be visible once activated.</div>';
-                } else {
-                    $caste_id = $row['religion'];
-                    $c_q = mysqli_query($con, "SELECT caste FROM caste WHERE id='$caste_id'");
-                    $c_row = mysqli_fetch_array($c_q);
-                    $c_name = $c_row['caste'] ?? 'N/A';
-
-                    $sub_id = $row['caste'];
-                    $s_q = mysqli_query($con, "SELECT subcaste FROM subcaste WHERE id='$sub_id'");
-                    $s_row = mysqli_fetch_array($s_q);
-                    $s_name = $s_row['subcaste'] ?? 'N/A';
-
-                    $gender_profile = $row['gender'];
-                    $default_avatar = ($gender_profile == 'male' || $gender_profile == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
-                    $profile_img = $default_avatar;
-                    // Strictly use avatar images as requested
-                    $profile_img = $default_avatar;
-                    ?>
-                    <div class="result-profile-card">
-                        <div class="profile-banner">
-                            <h3><?php echo ucwords($row['name']); ?></h3>
-                            <span class="profile-id-tag">Member ID:
-                                <?php echo !empty($row['username']) ? $row['username'] : $row['id']; ?></span>
-                        </div>
-                        <div class="p-5">
-                            <div class="row g-5">
-                                <div class="col-lg-4 text-center">
-                                    <div class="profile-img-wrapper mb-4">
-                                        <img src="<?php echo $profile_img; ?>" alt="Profile Image">
-                                    </div>
-                                    <button class="btn btn-success w-100 mt-3 py-2 rounded-pill fw-bold"
-                                        onclick="location.href='paynow.php'">
-                                        <i class="bi bi-telephone me-2"></i>Contact Member
-                                    </button>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="info-group-title">Personal & Identity</div>
-                                    <div class="row g-4 mb-3">
-                                        <div class="col-md-6 border-end">
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-person"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Gender</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['gender']); ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-calendar-check"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Age / DOB</p>
-                                                    <p class="detail-value"><?php echo $row['age']; ?> Yrs,
-                                                        <?php echo $row['dob']; ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-clock"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Time of Birth</p>
-                                                    <p class="detail-value"><?php echo $row['tob'] ?: 'N/A'; ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-geo-alt"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Place of Birth</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['p_birth'] ?: 'N/A'); ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-arrows-expand"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Height</p>
-                                                    <p class="detail-value"><?php echo $row['height'] ?: 'N/A'; ?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ps-md-4">
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-layers"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Caste / Subcaste</p>
-                                                    <p class="detail-value"><?php echo ucwords($c_name); ?> /
-                                                        <?php echo ucwords($s_name); ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-star"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Star / Moonsign</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['star']) ?: 'N/A'; ?>
-                                                        (<?php echo ucwords($row['moonsign']) ?: 'N/A'; ?>)</p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-palette"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Skin Color</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['skin'] ?: 'N/A'); ?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-group-title">Education & Career</div>
-                                    <div class="row g-4 mb-3">
-                                        <div class="col-md-6 border-end">
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-book"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Education</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['education']); ?>
-                                                        (<?php echo ucwords($row['edu_det']); ?>)</p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-building"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Company Name</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['job_cmpy'] ?: 'N/A'); ?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ps-md-4">
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-briefcase"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Job & Salary</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['job']); ?>
-                                                        (<?php echo $row['salary'] ?: 'N/A'; ?>)</p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-map"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Job Location</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['job_loc']); ?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-group-title">Family Details</div>
-                                    <div class="row g-4">
-                                        <div class="col-md-6 border-end">
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-person-up"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Father's Info</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['fathername']); ?>
-                                                        (<?php echo ucwords($row['father_occupation']); ?>)</p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-person-heart"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Mother's Info</p>
-                                                    <p class="detail-value"><?php echo ucwords($row['mother_name']); ?>
-                                                        (<?php echo ucwords($row['mother_occupation']); ?>)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ps-md-4">
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-people"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Brothers</p>
-                                                    <p class="detail-value"><?php echo $row['no_of_brothers'] ?: '0'; ?> (Married:
-                                                        <?php echo $row['bro_married'] ?: '0'; ?>)</p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-item">
-                                                <div class="detail-icon"><i class="bi bi-people-fill"></i></div>
-                                                <div>
-                                                    <p class="detail-label">Sisters</p>
-                                                    <p class="detail-value"><?php echo $row['no_of_sisters'] ?: '0'; ?> (Married:
-                                                        <?php echo $row['sis_married'] ?: '0'; ?>)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="desc-box">
-                                        <span class="desc-title">About Member</span>
-                                        <p class="mb-0 text-muted">
-                                            <?php echo !empty($row['self_desc']) ? nl2br(htmlspecialchars($row['self_desc'])) : 'No additional information shared by this member.'; ?>
-                                        </p>
-                                    </div>
-
-                                    <?php if (!empty($row['horo'])) { ?>
-                                        <div class="desc-box mt-4">
-                                            <span class="desc-title">Horoscope</span>
-                                            <div class="mt-3 text-center">
-                                                <img src="matrimonyadmin/horo/<?php echo $row['horo']; ?>"
-                                                    class="img-fluid rounded shadow-sm border" style="max-height: 400px;"
-                                                    alt="Horoscope">
-                                                <div class="mt-3">
-                                                    <a href="matrimonyadmin/horo/<?php echo $row['horo']; ?>"
-                                                        class="btn btn-outline-success btn-sm rounded-pill fw-bold" target="_blank">
-                                                        <i class="bi bi-file-earmark-pdf me-2"></i>View Full Horoscope
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo '<div class="alert alert-info mt-5 p-4 rounded-3 border-0 shadow-sm"><i class="bi bi-info-circle me-3"></i>No profiles found with the Member ID: <strong>' . htmlspecialchars($user_id) . '</strong>. Please check the ID and try again.</div>';
-            }
-        }
-        ?>
+        <div id="results-area">
+            <?php echo $results_html; ?>
+        </div>
     </div>
-
-    <script>
-        function validateSearch() {
-            var id = document.getElementById("user_id").value;
-            if (!id.trim()) {
-                alert("Please enter a User ID to search");
-                return false;
-            }
-            return true;
-        }
-    </script>
-
     <?php include("include/footer.php"); ?>
-
 </body>
-
 </html>
