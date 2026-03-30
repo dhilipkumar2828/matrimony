@@ -4,7 +4,7 @@ include("include/connect.php");
 ?>
 <script type="text/javascript">
   if (screen.width <= 699) {
-    document.location = "indexmob.php";
+    document.location = "index.php";
   }
 </script>
 <?php

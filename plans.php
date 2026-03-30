@@ -44,6 +44,14 @@ include("include/connect.php");
         
         .trust-section { background: #eef4ea; padding: 70px 0; border-top: 1px solid #eee; }
         .trust-icon { font-size: 2.8rem; color: #689f38; margin-bottom: 20px; }
+
+        @media (max-width: 768px) {
+            .plans-header { padding: 40px 0; margin-bottom: 30px; }
+            .plans-header h1 { font-size: 2.2rem; }
+            .plans-header p { font-size: 1rem; padding: 0 15px; }
+            .pricing-grid { margin-bottom: 40px; }
+            .trust-section { padding: 40px 0; }
+        }
     </style>
 </head>
 <body>

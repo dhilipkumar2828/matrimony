@@ -404,7 +404,15 @@ $man111=mysqli_fetch_array($man112);
 <td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture 1</span></td>
 <td>:</td>
 <td colspan="4">
-<?php echo "<img src='".get_avatar($usprod['gender'], '../')."' height='300' width='300' />"; ?>
+                    <?php 
+                    $gender_h = $usprod['gender'];
+                    $default_avatar_h = ($gender_h == 'male' || $gender_h == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
+                    $profile_img_h = "../" . $default_avatar_h;
+                    if(isset($usprod['uploadedfile']) && strlen(trim($usprod['uploadedfile'])) > 0) {
+                        $profile_img_h = "../profile/" . trim($usprod['uploadedfile']);
+                    }
+                    ?>
+                    <img src="<?php echo $profile_img_h; ?>" height="300" width="300" style="object-fit: cover; border-radius: 10px;" />
 </td>
 </tr>
 <tr>

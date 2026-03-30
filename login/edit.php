@@ -689,7 +689,15 @@ else {
 <td  align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Profile Picture</span></td>
 <td>:</td>
 <td colspan="4">
-<img src="<?php echo get_avatar($usprod['gender'], '../'); ?>" height="300" width="300" />
+                            <?php 
+                            $gender_e = $usprod['gender'];
+                            $default_avatar_e = ($gender_e == 'male' || $gender_e == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
+                            $profile_img_e = "../" . $default_avatar_e;
+                            if(isset($usprod['uploadedfile']) && strlen(trim($usprod['uploadedfile'])) > 0) {
+                                $profile_img_e = "../profile/" . trim($usprod['uploadedfile']);
+                            }
+                            ?>
+                            <img src="<?php echo $profile_img_e; ?>" height="300" width="300" style="object-fit: cover; border-radius: 10px;" />
 <br>
 <input type="hidden" name="picture" id="picture" value="<?php echo $usprod['uploadedfile']; ?>" />
 <input name="image1"  type="file"  id="image1" onchange="return ValidateFileUpload('image1')"  />To Change Profile Picture

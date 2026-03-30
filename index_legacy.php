@@ -41,11 +41,6 @@ if (isset($_POST['submit'])) {
         rel="stylesheet">
 
     <script type="text/javascript">
-        if (screen.width <= 699) {
-            document.location = "indexmob.php";
-        }
-    </script>
-    <script type="text/javascript">
         function getXMLHTTP() {
             var xmlhttp = false;
             try { xmlhttp = new XMLHttpRequest(); }
@@ -527,7 +522,6 @@ if (isset($_POST['submit'])) {
     <!-- Footer Section -->
     <?php include("include/footer.php"); ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
     <script>

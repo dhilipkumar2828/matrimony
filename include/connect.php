@@ -32,7 +32,8 @@ mysqli_set_charset($con, "utf8");
  * Always returns gender-based avatar based on input gender
  * Supports optional path prefix (e.g., '../') for files in subdirectories
  */
-function get_avatar($gender, $prefix = '') {
+function get_avatar($gender, $prefix = '')
+{
     $g = strtolower(trim($gender));
     if ($g == "male" || $g == "groom") {
         return $prefix . "images/male_avatar.png";

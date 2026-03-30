@@ -47,38 +47,44 @@ function fetchProfiles($con, $filters, $page, $limit)
             $default_avatar = ($gender_profile == 'male' || $gender_profile == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
             $profile_img = $default_avatar;
             // Only show actual profile image if the user is logged in
-            if (isset($_SESSION['id']) && !empty($row['uploadedfile'])) {
-                if (file_exists("profile/" . $row['uploadedfile'])) {
-                    $profile_img = "profile/" . $row['uploadedfile'];
+            if (isset($_SESSION['id']) && isset($row['uploadedfile']) && strlen(trim($row['uploadedfile'])) > 0) {
+                $filename = trim($row['uploadedfile']);
+                if (file_exists("profile/" . $filename)) {
+                    $profile_img = "profile/" . $filename;
                 } else {
-                    $profile_img = "https://hmmatrimony.com/profile/" . $row['uploadedfile'];
+                    $profile_img = "https://hmmatrimony.com/profile/" . $filename;
                 }
             }
 
             echo "
             <div class='profile-result-card mb-4'>
                 <div class='row g-0 align-items-center'>
-                   
-                    <div class='col-md-7 p-3'>
+                    <div class='col-md-3 p-3 text-center'>
+                        <div class='profile-img-container shadow-sm border rounded' style='width: 150px; height: 150px; margin: 0 auto; overflow: hidden;'>
+                            <img src='{$profile_img}' style='width: 100%; height: 100%; object-fit: cover;' alt='Profile'>
+                        </div>
+                    </div>
+                    <div class='col-md-6 p-3'>
                         <div class='row'>
-                            <div class='col-sm-6'>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Name:</strong> <span style='color: #c53030;'>" . ucwords($row['name'] ?? '') . "</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Date of Birth - Age:</strong> <span style='color: #c53030;'>{$row['dob']} --- {$row['age']}</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Caste:</strong> <span style='color: #c53030;'>" . ucwords($caste_name) . "</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Star:</strong> <span style='color: #c53030;'>" . ucwords($row['star'] ?? '') . "</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Job Details:</strong> <span style='color: #c53030;'>" . ucwords($row['job'] ?? '') . "</span></p>
+                            <div class='col-sm-12'>
+                                <p class='mb-2' style='font-size: 1.1rem;'><strong style='color: #1e40af;'>Name:</strong> <span style='color: #c53030; font-weight: bold;'>" . ucwords($row['name'] ?? '') . "</span></p>
                             </div>
                             <div class='col-sm-6'>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Userid:</strong> <span style='color: #c53030;'>" . ($row['username'] ?? '') . "</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Time of Birth:</strong> <span style='color: #c53030;'>{$row['tob']}</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Sub Caste:</strong> <span style='color: #c53030;'>" . ucwords($subcaste_name) . "</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Moonsign:</strong> <span style='color: #c53030;'>" . ucwords($row['moonsign'] ?? '') . "</span></p>
-                                <p class='mb-1'><strong style='color: #1e40af;'>Salary:</strong> <span style='color: #c53030;'>{$row['salary']}</span></p>
+                                <p class='mb-1'><strong style='color: #1e40af;'>DOB - Age:</strong> <span style='color: #444;'>{$row['dob']} --- {$row['age']}</span></p>
+                                <p class='mb-1'><strong style='color: #1e40af;'>Caste:</strong> <span style='color: #444;'>" . ucwords($caste_name) . "</span></p>
+                                <p class='mb-1'><strong style='color: #1e40af;'>Star:</strong> <span style='color: #444;'>" . ucwords($row['star'] ?? '') . "</span></p>
+                            </div>
+                            <div class='col-sm-6'>
+                                <p class='mb-1'><strong style='color: #1e40af;'>Userid:</strong> <span style='color: #444;'>" . ($row['username'] ?? '') . "</span></p>
+                                <p class='mb-1'><strong style='color: #1e40af;'>Time of Birth:</strong> <span style='color: #444;'>{$row['tob']}</span></p>
+                                <p class='mb-1'><strong style='color: #1e40af;'>Salary:</strong> <span style='color: #444;'>{$row['salary']}</span></p>
                             </div>
                         </div>
                     </div>
-                    <div class='col-md-2 p-3 text-center'>
-                        <button class='btn btn-success w-100 showDialog' data-id='{$row['id']}'>View More</button>
+                    <div class='col-md-3 p-3 text-center'>
+                        <button class='btn btn-success w-100 py-2 rounded-pill fw-bold showDialog' data-id='{$row['id']}'>
+                            <i class='bi bi-eye me-2'></i>View Details
+                        </button>
                     </div>
                 </div>
             </div>";
@@ -294,6 +300,47 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 20px 10px !important;
+                padding: 15px !important;
+            }
+            .search-form-card {
+                padding: 15px !important;
+            }
+            .profile-result-card .row {
+                text-align: center !important;
+                padding: 10px !important;
+            }
+            .profile-result-card .col-md-9 {
+                padding-bottom: 0 !important;
+            }
+            .profile-result-card .col-sm-6 {
+                text-align: left !important;
+                margin-bottom: 15px !important;
+            }
+            .profile-result-card .btn {
+                margin-top: 10px !important;
+                width: 100% !important;
+            }
+            .pagination {
+                flex-wrap: wrap !important;
+                gap: 5px !important;
+            }
+            .pagination-link {
+                padding: 6px 10px !important;
+                font-size: 13px !important;
+            }
+            .search-nav-tabs {
+                flex-direction: column !important;
+                gap: 5px !important;
+            }
+            .search-nav-link {
+                text-align: center !important;
+                border-radius: 8px !important;
+            }
         }
     </style>
 </head>
@@ -566,7 +613,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         });
     </script>
     <?php include("include/footer.php"); ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init({ duration: 1000, once: true });</script>
 

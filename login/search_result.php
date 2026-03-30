@@ -540,8 +540,17 @@ while($bb=mysqli_fetch_array($aa))
 <table style="border:#006699 solid 2px; margin-top:10px; margin-left:10px;" width="100%">
   <tbody><tr>
   <td rowspan="6" width="16%">
-    <a href="../profile/<?php echo $bb['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo $bb['name']; ?>" class="fancybox">
-<img src="../<?php echo get_avatar($bb['gender']); ?>" width="200" height="200"></a> </td>
+    <?php 
+    $gender_bb = $bb['gender'];
+    $default_avatar = ($gender_bb == 'male' || $gender_bb == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
+    $profile_img = "../" . $default_avatar;
+    if(!empty($bb['uploadedfile'])) {
+        $profile_img = "../profile/".$bb['uploadedfile'];
+    }
+    ?>
+    <a href="<?php echo $profile_img; ?>" data-fancybox-group="gallery" title="<?php echo $bb['name']; ?>" class="fancybox">
+        <img src="<?php echo $profile_img; ?>" width="200" height="200" style="object-fit: cover; border-radius: 50%;">
+    </a>
   <td width="18%" height="33" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Name</span></td>
   <td width="1%">:</td>
   <td width="23%"><span style="color:#FF0000; font-size:14px;"><?php echo $bb['name']; ?></span></td>
@@ -613,9 +622,17 @@ $man111=mysqli_fetch_array($man112);
 <table width="100%" style="border:#006699 solid 1px; margin-top:10px;">
   <tr>
   <td width="16%" rowspan="6">
-  <?php if($usprod['uploadedfile']!='') { ?>
-  <a href="../profile/<?php echo $usprod['uploadedfile']; ?>" data-fancybox-group="gallery" title="<?php echo  ucwords($usprod['name']); ?>" class="fancybox" >
-<img src="../<?php echo get_avatar($usprod['gender']); ?>" height="200" width="200" /></a> <?php } ?></td>
+  <?php 
+  $gender_us = $usprod['gender'];
+  $default_avatar = ($gender_us == 'male' || $gender_us == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
+  $profile_img = "../" . $default_avatar;
+  if(isset($usprod['uploadedfile']) && strlen(trim($usprod['uploadedfile'])) > 0) {
+      $profile_img = "../profile/".trim($usprod['uploadedfile']);
+  }
+  ?>
+  <a href="<?php echo $profile_img; ?>" data-fancybox-group="gallery" title="<?php echo ucwords($usprod['name']); ?>" class="fancybox">
+    <img src="<?php echo $profile_img; ?>" height="200" width="200" style="object-fit: cover; border-radius: 50%;" />
+  </a></td>
   <td width="18%" height="33" align="right"><span style="color:#0033FF; font-weight:bold; font-size:14px;">Name</span></td>
   <td width="1%">:</td>
   <td width="23%"><span style="color:#FF0000; font-size:14px;"><?php echo  ucwords($usprod['name']); ?></span></td>

@@ -31,20 +31,20 @@ $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
     </div>
 
     <div class="row mb-4">
-        <div class="col-md-4 text-center">
             <?php
             $profile_img = get_avatar($usprod['gender']);
             // Only show actual profile image if the user is logged in
-            if (isset($_SESSION['id']) && !empty($usprod['uploadedfile'])) {
-                if (file_exists("profile/" . $usprod['uploadedfile'])) {
-                    $profile_img = "profile/" . $usprod['uploadedfile'];
+            if (isset($_SESSION['id']) && isset($usprod['uploadedfile']) && strlen(trim($usprod['uploadedfile'])) > 0) {
+                $filename = trim($usprod['uploadedfile']);
+                if (file_exists("profile/" . $filename)) {
+                    $profile_img = "profile/" . $filename;
                 } else {
-                    $profile_img = "https://hmmatrimony.com/profile/" . $usprod['uploadedfile'];
+                    // Fallback to absolute URL if local check fails (common on live servers)
+                    $profile_img = "https://hmmatrimony.com/profile/" . $filename;
                 }
             }
             ?>
-            <!-- <img src="<?php echo $profile_img; ?>" class="img-fluid rounded shadow-sm border" style="max-height: 200px;" alt="Profile Avatar"> -->
-        </div>
+            <img src="<?php echo $profile_img; ?>" class="img-fluid rounded shadow-sm border" style="max-height: 200px; object-fit: cover;" alt="Profile Image">
         <div class="col-md-8">
             <div class="row g-3">
                 <div class="col-md-6">
@@ -206,7 +206,7 @@ $subcaste_name = $subcaste_data['subcaste'] ?? 'N/A';
                 <td class="fw-bold text-primary" width="45%">Profile Picture</td>
                 <td>: <span class="text-danger">
                         <?php
-                        if (!empty($usprod['uploadedfile']) && file_exists("profile/" . $usprod['uploadedfile'])) {
+                        if (isset($usprod['uploadedfile']) && strlen(trim($usprod['uploadedfile'])) > 0) {
                             echo "Picture Available";
                         } else {
                             echo "Picture not found";
