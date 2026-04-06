@@ -241,29 +241,34 @@
 					</li>
 				</ul>
 			</li>
-			<!-- ************li start******************-->
-			<?php
-			$ar = mysqli_query($con, "select * from register where id='$id'");
-			$ar1 = mysqli_fetch_array($ar);
-			$username = $ar1['name'];
-			$uploadedfile1 = $ar1['uploadedfile'];
-			$gender1 = $ar1['gender'];
-			?>
-			<!-- ************li start******************-->
+			<!-- ************li start****************** -->
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 					<?php
-					$default_avatar_h = (strtolower(trim($gender1)) == 'male' || strtolower(trim($gender1)) == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
-					$profile_img_h = "../" . $default_avatar_h;
+					// Use the already fetched $riw_ghj for efficiency
+					$username = $riw_ghj['name'];
+					$uploadedfile1 = $riw_ghj['uploadedfile'];
+					$gender1 = $riw_ghj['gender'];
+
+					// Determine default avatar based on gender
+					$g_lower = strtolower(trim($gender1));
+					if ($g_lower == 'male' || $g_lower == 'groom') {
+						$default_avatar = "../images/male_avatar.png";
+					} else {
+						$default_avatar = "../images/female_avatar.png";
+					}
+
+					$profile_img_h = $default_avatar;
 					if (isset($uploadedfile1) && strlen(trim($uploadedfile1)) > 0) {
-						$profile_img_h = "../profile/" . trim($uploadedfile1);
+						$file_path = "../profile/" . trim($uploadedfile1);
+						// Only use the uploaded file if it actually exists on disk
+						if (file_exists($file_path)) {
+							$profile_img_h = $file_path;
+						}
 					}
 					?>
-					<!-- Debug: Gender=<?php echo $gender1; ?>, File=<?php echo $uploadedfile1; ?> -->
 					<img class="nav-user-photo" src="<?php echo $profile_img_h; ?>"
-						alt="<?php echo ucwords($username); ?>" style="object-fit: cover; border-radius: 50%;" />
-
-
+						alt="<?php echo ucwords($username); ?>" style="object-fit: cover; border-radius: 50%; width: 40px; height: 40px;" />
 
 					<span class="user-info">
 						<small>Welcome,</small>

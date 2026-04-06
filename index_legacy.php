@@ -81,6 +81,11 @@ if (isset($_POST['submit'])) {
             var age2 = document.getElementById('age2');
             var currentAge1 = age1.value;
 
+            // Default to 18 (or 21 for male) if nothing is selected or if current selection is invalid for new gender
+            if (currentAge1 == "" || parseInt(currentAge1) < minAge) {
+                currentAge1 = (minAge > 18) ? minAge : 18;
+            }
+
             age1.innerHTML = '<option value="">Min Age</option>';
             for (var i = minAge; i <= 60; i++) {
                 var opt = document.createElement('option');
@@ -99,6 +104,12 @@ if (isset($_POST['submit'])) {
 
             if (!isNaN(selectedAge1)) {
                 var currentAge2 = age2.value;
+                // Default to 40 if nothing is selected or current selection is invalid
+                if (currentAge2 == "" || parseInt(currentAge2) <= selectedAge1) {
+                    currentAge2 = 40;
+                    if (currentAge2 <= selectedAge1) currentAge2 = selectedAge1 + 1;
+                }
+
                 age2.innerHTML = '<option value="">Max Age</option>';
                 for (var i = selectedAge1 + 1; i <= 60; i++) {
                     var opt = document.createElement('option');
@@ -146,7 +157,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="form-row mb-4">
-                    <label class="form-label-custom">User ID / Email</label>
+                    <label class="form-label-custom">User ID</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-person"></i></span>
                         <input type="text" class="form-control" name="username" id="username" placeholder="Enter ID"
@@ -205,13 +216,15 @@ if (isset($_POST['submit'])) {
                         <select name="age1" id="age1" class="flex-fill" onchange="updateMaxAge()">
                             <option value="">Min Age</option>
                             <?php for ($i = 18; $i <= 60; $i++) {
-                                echo "<option value='$i'>$i</option>";
+                                $selected = ($i == 18) ? "selected" : "";
+                                echo "<option value='$i' $selected>$i</option>";
                             } ?>
                         </select>
                         <select name="age2" id="age2" class="flex-fill">
                             <option value="">Max Age</option>
                             <?php for ($i = 18; $i <= 60; $i++) {
-                                echo "<option value='$i'>$i</option>";
+                                $selected = ($i == 40) ? "selected" : "";
+                                echo "<option value='$i' $selected>$i</option>";
                             } ?>
                         </select>
                     </div>

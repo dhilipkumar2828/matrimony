@@ -286,10 +286,21 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         function agelimit(gender) {
             let min = (gender === 'male') ? 21 : 18;
             let age1 = $('#age1'), age2 = $('#age2');
+            let currentAge1 = age1.val();
+
+            // Set default if empty or invalid for new gender
+            if (!currentAge1 || parseInt(currentAge1) < min) {
+                currentAge1 = (min > 18 ? min : 18);
+            }
+
             age1.empty(); 
             for(let i=min; i<=60; i++) {
-                age1.append(new Option(i, i));
+                let isSelected = (i == currentAge1);
+                age1.append(new Option(i, i, isSelected, isSelected));
             }
+            
+            // Explicitly set to be sure
+            age1.val(currentAge1);
             updateMaxAge();
         }
 
@@ -297,16 +308,22 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             let age1Val = parseInt($('#age1').val());
             let currentAge2Val = $('#age2').val();
             let age2 = $('#age2');
+            
+            // Determine target value: if no current valid selection, use 40
+            let targetAge2 = currentAge2Val;
+            if (!targetAge2 || parseInt(targetAge2) <= age1Val) {
+                targetAge2 = 40;
+                if (targetAge2 <= age1Val) targetAge2 = age1Val + 1;
+            }
+
             age2.empty();
             for(let i = age1Val + 1; i <= 60; i++) {
-                age2.append(new Option(i, i));
+                let isSelected = (i == targetAge2);
+                age2.append(new Option(i, i, isSelected, isSelected));
             }
-            // Set current value if it's still valid, otherwise default to something else
-            if (currentAge2Val > age1Val) {
-                age2.val(currentAge2Val);
-            } else {
-                age2.val(age1Val + 5 > 60 ? 60 : age1Val + 5);
-            }
+            
+            // Explicitly set the value to be sure
+            age2.val(targetAge2);
         }
 
         function loadProfiles(page = 1) {

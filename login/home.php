@@ -406,13 +406,22 @@ $man111=mysqli_fetch_array($man112);
 <td colspan="4">
                     <?php 
                     $gender_h = $usprod['gender'];
-                    $default_avatar_h = ($gender_h == 'male' || $gender_h == 'groom') ? "images/male_avatar.png" : "images/female_avatar.png";
-                    $profile_img_h = "../" . $default_avatar_h;
+                    $g_lower_h = strtolower(trim($gender_h));
+                    if ($g_lower_h == 'male' || $g_lower_h == 'groom') {
+                        $default_avatar_p = "../images/male_avatar.png";
+                    } else {
+                        $default_avatar_p = "../images/female_avatar.png";
+                    }
+
+                    $profile_img_p = $default_avatar_p;
                     if(isset($usprod['uploadedfile']) && strlen(trim($usprod['uploadedfile'])) > 0) {
-                        $profile_img_h = "../profile/" . trim($usprod['uploadedfile']);
+                        $file_path_p = "../profile/" . trim($usprod['uploadedfile']);
+                        if (file_exists($file_path_p)) {
+                            $profile_img_p = $file_path_p;
+                        }
                     }
                     ?>
-                    <img src="<?php echo $profile_img_h; ?>" height="300" width="300" style="object-fit: cover; border-radius: 10px;" />
+                    <img src="<?php echo $profile_img_p; ?>" height="300" width="300" style="object-fit: cover; border-radius: 10px;" />
 </td>
 </tr>
 <tr>
