@@ -2779,7 +2779,7 @@ body {
 .profile-img-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .profile-info {
@@ -4557,31 +4557,40 @@ body {
         }
 
         /* Other About Sections */
-        .mission-section-main, .why-choose-us-main {
+        .mission-section-main,
+        .why-choose-us-main {
             text-align: center !important;
             padding: 50px 20px !important;
         }
-        .why-choose-us-section, .aboutus-mission-section {
+
+        .why-choose-us-section,
+        .aboutus-mission-section {
             padding-left: 0 !important;
             margin: 0 auto !important;
             max-width: 100% !important;
             text-align: center !important;
         }
-        .why-choose-us-section h2, .aboutus-mission-section h2 {
+
+        .why-choose-us-section h2,
+        .aboutus-mission-section h2 {
             text-align: center !important;
             width: 100% !important;
             margin-bottom: 25px !important;
         }
-        .mission-section-image img, .why-choose-us-image img {
+
+        .mission-section-image img,
+        .why-choose-us-image img {
             max-width: 100% !important;
             height: auto !important;
             margin-bottom: 30px !important;
         }
+
         .why-choose-us-list {
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
         }
+
         .why-choose-us-list ul {
             display: block !important;
             text-align: left !important;
@@ -4589,11 +4598,13 @@ body {
             margin: 0 auto !important;
             padding: 0 !important;
         }
+
         .why-choose-us-list ul li {
             justify-content: flex-start !important;
             font-size: 16px !important;
             margin-bottom: 12px !important;
         }
+
         .about-stats-box {
             margin-bottom: 20px !important;
         }

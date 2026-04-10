@@ -501,7 +501,8 @@ if (isset($_POST['submit'])) {
                     </div>
 
                     <div class="store-buttons">
-                        <a href="#" class="store-btn">
+                        <a href="https://play.google.com/store/apps/details?id=com.ocean.hmmatrimony.app"
+                            target="_blank" class="store-btn">
                             <div class="store-icon google">
                                 <i class="bi bi-google-play"></i>
                             </div>
@@ -523,7 +524,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="col-lg-5 col-md-12 d-none d-lg-flex justify-content-center">
-                    <img src="image/app screen.svg" style="width: 100%; height: 55%; object-fit: cover;"
+                    <img src="image/app screen.svg" style="width: 100%; height: 55%; object-fit: contain;"
                         alt="App Interface">
 
                 </div>

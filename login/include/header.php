@@ -268,7 +268,8 @@
 					}
 					?>
 					<img class="nav-user-photo" src="<?php echo $profile_img_h; ?>"
-						alt="<?php echo ucwords($username); ?>" style="object-fit: cover; border-radius: 50%; width: 40px; height: 40px;" />
+						alt="<?php echo ucwords($username); ?>"
+						style="object-fit: fill; border-radius: 50%; width: 40px; height: 40px;" />
 
 					<span class="user-info">
 						<small>Welcome,</small>

@@ -62,7 +62,7 @@ function get_avatar_local($gender) {
                 }
             }
             ?>
-            <img src="<?php echo $profile_img; ?>" class="img-fluid rounded-3 shadow-sm border" style="max-height: 200px; width: 200px; object-fit: cover;" alt="Profile Image">
+            <img src="<?php echo $profile_img; ?>" class="img-fluid rounded-3 shadow-sm border" style="max-height: 200px; width: 200px; object-fit: contain;" alt="Profile Image">
         <div class="col-md-8">
             <div class="row g-3">
                 <div class="col-md-6">
