@@ -5,7 +5,7 @@ class Database {
     private $host = "localhost";
     private $user = "root";
     private $pass = "";
-    private $dbname = "hmmattdk_matrimonialdb";
+    private $dbname = "matrimony";
     
     private static $instance = null;
     private $conn;
@@ -13,7 +13,7 @@ class Database {
     // Private constructor to prevent multiple instances (Singleton Pattern)
     private function __construct() {
         // Auto-detect environment
-        if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+        if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1' || strpos($_SERVER['HTTP_HOST'], '192.168.') === 0 || strpos($_SERVER['HTTP_HOST'], '192.168.') !== false) {
             $this->host = "localhost";
             $this->user = "root";
             $this->pass = "";
@@ -22,7 +22,7 @@ class Database {
             $this->user = "hmmattdk_testuser";
             $this->pass = "Micandmac@12";
         }
-        $this->dbname = "hmmattdk_matrimonialdb";
+        $this->dbname = "matrimony";
 
         try {
             $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname . ";charset=utf8mb4";
