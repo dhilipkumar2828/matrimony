@@ -84,4 +84,21 @@ class ApiController {
             $this->jsonResponse(['error' => 'Unauthorized'], 401);
         }
     }
+    protected function sendSms($number, $message, $templateId) {
+        $encodedMessage = urlencode($message);
+        $url = "http://site.ping4sms.com/api/httpapi?username=hmmatrimony&password=success&sender=HMMATR&route=2&number=" . $number . "&sms=" . $encodedMessage . "&templateid=" . $templateId;
+        
+        try {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+            $result = curl_exec($curl);
+            return $result;
+        } catch (\Exception $e) {
+            error_log("SMS Sending Error: " . $e->getMessage());
+            return false;
+        }
+    }
 }
+

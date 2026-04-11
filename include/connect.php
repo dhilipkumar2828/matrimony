@@ -6,7 +6,7 @@ ini_set('display_errors', '0');
 @ob_start();
 
 // Auto-detect environment
-if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1' || strpos($_SERVER['HTTP_HOST'], '192.168.') === 0 || strpos($_SERVER['HTTP_HOST'], '192.168.') !== false) {
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -15,7 +15,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['REMOTE_ADDR'] == '127.0.0.
     $username = "hmmattdk_testuser";
     $password = "Micandmac@12";
 }
-$dbname = "hmmattdk_matrimonialdb";
+$dbname = "matrimony";
 
 // Direct connect with database
 $con = mysqli_connect($servername, $username, $password, $dbname);

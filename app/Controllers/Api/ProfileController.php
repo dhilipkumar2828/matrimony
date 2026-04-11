@@ -248,4 +248,30 @@ class ProfileController extends ApiController {
             'is_writable' => is_writable($uploadDir)
         ], 500);
     }
+
+    public function deleteAccount() {
+        $user = $this->authenticate();
+        $id = $user['id'];
+
+        // We can either do a hard delete or a soft delete.
+        // Given the requirement "permanently deleted within 15 days", 
+        // we'll set the status to '0' (inactive) and record the deletion request date.
+        
+        $c_date = date('Y-m-d');
+        $stmt = $this->db->prepare("UPDATE register SET status = '0', delete_requested_at = :d WHERE id = :id");
+        
+        try {
+            if ($stmt->execute(['d' => $c_date, 'id' => $id])) {
+                return $this->jsonResponse(['status' => 'success', 'message' => 'Account deletion request submitted. Your account will be permanently deleted within 7 days.']);
+            }
+        } catch (\PDOException $e) {
+            // If delete_requested_at column doesn't exist, just update status
+            $stmt = $this->db->prepare("UPDATE register SET status = '0' WHERE id = :id");
+            if ($stmt->execute(['id' => $id])) {
+                return $this->jsonResponse(['status' => 'success', 'message' => 'Account deactivated and scheduled for deletion.']);
+            }
+        }
+
+        return $this->jsonResponse(['error' => 'Failed to delete account'], 500);
+    }
 }

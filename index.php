@@ -58,6 +58,7 @@ $router->get('/admin/logout', [App\Controllers\Admin\LoginController::class, 'lo
 // ==========================================
 $router->post('/api/v1/auth/login', [App\Controllers\Api\AuthController::class, 'login']);
 $router->post('/api/v1/auth/register', [App\Controllers\Api\AuthController::class, 'register']);
+$router->post('/api/v1/auth/verify-otp', [App\Controllers\Api\AuthController::class, 'verifyOtp']);
 $router->get('/api/v1/members/search', [App\Controllers\Api\MemberController::class, 'search']);
 $router->get('/api/v1/members/likes', [App\Controllers\Api\MemberController::class, 'likes']);
 $router->get('/api/v1/members/shortlist', [App\Controllers\Api\MemberController::class, 'shortlist']);
@@ -71,7 +72,13 @@ $router->get('/api/v1/profile/me', [App\Controllers\Api\ProfileController::class
 $router->put('/api/v1/profile/me', [App\Controllers\Api\ProfileController::class, 'update']);
 $router->post('/api/v1/profile/upload-image', [App\Controllers\Api\ProfileController::class, 'uploadImage']);
 $router->post('/api/v1/profile/upload-horoscope', [App\Controllers\Api\ProfileController::class, 'uploadHoroscope']);
+$router->post('/api/v1/members/{id}/block', [App\Controllers\Api\MemberController::class, 'block']);
+$router->post('/api/v1/members/{id}/report', [App\Controllers\Api\MemberController::class, 'report']);
 $router->get('/api/v1/metadata/education', [App\Controllers\Api\MetadataController::class, 'getEducation']);
+$router->get('/api/v1/metadata/castes', [App\Controllers\Api\MetadataController::class, 'getCastes']);
+$router->get('/api/v1/metadata/castes/{id}/subcastes', [App\Controllers\Api\MetadataController::class, 'getSubcastes']);
+
+$router->post('/api/v1/profile/delete-account', [App\Controllers\Api\ProfileController::class, 'deleteAccount']);
 // ==========================================
 
 // Get current URI and HTTP Method

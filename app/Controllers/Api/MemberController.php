@@ -102,12 +102,23 @@ class MemberController extends ApiController {
         $minAge = $currentAge - 7;
         $maxAge = $currentAge + 7;
 
-        $query = "SELECT id, username, name, age, gender, height, job, education, edu_det, native_place, self_desc, uploadedfile, religion, horo, dob, tob, star, moonsign, salary FROM register WHERE LOWER(gender) = :gender AND status = '1'";
+        $query = "SELECT id, username, name, age, gender, height, job, education, edu_det, native_place, self_desc, uploadedfile, religion, horo, dob, tob, star, moonsign, salary 
+                  FROM register 
+                  WHERE LOWER(gender) = :gender 
+                  AND status = '1'
+                  AND id != :my_id
+                  AND id NOT IN (SELECT to_id FROM blocked_users WHERE sender_id = :my_id2)
+                  AND id NOT IN (SELECT sender_id FROM blocked_users WHERE to_id = :my_id3)
+                  AND id NOT IN (SELECT to_id FROM reported_users WHERE sender_id = :my_id4)";
         
         $params = [
             'gender' => $oppositeGender,
             'min_age' => $minAge,
-            'max_age' => $maxAge
+            'max_age' => $maxAge,
+            'my_id' => $user['id'],
+            'my_id2' => $user['id'],
+            'my_id3' => $user['id'],
+            'my_id4' => $user['id']
         ];
 
         $query .= " AND age >= :min_age AND age <= :max_age";
@@ -193,8 +204,21 @@ class MemberController extends ApiController {
         $user = $this->authenticate();
         $oppositeGender = (strtolower($user['gender']) == 'male') ? 'female' : 'male';
 
-        $query = "SELECT id, username, name, age, gender, height, job, education, edu_det, native_place, self_desc, uploadedfile, religion, horo, dob, tob, star, moonsign, salary FROM register WHERE LOWER(gender) = :gender AND status = '1'";
-        $params = ['gender' => $oppositeGender];
+        $query = "SELECT id, username, name, age, gender, height, job, education, edu_det, native_place, self_desc, uploadedfile, religion, horo, dob, tob, star, moonsign, salary 
+                  FROM register 
+                  WHERE LOWER(gender) = :gender 
+                  AND status = '1'
+                  AND id != :my_id
+                  AND id NOT IN (SELECT to_id FROM blocked_users WHERE sender_id = :my_id2)
+                  AND id NOT IN (SELECT sender_id FROM blocked_users WHERE to_id = :my_id3)
+                  AND id NOT IN (SELECT to_id FROM reported_users WHERE sender_id = :my_id4)";
+        $params = [
+            'gender' => $oppositeGender,
+            'my_id' => $user['id'],
+            'my_id2' => $user['id'],
+            'my_id3' => $user['id'],
+            'my_id4' => $user['id']
+        ];
 
         if (!empty($_GET['profile_id'])) {
             $query .= " AND (profile_id = :profile_id OR username = :profile_id)";
@@ -325,13 +349,31 @@ class MemberController extends ApiController {
         $id = $user['id'];
 
         // Members who liked the current user (Who liked me)
-        $stmt1 = $this->db->prepare("SELECT r.*, l.c_date as liked_at, l.send_interest FROM register r JOIN likes l ON r.id = l.sender_id WHERE l.to_id = :id ORDER BY l.id DESC");
-        $stmt1->execute(['id' => $id]);
+        $stmt1 = $this->db->prepare("
+            SELECT r.*, l.c_date as liked_at, l.send_interest 
+            FROM register r 
+            JOIN likes l ON r.id = l.sender_id 
+            WHERE l.to_id = :id 
+            AND r.id NOT IN (SELECT to_id FROM blocked_users WHERE sender_id = :id2)
+            AND r.id NOT IN (SELECT sender_id FROM blocked_users WHERE to_id = :id3)
+            AND r.id NOT IN (SELECT to_id FROM reported_users WHERE sender_id = :id4)
+            ORDER BY l.id DESC
+        ");
+        $stmt1->execute(['id' => $id, 'id2' => $id, 'id3' => $id, 'id4' => $id]);
         $whoLikedMe = $stmt1->fetchAll();
         
         // Members current user liked (I liked)
-        $stmt2 = $this->db->prepare("SELECT r.*, l.c_date as liked_at, l.send_interest FROM register r JOIN likes l ON r.id = l.to_id WHERE l.sender_id = :id ORDER BY l.id DESC");
-        $stmt2->execute(['id' => $id]);
+        $stmt2 = $this->db->prepare("
+            SELECT r.*, l.c_date as liked_at, l.send_interest 
+            FROM register r 
+            JOIN likes l ON r.id = l.to_id 
+            WHERE l.sender_id = :id 
+            AND r.id NOT IN (SELECT to_id FROM blocked_users WHERE sender_id = :id2)
+            AND r.id NOT IN (SELECT sender_id FROM blocked_users WHERE to_id = :id3)
+            AND r.id NOT IN (SELECT to_id FROM reported_users WHERE sender_id = :id4)
+            ORDER BY l.id DESC
+        ");
+        $stmt2->execute(['id' => $id, 'id2' => $id, 'id3' => $id, 'id4' => $id]);
         $iLiked = $stmt2->fetchAll();
 
         return $this->jsonResponse(array(
@@ -345,8 +387,17 @@ class MemberController extends ApiController {
         $id = $user['id'];
 
         // Members the current user liked (current user is sender_id) - based on like_response.php
-        $stmt = $this->db->prepare("SELECT r.*, l.c_date as liked_at, l.send_interest FROM register r JOIN likes l ON r.id = l.to_id WHERE l.sender_id = :id ORDER BY l.id DESC");
-        $stmt->execute(['id' => $id]);
+        $stmt = $this->db->prepare("
+            SELECT r.*, l.c_date as liked_at, l.send_interest 
+            FROM register r 
+            JOIN likes l ON r.id = l.to_id 
+            WHERE l.sender_id = :id 
+            AND r.id NOT IN (SELECT to_id FROM blocked_users WHERE sender_id = :id2)
+            AND r.id NOT IN (SELECT sender_id FROM blocked_users WHERE to_id = :id3)
+            AND r.id NOT IN (SELECT to_id FROM reported_users WHERE sender_id = :id4)
+            ORDER BY l.id DESC
+        ");
+        $stmt->execute(['id' => $id, 'id2' => $id, 'id3' => $id, 'id4' => $id]);
         $members = $stmt->fetchAll();
         
         $formattedMembers = array_map([$this, 'mapMemberData'], $members);
@@ -358,8 +409,18 @@ class MemberController extends ApiController {
         $id = $user['id'];
 
         // Members whose contact the current user unlocked - based on get_contact_history.php
-        $stmt = $this->db->prepare("SELECT r.*, g.c_date as unlocked_at, g.valid_to FROM register r JOIN getcontact_history g ON r.id = g.to_id WHERE g.sender_id = :id AND CURDATE() BETWEEN g.valid_from AND g.valid_to ORDER BY g.id DESC");
-        $stmt->execute(['id' => $id]);
+        $stmt = $this->db->prepare("
+            SELECT r.*, g.c_date as unlocked_at, g.valid_to 
+            FROM register r 
+            JOIN getcontact_history g ON r.id = g.to_id 
+            WHERE g.sender_id = :id 
+            AND CURDATE() BETWEEN g.valid_from AND g.valid_to 
+            AND r.id NOT IN (SELECT to_id FROM blocked_users WHERE sender_id = :id2)
+            AND r.id NOT IN (SELECT sender_id FROM blocked_users WHERE to_id = :id3)
+            AND r.id NOT IN (SELECT to_id FROM reported_users WHERE sender_id = :id4)
+            ORDER BY g.id DESC
+        ");
+        $stmt->execute(['id' => $id, 'id2' => $id, 'id3' => $id, 'id4' => $id]);
         $members = $stmt->fetchAll();
         
         $formattedMembers = array_map([$this, 'mapMemberData'], $members);
@@ -504,5 +565,78 @@ class MemberController extends ApiController {
         }
 
         return $this->jsonResponse(['error' => 'Failed to send notification'], 500);
+    }
+
+    public function block($id) {
+        $user = $this->authenticate();
+        $senderId = $user['id'];
+
+        // Resolve numeric ID
+        $stmtMember = $this->db->prepare("SELECT id FROM register WHERE id = :id1 OR username = :id2");
+        $stmtMember->execute(['id1' => $id, 'id2' => $id]);
+        $target = $stmtMember->fetch();
+
+        if (!$target) {
+            return $this->jsonResponse(['error' => 'Member not found'], 404);
+        }
+        $targetId = $target['id'];
+
+        if ($senderId == $targetId) {
+            return $this->jsonResponse(['error' => 'You cannot block yourself'], 400);
+        }
+
+        // Check if already blocked
+        $stmt = $this->db->prepare("SELECT id FROM blocked_users WHERE sender_id = :s AND to_id = :t");
+        $stmt->execute(['s' => $senderId, 't' => $targetId]);
+        $existing = $stmt->fetch();
+
+        if ($existing) {
+            // Unblock
+            $del = $this->db->prepare("DELETE FROM blocked_users WHERE sender_id = :s AND to_id = :t");
+            $del->execute(['s' => $senderId, 't' => $targetId]);
+            return $this->jsonResponse(['status' => 'success', 'message' => 'Profile unblocked', 'blocked' => false]);
+        } else {
+            // Block
+            $c_date = date('Y-m-d');
+            date_default_timezone_set('Asia/Kolkata');
+            $c_time = date('H:i:s A');
+            $ip = $_SERVER['REMOTE_ADDR'];
+
+            $ins = $this->db->prepare("INSERT INTO blocked_users (sender_id, to_id, c_date, c_time, ip_add) VALUES (:s, :t, :d, :tm, :ip)");
+            $ins->execute(['s' => $senderId, 't' => $targetId, 'd' => $c_date, 'tm' => $c_time, 'ip' => $ip]);
+            
+            return $this->jsonResponse(['status' => 'success', 'message' => 'Profile blocked', 'blocked' => true]);
+        }
+    }
+
+    public function report($id) {
+        $user = $this->authenticate();
+        $senderId = $user['id'];
+        $payload = $this->getJsonPayload();
+        $reason = $payload['reason'] ?? 'No reason provided';
+
+        // Resolve numeric ID
+        $stmtMember = $this->db->prepare("SELECT id FROM register WHERE id = :id1 OR username = :id2");
+        $stmtMember->execute(['id1' => $id, 'id2' => $id]);
+        $target = $stmtMember->fetch();
+
+        if (!$target) {
+            return $this->jsonResponse(['error' => 'Member not found'], 404);
+        }
+        $targetId = $target['id'];
+
+        if ($senderId == $targetId) {
+            return $this->jsonResponse(['error' => 'You cannot report yourself'], 400);
+        }
+
+        $c_date = date('Y-m-d');
+        date_default_timezone_set('Asia/Kolkata');
+        $c_time = date('H:i:s A');
+        $ip = $_SERVER['REMOTE_ADDR'];
+
+        $ins = $this->db->prepare("INSERT INTO reported_users (sender_id, to_id, reason, c_date, c_time, ip_add) VALUES (:s, :t, :r, :d, :tm, :ip)");
+        $ins->execute(['s' => $senderId, 't' => $targetId, 'r' => $reason, 'd' => $c_date, 'tm' => $c_time, 'ip' => $ip]);
+        
+        return $this->jsonResponse(['status' => 'success', 'message' => 'User reported successfully']);
     }
 }
