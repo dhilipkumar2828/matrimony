@@ -129,6 +129,73 @@ if (isset($_POST['submit'])) {
             }
         }
     </script>
+    <style>
+        .news-banner-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            color: #333;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-banner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: #689f38;
+        }
+
+        .news-banner-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1b2e1b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .news-banner-card h2 span {
+            color: #689f38;
+        }
+
+        .news-banner-card h2 i {
+            font-size: 24px;
+            color: #689f38;
+        }
+
+        .news-content-box {
+            background: rgba(104, 159, 56, 0.05);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px dashed rgba(104, 159, 56, 0.3);
+        }
+
+        .news-banner-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .news-banner-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 
 <body onload="valid()">
@@ -142,8 +209,37 @@ if (isset($_POST['submit'])) {
         <div class="hero-overlay"></div>
 
         <div class="hero-text-container">
-            <h1>Find Your perfect<br><span>Life Partner</span></h1>
-            <p>Trusted matrimony service helping families find meaningful connections.</p>
+            <?php
+            // Fetch News & Events from database
+            // Admin specifically manages news with ID 2 for the homepage banner
+            $news_query = mysqli_query($con, "SELECT * FROM news WHERE id='2' LIMIT 1");
+            $show_news = false;
+            if ($news_query && mysqli_num_rows($news_query) > 0) {
+                $news_data = mysqli_fetch_array($news_query);
+                if (!empty(trim($news_data['news_heading'])) || !empty(trim($news_data['descrip']))) {
+                    $show_news = true;
+                    $news_heading = $news_data['news_heading'];
+                    $news_desc = $news_data['descrip'];
+                }
+            }
+
+            if ($show_news) {
+                ?>
+                <div class="news-banner-card" data-aos="fade-right">
+                    <h2><i class="bi bi-megaphone-fill"></i> News & <span>Events</span></h2>
+                    <div class="news-content-box">
+                        <h3><?php echo $news_heading; ?></h3>
+                        <p><?php echo $news_desc; ?></p>
+                    </div>
+                </div>
+                <?php
+            } else {
+                ?>
+                <h1>Find Your perfect<br><span>Life Partner</span></h1>
+                <p>Trusted matrimony service helping families find meaningful connections.</p>
+                <?php
+            }
+            ?>
         </div>
 
         <div class="hero-forms-wrapper" data-aos="fade-left">
