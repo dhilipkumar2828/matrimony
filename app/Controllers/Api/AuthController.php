@@ -4,6 +4,12 @@ namespace App\Controllers\Api;
 class AuthController extends ApiController {
     public function login() {
         $data = $this->getJsonPayload();
+        
+        // Check if payload is valid JSON
+        if (!is_array($data)) {
+            return $this->jsonResponse(['error' => 'Invalid JSON payload'], 400);
+        }
+        
         if (!isset($data['identifier']) || !isset($data['password'])) {
             return $this->jsonResponse(['error' => 'Missing identifier or password'], 400);
         }
@@ -39,8 +45,14 @@ class AuthController extends ApiController {
     public function register() {
         $data = $this->getJsonPayload();
         
+        // Check if payload is valid JSON
+        if (!is_array($data)) {
+            return $this->jsonResponse(['error' => 'Invalid JSON payload'], 400);
+        }
+        
         // Basic validation
         $required = ['name', 'mobile', 'gender', 'dob'];
+       
         foreach ($required as $field) {
             if (empty($data[$field])) {
                 return $this->jsonResponse(['error' => "Missing required field: $field"], 400);
@@ -66,7 +78,12 @@ class AuthController extends ApiController {
         }
 
         // Generate 6-digit OTP as per save_profile.php
-        $otp = rand(100000, 999999);
+        // Static OTP for testing with mobile 9876543210
+        if ($data['mobile'] === '9876543210') {
+            $otp = 123456;
+        } else {
+            $otp = rand(100000, 999999);
+        }
         $c_date = date('d/m/Y');
         
         // Map fields from payload to database columns
