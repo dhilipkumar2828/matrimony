@@ -56,8 +56,12 @@
         color: #68ad00 !important;
     }
     .footer-logo {
-        height: 60px;
+        height: 90px;
         width: auto;
+        transition: transform 0.3s ease;
+    }
+    .footer-logo:hover {
+        transform: scale(1.05);
     }
 </style>
 
@@ -66,15 +70,15 @@
         <div class="row g-4 footer-container">
             <!-- Column 1: Logo & Social -->
             <div class="col-lg-4 col-md-6 footer-box">
-                <img src="image/CMU Serif (4).png" class="footer-logo mb-4" alt="Footer Logo">
+                <img src="image/footerlogo.svg" class="footer-logo mb-4" alt="Footer Logo">
                 <p style="color: #ccc !important; font-size: 15px; line-height: 1.7; margin-bottom: 20px;">
                     Trusted matrimony service helping lakhs of people find their perfect life partner across India.
                 </p>
                 <div class="social-icons d-flex gap-3 mt-4">
-                    <a href="https://www.facebook.com/AdiDravidarMatrimonyHappyMarriage" target="_blank" class="social-link">
+                    <a href="#" target="_blank" class="social-link">
                         <i class="bi bi-facebook"></i>
                     </a>
-                    <a href="https://www.youtube.com/@hmmatrimony9238" target="_blank" class="social-link">
+                    <a href="#" target="_blank" class="social-link">
                         <i class="bi bi-youtube"></i>
                     </a>
                 </div>
@@ -101,28 +105,22 @@
                 <div class="contact-details">
                     <div class="d-flex align-items-center mb-3">
                         <div class="contact-icon me-3">
-                            <i class="bi bi-phone-fill"></i>
-                        </div>
-                        <p class="mb-0" style="color: #ccc !important; font-size: 15px;">+91 90940 10909 / 7299234446</p>
-                    </div>
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="contact-icon me-3">
                             <i class="bi bi-telephone-fill"></i>
                         </div>
-                        <p class="mb-0" style="color: #ccc !important; font-size: 15px;">044 4386 3901</p>
+                        <p class="mb-0" style="color: #ccc !important; font-size: 15px;">7338821446</p>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <div class="contact-icon me-3">
                             <i class="bi bi-envelope-fill"></i>
                         </div>
-                        <p class="mb-0" style="color: #ccc !important; font-size: 15px;">hmlucky03@gmail.com</p>
+                        <p class="mb-0" style="color: #ccc !important; font-size: 15px;">doctorwedding2026@gmail.com</p>
                     </div>
                     <div class="d-flex align-items-start mb-3">
                         <div class="contact-icon me-3 mt-1">
                             <i class="bi bi-geo-alt-fill"></i>
                         </div>
                         <p class="mb-0" style="color: #ccc !important; font-size: 15px; line-height: 1.6;">
-                            28/49, South Usman Road,<br>
+                           28/49 South Usman Road, <br>
                             T Nagar, Chennai - 600017<br>
                             Landmark: Between Paragon and Shree Leathers, Near Bus Depot.
                         </p>
@@ -135,7 +133,7 @@
         
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0 copyright-text" style="color: #888; font-size: 14px;">© 2026 hmmatrimony. All Rights Reserved.</p>
+                <p class="mb-0 copyright-text" style="color: #888; font-size: 14px;">© 2026 DOCTOR WEDDING. All Rights Reserved.</p>
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <p class="mb-0 copyright-text" style="color: #888; font-size: 14px;">

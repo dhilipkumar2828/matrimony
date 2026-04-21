@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
 
     <style>
         :root {
-            --premium-green: #689f38;
-            --premium-green-dark: #558b2f;
+            --premium-green: #07642f;
+            --premium-green-dark: #07642f;
             --glass-bg: rgba(255, 255, 255, 0.9);
             --glass-border: rgba(255, 255, 255, 0.4);
         }

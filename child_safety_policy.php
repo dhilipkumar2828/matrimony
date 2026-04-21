@@ -55,14 +55,14 @@
         .policy-section h3 {
             font-size: 20px;
             font-weight: 700;
-            color: #689f38;
+            color: #07642f;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
         }
 
         .policy-section h3 span {
-            background: #689f38;
+            background: #07642f;
             color: #fff;
             width: 28px;
             height: 28px;
@@ -99,13 +99,13 @@
             font-family: "bootstrap-icons";
             position: absolute;
             left: 0;
-            color: #689f38;
+            color: #07642f;
             font-weight: bold;
         }
 
         .warning-box {
             background: #f8fcf5;
-            border-left: 4px solid #689f38;
+            border-left: 4px solid #07642f;
             padding: 15px;
             border-radius: 8px;
             margin: 20px 0;
@@ -137,7 +137,7 @@
         }
 
         .contact-info-footer i {
-            color: #689f38;
+            color: #07642f;
             margin-right: 10px;
             width: 20px;
         }

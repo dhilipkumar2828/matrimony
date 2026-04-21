@@ -99,13 +99,13 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
     <style>
         body { font-family: 'Inter', sans-serif; background: #f4f7f6; }
         .payment-container { max-width: 800px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .section-title { font-family: 'Playfair Display', serif; color: #333; font-weight: 700; margin-bottom: 25px; border-bottom: 2px solid #689f38; display: inline-block; padding-bottom: 5px; }
+        .section-title { font-family: 'Playfair Display', serif; color: #333; font-weight: 700; margin-bottom: 25px; border-bottom: 2px solid #07642f; display: inline-block; padding-bottom: 5px; }
         .plan-summary-card { background: #f8fcf5; border: 1px solid #e1eed9; border-radius: 12px; padding: 25px; margin-bottom: 30px; }
         .form-label { font-weight: 600; font-size: 14px; color: #555; }
         .form-control { border-radius: 8px; padding: 12px; border: 1px solid #ddd; }
         .radio-group-modern { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
-        .radio-group-modern:hover { border-color: #689f38; background: #fafff5; }
-        .form-check-input:checked + .form-check-label { color: #689f38; font-weight: 600; }
+        .radio-group-modern:hover { border-color: #07642f; background: #fafff5; }
+        .form-check-input:checked + .form-check-label { color: #07642f; font-weight: 600; }
     </style>
 </head>
 <body onload="submitPayuForm()">

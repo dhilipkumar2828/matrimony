@@ -24,12 +24,12 @@ include("include/connect.php");
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
         body { font-family: 'Inter', sans-serif; background: #f4f7f6; }
-        .verify-container { max-width: 600px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 5px solid #689f38; }
+        .verify-container { max-width: 600px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 5px solid #07642f; }
         .section-title { font-family: 'Playfair Display', serif; color: #333; font-weight: 700; margin-bottom: 20px; text-align: center; }
         .form-control { border-radius: 10px; padding: 15px; border: 1px solid #ddd; font-size: 18px; text-align: center; letter-spacing: 5px; font-weight: 700; }
-        .btn-verify { background: #689f38; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: 700; font-size: 16px; transition: 0.3s; width: 100%; transition: 0.3s; }
-        .btn-verify:hover { background: #558b2f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(104, 159, 56, 0.3); }
-        .mobile-display { background: #f8fcf5; color: #689f38; padding: 10px 20px; border-radius: 30px; display: inline-block; font-weight: 600; margin-bottom: 30px; }
+        .btn-verify { background: #07642f; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: 700; font-size: 16px; transition: 0.3s; width: 100%; transition: 0.3s; }
+        .btn-verify:hover { background: #07642f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(104, 159, 56, 0.3); }
+        .mobile-display { background: #f8fcf5; color: #07642f; padding: 10px 20px; border-radius: 30px; display: inline-block; font-weight: 600; margin-bottom: 30px; }
     </style>
 </head>
 <body>

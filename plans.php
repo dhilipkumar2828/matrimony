@@ -10,7 +10,7 @@ include("include/connect.php");
     <link rel="stylesheet" href="css/modern-design.css">
     <style>
         body { font-family: 'Inter', sans-serif; background: #f8faf9; }
-        .plans-header { background: linear-gradient(135deg, #689f38 0%, #33691e 100%); color: white; padding: 60px 0; text-align: center; margin-bottom: 50px; }
+        .plans-header { background: linear-gradient(135deg, #07642f 0%, #33691e 100%); color: white; padding: 60px 0; text-align: center; margin-bottom: 50px; }
         .plans-header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 15px; }
         .plans-header p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
         
@@ -30,20 +30,20 @@ include("include/connect.php");
             flex-direction: column; 
             justify-content: space-between;
         }
-        .plan-card-modern:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(104, 159, 56, 0.15); border-color: #689f38; }
+        .plan-card-modern:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(104, 159, 56, 0.15); border-color: #07642f; }
         
         .plan-name { font-size: 1.6rem; font-weight: 700; color: #333; margin-bottom: 15px; }
-        .plan-price { font-size: 2.8rem; font-weight: 800; color: #689f38; margin-bottom: 10px; line-height: 1; }
+        .plan-price { font-size: 2.8rem; font-weight: 800; color: #07642f; margin-bottom: 10px; line-height: 1; }
         .plan-price span { font-size: 0.9rem; color: #888; font-weight: 600; display: block; margin-top: 5px; }
         
         .plan-features { list-style: none; padding: 0; margin: 30px 0; flex-grow: 1; text-align: left; }
         .plan-features li { padding: 12px 0; color: #555; border-bottom: 1px solid #f2f2f2; font-size: 14px; display: flex; align-items: center; }
-        .plan-features li i { color: #689f38; margin-right: 12px; font-size: 16px; }
+        .plan-features li i { color: #07642f; margin-right: 12px; font-size: 16px; }
         .plan-features li:last-child { border-bottom: none; }
         
         
         .trust-section { background: #eef4ea; padding: 70px 0; border-top: 1px solid #eee; }
-        .trust-icon { font-size: 2.8rem; color: #689f38; margin-bottom: 20px; }
+        .trust-icon { font-size: 2.8rem; color: #07642f; margin-bottom: 20px; }
 
         @media (max-width: 768px) {
             .plans-header { padding: 40px 0; margin-bottom: 30px; }

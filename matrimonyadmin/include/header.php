@@ -5,7 +5,7 @@
 							<i class="icon-heart"></i>
                            
 							
-							Happy Marriage Matrimony
+							Doctor Wedding
 						
                         
                         </small>

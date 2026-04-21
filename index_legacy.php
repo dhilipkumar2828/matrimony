@@ -25,11 +25,11 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
-    <title>Adidravidar Matrimony in Chennai | Adidravidar Matrimony</title>
+    <title>Doctor Wedding in Chennai | Doctor Wedding</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/png" href="icons8-home-24.png">
+    <link rel="icon" type="image/png" href="image/newfavicon.svg">
     <link rel="stylesheet" href="css/modern-design.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -129,73 +129,6 @@ if (isset($_POST['submit'])) {
             }
         }
     </script>
-    <style>
-        .news-banner-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            color: #333;
-            max-width: 500px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .news-banner-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: #689f38;
-        }
-
-        .news-banner-card h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #1b2e1b;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .news-banner-card h2 span {
-            color: #689f38;
-        }
-
-        .news-banner-card h2 i {
-            font-size: 24px;
-            color: #689f38;
-        }
-
-        .news-content-box {
-            background: rgba(104, 159, 56, 0.05);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px dashed rgba(104, 159, 56, 0.3);
-        }
-
-        .news-banner-card h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #333;
-            line-height: 1.4;
-        }
-
-        .news-banner-card p {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 0;
-        }
-    </style>
 </head>
 
 <body onload="valid()">
@@ -205,7 +138,7 @@ if (isset($_POST['submit'])) {
     <!-- banner from section -->
     <div class="hero-section">
         <div class="backgroundimg"
-            style="background-image: url('image/WhatsApp Image 2026-03-03 at 10.45.50 PM.jpeg');"></div>
+            style="background-image: url('image/homepagebanner.svg');"></div>
         <div class="hero-overlay"></div>
 
         <div class="hero-text-container">
@@ -252,7 +185,7 @@ if (isset($_POST['submit'])) {
                     <div class="login-subtitle">Welcome back! Please login to your account</div>
                 </div>
 
-                <div class="form-row mb-4">
+                <div class="form-row mb-2">
                     <label class="form-label-custom">User ID</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-person"></i></span>
@@ -261,7 +194,7 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
 
-                <div class="form-row mb-4">
+                <div class="form-row mb-2">
                     <label class="form-label-custom">Password</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-lock"></i></span>
@@ -270,7 +203,7 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember_me" id="remember_banner"
                             value="Y" style="width: 15px; height: 15px;">
@@ -282,13 +215,13 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <button type="submit" class="btn banner-btn">
-                    <i class="bi bi-box-arrow-in-right me-2"></i>Login to Account
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Log in to Account
                 </button>
 
                 <div class="banner-footer text-center">
                     <p class="text-muted small mb-1">Don't have an account yet?</p>
                     <a href="register_user.php"
-                        style="color: #689f38; font-weight: 700; text-decoration: none; font-size: 14px;">Register Free
+                        style="color: #07642f; font-weight: 700; text-decoration: none; font-size: 14px;">Register Free
                         Member</a>
                 </div>
             </form>
@@ -368,7 +301,7 @@ if (isset($_POST['submit'])) {
                 </button>
                 <div class="banner-footer text-center">
                     <a href="govt_search.php"
-                        style="color: #689f38; text-decoration: none; font-size: 13px; font-weight: 600;">Government
+                        style="color: #07642f; text-decoration: none; font-size: 13px; font-weight: 600;">Government
                         Search</a>
                 </div>
             </form>
@@ -535,13 +468,13 @@ if (isset($_POST['submit'])) {
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 video-box">
-                    <iframe src="https://www.youtube.com/embed/t2mlL7K1hbs" frameborder="0" allowfullscreen></iframe>
+                    <img src="image/homeabout.svg" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
                 </div>
                 <div class="col-lg-6 content-box">
                     <div class="video-heading">
                         <h2>About Our <span>Matrimony Service</span></h2>
                     </div>
-                    <p>Aadithiravidar Matrimony is a trusted platform helping families find the perfect life partner
+                    <p>Doctor Wedding is a trusted platform helping families find the perfect life partner
                         within the community.</p>
                     <div class="features-list">
                         <ul>
@@ -597,7 +530,7 @@ if (isset($_POST['submit'])) {
                     </div>
 
                     <div class="store-buttons">
-                        <a href="https://play.google.com/store/apps/details?id=com.ocean.hmmatrimony.app"
+                        <a href="#"
                             target="_blank" class="store-btn">
                             <div class="store-icon google">
                                 <i class="bi bi-google-play"></i>
@@ -620,7 +553,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="col-lg-5 col-md-12 d-none d-lg-flex justify-content-center">
-                    <img src="image/app screen.svg" style="width: 100%; height: 55%; object-fit: contain;"
+                    <img src="image/newmobile.svg" style="width: 100%; height: 55%; object-fit: contain;"
                         alt="App Interface">
 
                 </div>

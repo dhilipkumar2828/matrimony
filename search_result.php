@@ -198,13 +198,13 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         .pg-btn.pg-disabled { color: #ccc; border-color: #eee; cursor: not-allowed; }
 
         .custom-dialog { border-radius: 12px !important; overflow: hidden !important; box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important; }
-        .custom-dialog .ui-dialog-titlebar { background: #689f38 !important; color: #fff !important; border: none !important; }
+        .custom-dialog .ui-dialog-titlebar { background: #07642f !important; color: #fff !important; border: none !important; }
 
         /* Tab Styles */
         .search-nav-tabs { display: flex; gap: 5px; margin-bottom: -1px; position: relative; z-index: 10; padding-left: 10px; }
         .search-nav-link { padding: 10px 25px; background: #f8f9fa; border: 1px solid #ddd; border-bottom: none; border-radius: 10px 10px 0 0; text-decoration: none !important; color: #666; font-weight: 600; font-size: 14px; transition: 0.2s; }
         .search-nav-link:hover { background: #e9ecef; color: #333; }
-        .search-nav-link.active { background: #689f38; color: #fff; border-color: #689f38; }
+        .search-nav-link.active { background: #07642f; color: #fff; border-color: #07642f; }
     </style>
 </head>
 <body>

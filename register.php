@@ -20,7 +20,7 @@
 	<?php include("include/header.php"); ?>
 
 	<div class="container my-5">
-		<div class="registration-wrapper shadow-sm bg-white p-4 rounded-3" style="border-top: 5px solid #689f38;">
+		<div class="registration-wrapper shadow-sm bg-white p-4 rounded-3" style="border-top: 5px solid #07642f;">
 			<div class="plr">
 				<style>
 					.error {

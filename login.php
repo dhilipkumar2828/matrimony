@@ -51,7 +51,7 @@
         }
 
         .register-link {
-            color: #689f38;
+            color: #07642f;
             font-weight: 700;
             text-decoration: none;
         }
@@ -73,7 +73,7 @@
 
     <div class="login-container">
         <div class="text-center">
-            <img src="image/CMU Serif (4).png" class="logo-small" alt="Logo">
+            <img src="image/newlogo.svg" class="logo-small" alt="Logo">
             <h2 class="section-title">Member Login</h2>
         </div>
 

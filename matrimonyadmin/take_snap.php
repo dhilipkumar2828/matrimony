@@ -13,7 +13,7 @@ $usprod=mysqli_fetch_array($prod);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Adidravidar matrimony [www.hmmatrimony.com]</title>
+<title>Adidravidar matrimony [www.doctorwedding.com]</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./jquery/html2canvas.js">

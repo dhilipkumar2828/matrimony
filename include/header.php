@@ -14,7 +14,7 @@ $request_uri = $_SERVER['REQUEST_URI'];
 <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top headerdiv py-2 shadow-sm">
     <div class="container inner d-flex justify-content-between align-items-center">
         <a class="navbar-brand py-0" href="index.php">
-            <img src="image/CMU Serif (4).png" class="crtlogo" alt="Logo" style="height: 50px;">
+            <img src="image/newlogo.svg" class="crtlogo" alt="Logo">
         </a>
         
         <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">

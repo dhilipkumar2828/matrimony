@@ -5,7 +5,7 @@
 							<i class="icon-heart"></i>
                            
 							
-							Adi Dravidar Matrimony
+							Doctor Wedding
 						
                         
                         </small>

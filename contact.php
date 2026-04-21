@@ -11,20 +11,20 @@
     <style>
         body { font-family: 'Inter', sans-serif; background: #f4f7f6; }
         .contact-container { max-width: 1100px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .section-title { font-family: 'Playfair Display', serif; color: #333; font-weight: 700; margin-bottom: 25px; border-bottom: 2px solid #689f38; display: inline-block; padding-bottom: 5px; }
+        .section-title { font-family: 'Playfair Display', serif; color: #333; font-weight: 700; margin-bottom: 25px; border-bottom: 2px solid #07642f; display: inline-block; padding-bottom: 5px; }
         .contact-card { background: #f8fcf5; border: 1px solid #e1eed9; border-radius: 12px; padding: 20px; height: 100%; transition: 0.3s; }
         .contact-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .contact-card h5 { color: #689f38; font-weight: 700; margin-bottom: 15px; }
+        .contact-card h5 { color: #07642f; font-weight: 700; margin-bottom: 15px; }
         .bank-details-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .bank-details-card h6 { background: #689f38; color: #fff; padding: 8px 15px; border-radius: 6px; margin-bottom: 15px; font-weight: 600; }
+        .bank-details-card h6 { background: #07642f; color: #fff; padding: 8px 15px; border-radius: 6px; margin-bottom: 15px; font-weight: 600; }
         .bank-info-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; font-size: 14px; }
         .bank-info-item:last-child { border-bottom: none; }
         .bank-info-label { color: #666; font-weight: 500; }
         .bank-info-value { color: #333; font-weight: 600; text-align: right; }
         .form-label { font-weight: 600; font-size: 14px; color: #555; }
         .form-control { border-radius: 8px; padding: 12px; border: 1px solid #ddd; }
-        .btn-submit { background: #689f38; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 700; transition: 0.3s; }
-        .btn-submit:hover { background: #558b2f; transform: scale(1.02); }
+        .btn-submit { background: #07642f; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 700; transition: 0.3s; }
+        .btn-submit:hover { background: #07642f; transform: scale(1.02); }
         .video-wrapper { border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin: 30px 0; }
     </style>
 </head>
@@ -53,21 +53,17 @@
                 <h5><i class="bi bi-telephone-inbound-fill me-2"></i>Direct Contact</h5>
                 <div class="mb-2">
                     <span class="text-muted small d-block">Mobile Numbers:</span>
-                    <span class="fw-bold">+91 90940 10909 / 7299234446</span>
-                </div>
-                <div class="mb-2">
-                    <span class="text-muted small d-block">Landline:</span>
-                    <span class="fw-bold">044 4386 3901</span>
+                    <span class="fw-bold">7338821446</span>
                 </div>
                 <div>
                     <span class="text-muted small d-block">Support Email:</span>
-                    <span class="fw-bold text-success">hmlucky03@gmail.com</span>
+                    <span class="fw-bold text-success">doctorwedding2026@gmail.com</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row g-5">
+    <div class="row g-5 justify-content-center">
         <!-- Form and Video Column -->
         <div class="col-lg-7">
             <div class="video-wrapper">
@@ -107,11 +103,11 @@
         </div>
 
         <!-- Bank Details Column -->
-        <div class="col-lg-5">
-            <h4 class="mb-4 fw-bold">Bank Payment Details</h4>
+        <!-- <div class="col-lg-5">
+            <h4 class="mb-4 fw-bold">Bank Payment Details</h4> -->
             
             <!-- Indian Bank -->
-            <div class="bank-details-card shadow-sm">
+            <!-- <div class="bank-details-card shadow-sm">
                 <h6>Indian Bank Details</h6>
                 <div class="bank-info-item">
                     <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Account Holder Name</span>
@@ -133,10 +129,10 @@
                     <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Branch Name</span>
                     <span class="bank-info-value">T.Nagar, Chennai</span>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Axis Bank -->
-            <div class="bank-details-card shadow-sm">
+            <!-- <div class="bank-details-card shadow-sm">
                 <h6>Axis Bank Details</h6>
                 <div class="bank-info-item">
                     <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Account Holder Name</span>
@@ -161,7 +157,7 @@
                 <div class="bank-info-item">
                     <span class="bank-info-label"><i class="bi bi-caret-right-fill text-primary me-2"></i>Branch Code</span>
                     <span class="bank-info-value">001594</span>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -145,7 +145,7 @@ if (isset($_REQUEST['submit']) || isset($_GET['user_id'])) {
         .search-form-card { background: #fff; border-radius: 25px; padding: 40px; box-shadow: 0 15px 50px rgba(0, 0, 0, 0.05); border: 1px solid #edf2ed; }
         .form-label { font-size: 14px; font-weight: 600; color: #555; }
         .form-control { padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8e2; background: #fafcfa; }
-        .form-control:focus { border-color: #689f38; box-shadow: 0 0 0 0.25rem rgba(104, 159, 56, 0.15); }
+        .form-control:focus { border-color: #07642f; box-shadow: 0 0 0 0.25rem rgba(104, 159, 56, 0.15); }
         .section-subtitle { font-size: 16px; border-bottom: 2px solid #f0f7f0; padding-bottom: 8px; }
         .text-primary { color: #2e59d9 !important; }
         .text-danger { color: #e74a3b !important; }
@@ -155,7 +155,7 @@ if (isset($_REQUEST['submit']) || isset($_GET['user_id'])) {
         .search-nav-tabs { display: flex; gap: 5px; margin-bottom: -1px; position: relative; z-index: 10; padding-left: 10px; }
         .search-nav-link { padding: 10px 25px; background: #f8f9fa; border: 1px solid #ddd; border-bottom: none; border-radius: 10px 10px 0 0; text-decoration: none !important; color: #666; font-weight: 600; font-size: 14px; transition: 0.2s; }
         .search-nav-link:hover { background: #e9ecef; color: #333; }
-        .search-nav-link.active { background: #689f38; color: #fff; border-color: #689f38; }
+        .search-nav-link.active { background: #07642f; color: #fff; border-color: #07642f; }
     </style>
 </head>
 <body>

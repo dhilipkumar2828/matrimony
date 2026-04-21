@@ -17,16 +17,16 @@
         .section-title { font-family: 'Playfair Display', serif; color: #1b2e1b; font-weight: 700; margin-bottom: 10px; font-size: 32px; }
         .subtitle { color: #888; font-size: 14px; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; display: block; }
         .policy-section { margin-bottom: 35px; }
-        .policy-section h3 { font-size: 20px; font-weight: 700; color: #689f38; margin-bottom: 15px; display: flex; align-items: center; }
-        .policy-section h3 span { background: #689f38; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px; flex-shrink: 0; }
+        .policy-section h3 { font-size: 20px; font-weight: 700; color: #07642f; margin-bottom: 15px; display: flex; align-items: center; }
+        .policy-section h3 span { background: #07642f; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 12px; flex-shrink: 0; }
         .policy-section p { line-height: 1.8; font-size: 15px; margin-bottom: 15px; }
         .policy-list { list-style: none; padding-left: 40px; }
         .policy-list li { position: relative; margin-bottom: 12px; line-height: 1.6; font-size: 15px; }
-        .policy-list li::before { content: "\F26A"; font-family: "bootstrap-icons"; position: absolute; left: -25px; color: #689f38; font-weight: bold; }
+        .policy-list li::before { content: "\F26A"; font-family: "bootstrap-icons"; position: absolute; left: -25px; color: #07642f; font-weight: bold; }
         .contact-info-footer { background: #f8fcf5; padding: 30px; border-radius: 12px; margin-top: 50px; border: 1px solid #e1eed9; }
         .contact-info-footer h4 { color: #1b2e1b; font-weight: 700; margin-bottom: 15px; font-size: 18px; }
         .contact-info-footer p { margin-bottom: 8px; font-size: 14px; color: #555; display: flex; align-items: center; }
-        .contact-info-footer i { color: #689f38; margin-right: 10px; width: 20px; }
+        .contact-info-footer i { color: #07642f; margin-right: 10px; width: 20px; }
     </style>
 </head>
 <body>

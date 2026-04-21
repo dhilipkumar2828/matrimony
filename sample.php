@@ -280,7 +280,7 @@ function get_avatar_local($gender) {
 
     .profile-details-modal label {
         display: block;
-        border-bottom: 2px solid #689f38;
+        border-bottom: 2px solid #07642f;
         width: fit-content;
         margin-bottom: 5px;
     }

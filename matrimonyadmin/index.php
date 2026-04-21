@@ -50,10 +50,9 @@ return true;
 							<div class="center">
 								<h1 style="font-size:22px;">
 									<i class="icon-heart  green"></i>
-									<span class="red">HappyMarriage </span>
-									<span class="white">Matrimony	</span>
+									<span class="red">Doctor Wedding </span>
 								</h1>
-								<h4 class="blue">&copy; www.hmmatrimony.com</h4>
+								<h4 class="blue">&copy; www.doctorwedding.com</h4>
 							</div>
 							<div class="space-6"></div>
 							<div class="position-relative">
